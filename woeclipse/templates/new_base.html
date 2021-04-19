@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title> {{ page_title }}</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="/">Woeclipse</a>
+            <div class="dropdown">
+              <button class="dropbtn">Battle
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="/tournments">Tournments</a>
+                <a href="/challenges">Challenges</a>
+                <a href="/rankedmatches">Ranked Matches</a>
+              </div>
+            </div>
+            <a href="/ranking">Ranking</a>
+            <div class="dropdown">
+                <button class="dropbtn">More
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="/community">Community</a>
+                  <a href="/rules">Rules</a>
+                  <a href="/resources">Resources</a>
+                  <a href="/about">About Us</a>
+                </div>
+              </div>
+              <a href="/contact">Contact Us</a>
+          </div>
+    </header>
+    <main>
+        {% block content%} {% endblock %}
+    </main>
+    <footer>
+        <h3> <em> Links and Social Media </em></h3>
+    </footer>
+</body>
