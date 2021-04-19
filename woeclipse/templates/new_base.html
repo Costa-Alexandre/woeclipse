@@ -1,7 +1,9 @@
 <html>
 
 <head>
-    <title> {{ page_title }}</title>
+    {% block head %}
+      <title>Woeclipse - Home</title>
+    {% endblock %}
     <meta charset="utf-8" />
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
@@ -36,8 +38,12 @@
               </div>
           </div>
           <a href="/contact">Contact Us</a>
-          <a href="/login" style="float: right;">Log In</a>
-          <a href="/signup" style="float: right;">Sign Up</a>
+          {% if current_user.is_authenticated %}
+            <a href="/signout" style="float: right;">Log Out</a>
+          {% else %}
+            <a href="/login" style="float: right;">Log In</a>
+            <a href="/signup" style="float: right;">Sign Up</a>
+          {% endif %}
         </div>  
           
           
