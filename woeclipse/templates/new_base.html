@@ -12,31 +12,35 @@
 
     <header>
         <div class="navbar">
-            <a href="/">Woeclipse</a>
-            <div class="dropdown">
-              <button class="dropbtn">Battle
+          <a href="/">Woeclipse</a>
+          <div class="dropdown">
+            <button class="dropbtn">Battle
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/tournments">Tournments</a>
+              <a href="/challenges">Challenges</a>
+              <a href="/rankedmatches">Ranked Matches</a>
+            </div>
+          </div>
+          <a href="/ranking">Ranking</a>
+          <div class="dropdown">
+              <button class="dropbtn">More
                 <i class="fa fa-caret-down"></i>
               </button>
               <div class="dropdown-content">
-                <a href="/tournments">Tournments</a>
-                <a href="/challenges">Challenges</a>
-                <a href="/rankedmatches">Ranked Matches</a>
+                <a href="/community">Community</a>
+                <a href="/rules">Rules</a>
+                <a href="/resources">Resources</a>
+                <a href="/about">About Us</a>
               </div>
-            </div>
-            <a href="/ranking">Ranking</a>
-            <div class="dropdown">
-                <button class="dropbtn">More
-                  <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                  <a href="/community">Community</a>
-                  <a href="/rules">Rules</a>
-                  <a href="/resources">Resources</a>
-                  <a href="/about">About Us</a>
-                </div>
-              </div>
-              <a href="/contact">Contact Us</a>
           </div>
+          <a href="/contact">Contact Us</a>
+          <a href="/login" style="float: right;">Log In</a>
+          <a href="/signup" style="float: right;">Sign Up</a>
+        </div>  
+          
+          
     </header>
     <main>
         {% block content%} {% endblock %}

@@ -36,7 +36,12 @@ footer {
     padding: 14px 16px;
     text-decoration: none;
   }
-  
+
+  #navbar-right {
+    float: right;
+    color: red !important;
+  }
+
   /* The dropdown container */
   .dropdown {
     float: left;
