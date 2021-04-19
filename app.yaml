@@ -4,7 +4,7 @@ instance_class: F2
 
 handlers:
 - url: /static
-  static_dir: great_project/static
+  static_dir: woeclipse/static
 
 - url: /.*
   secure: always
