@@ -4,15 +4,15 @@
     <title>Woeclipse - Log In</title>
 {% endblock %}
 
-{% block body %}
+{% block content %}
     <header>
         <h1>Log In</h1>
     </header>
 
     <main>
-        <form action="/login" method="POST">
+        <form action="/signin" method="POST">
             <div>
-                <input type="text" name="eusername" id="login_username" placeholder="Log In" required>
+                <input type="text" name="username" id="login_username" placeholder="Username" required>
             </div>
             
             <div>

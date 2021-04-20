@@ -3,7 +3,7 @@
 {% block content %}
     {% if current_user.is_authenticated %}
         <p>You are logged in as <strong>{{ username }}</strong></p>
-    {% else %} 
+    {% endif %} 
 
     <button onclick="warnUser()"> Push Me. I Dare You. </button>  
 

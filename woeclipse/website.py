@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ app.config['SECRET_KEY'] = '7ZUXn;R}#tX3(9v' # 🚧 TODO: The secret key should 
 
 login_manager = LoginManager() # initialize flask_login
 login_manager.init_app(app) # initialize flask_login with our app
-login_manager.login_view = 'signin' # redirect route when @login_required fails
+login_manager.login_view = 'index' # redirect route when @login_required fails
 
 # Connect flask login with the user records in our database:
 @login_manager.user_loader
@@ -28,7 +29,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
-    birthday = db.Column(db.DateTime())
+    # birthday = db.Column(db.DateTime())
     country = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True)
     username = db.Column(db.String(20), unique=True)
@@ -64,12 +65,13 @@ def signup():
             # Assign form values to variables to make working with them easier later:
             first_name = request.form.get('first_name')
             last_name = request.form.get('last_name')
-            birthday = request.form.get('birthday')
+            # birthday = datetime(request.form.get('birthday'))
             country = request.form.get('country')
             email = request.form.get('email')
             username = request.form.get('username')
             password = request.form.get('password')
             password_confirmation = request.form.get('password_confirmation')
+
 
             # Validations: Throw an error if anything is wrong with the input parameters:
             if not email or not password or not username:
@@ -82,7 +84,7 @@ def signup():
             hashed_password = generate_password_hash(password, method='sha256')
 
             # Create a new use record in the database:
-            new_user = User(first_name=first_name, last_name=last_name, birthday=birthday, country=country, email=email, username=username, password=hashed_password)
+            new_user = User(first_name=first_name, last_name=last_name, country=country, email=email, username=username, password=hashed_password)
 
             db.session.add(new_user)
             db.session.commit()
@@ -133,7 +135,7 @@ def signin():
 def signout():
     # Logout users and send them back to the signin page:
     logout_user()
-    return redirect(url_for('signin'))
+    return redirect(url_for('index'))
 
 
 # Run the server
