@@ -12,3 +12,4 @@ handlers:
   script: auto
 
 env_variables:
+DB_PASSWORD = ${{ secrets.SECRET_KEY}}
