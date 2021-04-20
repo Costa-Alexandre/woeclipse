@@ -9,7 +9,12 @@ from os import environ
 # For example, you can add the port you wish to run on as a variable.
 # This can then be used when running the code.
 MY_PORT = "5000"
-
+TESTING = True
+DEBUG = True
+FLASK_ENV = 'development'
+FLASK_APP = 'main.py'
+SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
+SECRET_KEY = environ.get('SECRET_KEY')
 # !!! Important !!!
 # Anything written in this file is effectively public knowledge.
 # Anything that should remain a secret, like a password for a database or an
