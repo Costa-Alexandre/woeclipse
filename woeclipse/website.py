@@ -5,14 +5,15 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
 
 # Initialize database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 
 db = SQLAlchemy(app)
 
 # Initialize Authentication
-app.config['SECRET_KEY'] = '7ZUXn;R}#tX3(9v' # 🚧 TODO: The secret key should be in a environment variable
+# app.config['SECRET_KEY'] = '7ZUXn;R}#tX3(9v' # 🚧 TODO: The secret key should be in a environment variable
 
 login_manager = LoginManager() # initialize flask_login
 login_manager.init_app(app) # initialize flask_login with our app
