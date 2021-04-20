@@ -35,4 +35,4 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
 # by adding it as a repository secret, like with our google cloud credentials.
 # Those passwords can then be added dynamically to app.yaml by the GitHub
 # Action step called "Prepare Deployment" on line 36 of main.yaml.
-DATABASE_PASSWORD = getenv('DB_PASSWORD')
+SECRET_KEY = getenv('DB_PASSWORD')
