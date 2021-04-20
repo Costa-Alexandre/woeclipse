@@ -12,4 +12,3 @@ handlers:
   script: auto
 
 env_variables:
-SECRET_KEY: ${{ secrets.SECRET_KEY }}
