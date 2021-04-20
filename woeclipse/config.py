@@ -1,6 +1,6 @@
 # file to configure flask, loaded into our flask application
 # using the line: app.config.from_pyfile("config.py") in website.py
-from os import environ
+from os import getenv
 
 # These variables be available to your application to use.
 # Things that may be different on different computers, like a path to a file,
@@ -14,7 +14,7 @@ DEBUG = True
 FLASK_ENV = 'development'
 FLASK_APP = 'main.py'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
-SECRET_KEY = environ.get('SECRET_KEY')
+
 # !!! Important !!!
 # Anything written in this file is effectively public knowledge.
 # Anything that should remain a secret, like a password for a database or an
@@ -35,4 +35,4 @@ SECRET_KEY = environ.get('SECRET_KEY')
 # by adding it as a repository secret, like with our google cloud credentials.
 # Those passwords can then be added dynamically to app.yaml by the GitHub
 # Action step called "Prepare Deployment" on line 36 of main.yaml.
-DATABASE_PASSWORD = environ.get('DB_PASSWORD')
+DATABASE_PASSWORD = getenv('DB_PASSWORD')
