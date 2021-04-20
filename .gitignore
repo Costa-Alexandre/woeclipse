@@ -5,4 +5,3 @@ __pycache__/
 junit/
 *.pyc
 .DS_Store
-database.db
