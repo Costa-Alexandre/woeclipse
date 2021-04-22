@@ -9,5 +9,6 @@ from os import environ
 # Action step called "Prepare Deployment" on line 36 of main.yaml.
 SECRET_KEY = '123456'
 db_pass = environ.get('DB_PASSWORD')
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:' + str(db_pass) + '@35.198.159.181/woeclipse'
+MY_URI = 'postgresql+psycopg2://postgres:' + str(db_pass) + '@35.198.159.181/woeclipse'
+SQLALCHEMY_DATABASE_URI = MY_URI
 SQLALCHEMY_TRACK_MODIFICATIONS = False
