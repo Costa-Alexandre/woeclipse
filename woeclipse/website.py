@@ -3,11 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user,\
                         login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from dotenv import load_dotenv
-# from datetime import datetime
+
 
 app = Flask(__name__)
-load_dotenv()
+
 app.config.from_pyfile('config.py')
 
 db = SQLAlchemy(app)
@@ -20,11 +19,11 @@ login_manager.login_view = 'index'  # redirect route when @login_required fails
 # Connect flask login with the user records in our database:
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return Users.query.get(int(user_id))
 
 
 # Models
-class User(UserMixin, db.Model):
+class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(50))
     last_name = db.Column(db.String(50))
@@ -87,12 +86,12 @@ def signup():
             hashed_password = generate_password_hash(password, method='sha256')
 
             # Create a new use record in the database:
-            new_user = User(first_name=first_name,
-                            last_name=last_name,
-                            country=country,
-                            email=email,
-                            username=username,
-                            password=hashed_password)
+            new_user = Users(first_name=first_name,
+                             last_name=last_name,
+                             country=country,
+                             email=email,
+                             username=username,
+                             password=hashed_password)
 
             db.session.add(new_user)
             db.session.commit()
@@ -125,7 +124,7 @@ def signin():
 
             # Try to find a user record in the database with the
             # given email address:
-            user = User.query.filter_by(username=username).first()
+            user = Users.query.filter_by(username=username).first()
 
             # Make sure that the given password matches the encrypted
             # password of the user from the database:
