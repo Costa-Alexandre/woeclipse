@@ -7,7 +7,6 @@ from os import environ
 # by adding it as a repository secret, like with our google cloud credentials.
 # Those passwords can then be added dynamically to app.yaml by the GitHub
 # Action step called "Prepare Deployment" on line 36 of main.yaml.
-SECRET_KEY = 'hBcszIsbavFpmOhB'
-SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://postgres:\
-                        {SECRET_KEY}@35.198.159.181/woeclipse'
+SECRET_KEY = '123456'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:hBcszIsbavFpmOhB@35.198.159.181/woeclipse'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
