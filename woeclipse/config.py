@@ -8,5 +8,6 @@ from os import environ
 # Those passwords can then be added dynamically to app.yaml by the GitHub
 # Action step called "Prepare Deployment" on line 36 of main.yaml.
 SECRET_KEY = '123456'
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:' + environ.get('DB_PASSWORD') + '@35.198.159.181/woeclipse'
+db_pass = environ.get('DB_PASSWORD')
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:' + db_pass + '@35.198.159.181/woeclipse'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
