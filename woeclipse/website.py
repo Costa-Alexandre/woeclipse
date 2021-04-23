@@ -44,7 +44,7 @@ def index():
     else:
         # If users aren't logged in they should be
         # redirected to the signin page:
-        
+
         return render_template('index.html')
 
 
