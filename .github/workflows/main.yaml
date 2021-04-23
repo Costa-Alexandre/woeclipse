@@ -36,6 +36,10 @@ jobs:
     - name: Prepare Deployment 
       run: | 
         echo "  DB_PASSWORD: \"${{ secrets.PRODUCTION_DATABASE_PASSWORD }}\" " >> app.yaml
+        echo "  DB_HOST: \"${{ secrets.POSTGRES_HOST }}\" " >> app.yaml
+        echo "  DB_USER: \"${{ secrets.POSTGRES_USER }}\" " >> app.yaml
+        echo "  DB_SECRET: \"${{ secrets.SECRET_KEY }}\" " >> app.yaml
+        echo "  DB_NAME: \"${{ secrets.POSTGRES_DB }}\" " >> app.yaml
         more app.yaml
     - name: Deploy to Google App Engine
       uses: google-github-actions/deploy-appengine@main
