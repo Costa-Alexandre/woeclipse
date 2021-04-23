@@ -9,11 +9,7 @@ import os
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = '123456'
-DATABASE_PASSWORD = os.getenv('DB_PASSWORD')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-DB_URL = 'postgresql+psycopg2://postgres:{pw}@35.198.159.181/woeclipse'.format(pw=DATABASE_PASSWORD)
-app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
+app.config.from_pyfile('config.py')
 
 db = SQLAlchemy(app)
 
