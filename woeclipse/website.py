@@ -14,7 +14,6 @@ DATABASE_PASSWORD = os.getenv('DB_PASSWORD')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 DB_URL = 'postgresql+psycopg2://postgres:{pw}@35.198.159.181/woeclipse'.format(pw=DATABASE_PASSWORD)
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
-# SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:hBcszIsbavFpmOhB@35.198.159.181/woeclipse'
 
 db = SQLAlchemy(app)
 
@@ -52,7 +51,7 @@ def index():
         # If users aren't logged in they should be
         # redirected to the signin page:
 
-        return render_template('index.html', db=DB_URL)
+        return render_template('index.html')
 
 
 @app.route('/admin')
