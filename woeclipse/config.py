@@ -3,11 +3,14 @@
 from os import environ
 import yaml
 
-with open('app.yaml', "r") as f:
-    data = yaml.load(f, Loader=yaml.BaseLoader)
-env_vars = data['env_variables']
-for k,v in env_vars.items():
-    environ[k] = v
+try:
+    with open('app.yaml', "r") as f:
+        data = yaml.load(f, Loader=yaml.BaseLoader)
+    env_vars = data['env_variables']
+    for k,v in env_vars.items():
+        environ[k] = v
+except:
+    pass
 
 # You can then set a different password for your production database in GitHub,
 # by adding it as a repository secret, like with our google cloud credentials.
