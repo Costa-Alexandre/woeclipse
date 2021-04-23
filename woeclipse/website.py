@@ -3,7 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user,\
                         login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+import os
 
+DATABASE_PASSWORD = os.getenv('DB_PASSWORD')
 
 app = Flask(__name__)
 
@@ -45,7 +47,7 @@ def index():
         # If users aren't logged in they should be
         # redirected to the signin page:
 
-        return render_template('index.html')
+        return render_template('index.html', db=DATABASE_PASSWORD)
 
 
 @app.route('/admin')
