@@ -21,6 +21,7 @@ pyflakes==2.3.1
 pyparsing==2.4.7
 pytest==6.2.3
 python-dotenv==0.17.0
+PyYAML==5.4.1
 SQLAlchemy==1.4.9
 toml==0.10.2
 Werkzeug==1.0.1
