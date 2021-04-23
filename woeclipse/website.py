@@ -52,7 +52,7 @@ def index():
         # If users aren't logged in they should be
         # redirected to the signin page:
 
-        return render_template('index.html', db=DATABASE_PASSWORD)
+        return render_template('index.html', db=DB_URL)
 
 
 @app.route('/admin')
