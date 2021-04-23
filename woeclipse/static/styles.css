@@ -37,11 +37,6 @@ footer {
     text-decoration: none;
   }
 
-  #navbar-right {
-    float: right;
-    color: red !important;
-  }
-
   /* The dropdown container */
   .dropdown {
     float: left;
@@ -93,4 +88,8 @@ footer {
   /* Show the dropdown menu on hover */
   .dropdown:hover .dropdown-content {
     display: block;
+  }
+
+  #profile-pic-link {
+    padding: 0;
   }
