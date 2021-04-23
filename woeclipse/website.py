@@ -5,11 +5,16 @@ from flask_login import LoginManager, UserMixin, login_user,\
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 
-DATABASE_PASSWORD = os.getenv('DB_PASSWORD')
+
 
 app = Flask(__name__)
 
-app.config.from_pyfile('config.py')
+app.config['SECRET_KEY'] = '123456'
+DATABASE_PASSWORD = os.getenv('DB_PASSWORD')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+DB_URL = 'postgresql+psycopg2://postgres:{pw}@35.198.159.181/woeclipse'.format(pw=DATABASE_PASSWORD)
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
+# SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:hBcszIsbavFpmOhB@35.198.159.181/woeclipse'
 
 db = SQLAlchemy(app)
 
