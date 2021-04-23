@@ -41,18 +41,18 @@
       {% if current_user.is_authenticated %}
       <div class="navbar" style="float: right;">
         <div class="dropdown">
-          <button class="dropbtn">Hello, {{ username }}
+          <button class="dropbtn">Hello, {{ username.capitalize() }}
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="/account">Account</a>
+            <a href="/profile">Profile</a>
             <a href="/stats">Stats</a>
             <a href="/preferences">Preferences</a>
             <a href="/preferences">Change language</a>
             <a href="/signout">Log Out</a>
           </div>
         </div>
-        <a href="/account" id="profile-pic-link">
+        <a href="/profile" id="profile-pic-link">
           <img src="https://via.placeholder.com/40" alt="profile-pic" style="float: right;">
         </a> 
       </div>

@@ -34,6 +34,16 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(80))
     is_admin = db.Column(db.Boolean, default=False)
 
+class Stats(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True)
+    team_name = db.Column(db.String(50))
+    matches_w = db.Column(db.Integer, default=0)
+    matches_d = db.Column(db.Integer, default=0)
+    matches_l = db.Column(db.Integer, default=0)
+    rank = db.Column(db.Integer, default=0)
+    kills = db.Column(db.Integer, default=0)
+    killed = db.Column(db.Integer, default=0)
+
 
 # Routes
 @app.route('/')
@@ -64,12 +74,12 @@ def signup():
         try:
             # Assign form values to variables to make working
             # with them easier later:
-            first_name = request.form.get('first_name')
-            last_name = request.form.get('last_name')
+            first_name = request.form.get('first_name').lower()
+            last_name = request.form.get('last_name').lower()
             birthday = request.form.get('birthday')
-            country = request.form.get('country')
-            email = request.form.get('email')
-            username = request.form.get('username')
+            country = request.form.get('country').lower()
+            email = request.form.get('email').lower()
+            username = request.form.get('username').lower()
             password = request.form.get('password')
             password_confirmation = request.form.get('password_confirmation')
 
@@ -96,6 +106,13 @@ def signup():
                             password=hashed_password)
 
             db.session.add(new_user)
+            db.session.commit()
+
+            # Create stats entry for newly created user
+            team_name = f"{new_user.username.capitalize()}'s Team"
+            new_stats_entry = Stats(user_id=new_user.id, team_name=team_name)
+
+            db.session.add(new_stats_entry)
             db.session.commit()
 
             # Login the user
@@ -156,6 +173,29 @@ def signout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/profile')
+@login_required
+def profile():
+    if current_user.is_authenticated:
+            stats = db.session.query(Stats).filter_by(user_id=current_user.id).one_or_none()
+            # Show the home page only to logged in users:
+            return render_template('profile.html', 
+            username=current_user.username,
+            first_name=current_user.first_name,
+            last_name=current_user.last_name,
+            country=current_user.country,
+            team_name=stats.team_name,
+            matches_w=stats.matches_w,
+            matches_d=stats.matches_d,
+            matches_l=stats.matches_l,
+            rank=stats.rank,
+            kills=stats.kills,
+            killed=stats.killed
+            )
+    else:
+        # If users aren't logged in they should be
+        # redirected to the signin page:
+        return render_template('signin.html')
 
 # Run the server
 

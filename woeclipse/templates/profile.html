@@ -1,0 +1,42 @@
+{% extends "new_base.html" %}
+
+{% block content %}
+
+    <div id="username-frame">
+        <img src="https://via.placeholder.com/120" alt="profile-pic-large">
+        <div>
+            <li>{{ username.capitalize() }}
+            <li>{{ first_name.capitalize() }} {{ last_name.capitalize() }}
+        <div>
+        <img src="https://via.placeholder.com/40" alt="country-flag">
+    </div>
+    
+    <div id="stats-frame">
+        <div id="labels">
+            <h2>Stats</h2>
+            <li>Team Name:</li>
+            <li>Matches Won:</li>
+            <li>Matches Drawn:</li>
+            <li>Matches Lost:</li>
+            <li>Rank:</li>
+            <li>Kills:</li>
+            <li>Killed:</li>
+        </div>
+        <div id="values">
+            <li></li>
+            <li>{{ team_name }}</li>
+            <li>{{ matches_w }}</li>
+            <li>{{ matches_d }}</li>
+            <li>{{ matches_l }}</li>
+            <li>{{ rank }}</li>
+            <li>{{ kills }}</li>
+            <li>{{ killed }}</li>
+        </div>
+    </div>
+
+    <div id="badges-frame">
+        <h2>Badges</h2>
+    </div>
+
+
+{% endblock %}  
