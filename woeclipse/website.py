@@ -25,14 +25,15 @@ def load_user(user_id):
 # Models
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(50))
-    last_name = db.Column(db.String(50))
-    birthday = db.Column(db.String(50))
-    country = db.Column(db.String(50))
-    email = db.Column(db.String(50), unique=True)
-    username = db.Column(db.String(20), unique=True)
-    password = db.Column(db.String(80))
+    first_name = db.Column(db.String(50), default="John")
+    last_name = db.Column(db.String(50), default="Doe")
+    birthday = db.Column(db.String(50), default="2000-01-01")
+    country = db.Column(db.String(50), default='Germany')
+    email = db.Column(db.String(50), unique=True, nullable=False)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    password = db.Column(db.String(80), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
+
 
 class Stats(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
@@ -173,31 +174,52 @@ def signout():
     logout_user()
     return redirect(url_for('index'))
 
+
+@app.route('/user/<username>')
+def public_profile(username):
+    user = User.query.filter_by(username=username).first()
+    stats = Stats.query.filter_by(user_id=user.id).first()
+    # Show the user public profile:
+    return render_template('profile.html',
+                           username=current_user.username,
+                           first_name=current_user.first_name,
+                           last_name=current_user.last_name,
+                           country=current_user.country,
+                           team_name=stats.team_name,
+                           matches_w=stats.matches_w,
+                           matches_d=stats.matches_d,
+                           matches_l=stats.matches_l,
+                           rank=stats.rank,
+                           kills=stats.kills,
+                           killed=stats.killed
+                           )
+
+
 @app.route('/profile')
 @login_required
 def profile():
     if current_user.is_authenticated:
-            stats = db.session.query(Stats).filter_by(user_id=current_user.id).one_or_none()
-            # Show the home page only to logged in users:
-            return render_template('profile.html', 
-            username=current_user.username,
-            first_name=current_user.first_name,
-            last_name=current_user.last_name,
-            country=current_user.country,
-            team_name=stats.team_name,
-            matches_w=stats.matches_w,
-            matches_d=stats.matches_d,
-            matches_l=stats.matches_l,
-            rank=stats.rank,
-            kills=stats.kills,
-            killed=stats.killed
-            )
+        stats = Stats.query.filter_by(user_id=current_user.id).first()
+        # Show the home page only to logged in users:
+        return render_template('profile.html',
+                               username=current_user.username,
+                               first_name=current_user.first_name,
+                               last_name=current_user.last_name,
+                               country=current_user.country,
+                               team_name=stats.team_name,
+                               matches_w=stats.matches_w,
+                               matches_d=stats.matches_d,
+                               matches_l=stats.matches_l,
+                               rank=stats.rank,
+                               kills=stats.kills,
+                               killed=stats.killed
+                               )
     else:
         # If users aren't logged in they should be
         # redirected to the signin page:
         return render_template('signin.html')
 
-# Run the server
 
+# Run the server
 if __name__ == "__main__":
     app.run(debug=True)

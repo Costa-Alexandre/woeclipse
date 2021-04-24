@@ -6,3 +6,4 @@ junit/
 *.pyc
 .DS_Store
 .env
+dotenv
