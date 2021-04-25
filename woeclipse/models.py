@@ -2,6 +2,7 @@ from flask_login import UserMixin, LoginManager
 
 from .website import db, app
 
+
 # Models
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -24,6 +25,7 @@ class Stats(db.Model):
     rank = db.Column(db.Integer, default=0)
     kills = db.Column(db.Integer, default=0)
     killed = db.Column(db.Integer, default=0)
+
 
 login_manager = LoginManager()  # initialize flask_login
 login_manager.init_app(app)  # initialize flask_login with our app
