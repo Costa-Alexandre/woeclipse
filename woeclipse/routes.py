@@ -186,3 +186,37 @@ def edit_event(event_id):
             return render_template('edit_event.html', username=current_user.username, event=event)
     else:
         return 'You are not authorized to view this page.'
+
+@routes.route('/admin/delete_event/<event_id>')
+@login_required
+def delete_event(event_id):
+    if current_user.is_admin:
+        event = Event.query.filter_by(id = event_id).first()
+        try: 
+            db.session.delete(event)
+            db.session.commit()
+            return redirect(url_for('routes.admin_events'))
+        except Exception:
+            db.session.rollback()
+            return redirect(url_for('routes.admin_events'))
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/create_event', methods=['POST', 'GET'])
+@login_required
+def create_event():
+    if current_user.is_admin:
+        if request.method == 'POST':
+            event_name = request.form.get('event_name')
+            event_date = request.form.get('event_date')
+            event_description = request.form.get('event_description')
+
+            new_event = Event(event_name=event_name, date=event_date, description=event_description)
+
+            db.session.add(new_event)
+            db.session.commit()
+            return redirect(url_for('routes.admin_events'))
+        else:
+            return redirect(url_for('routes.admin_events'))
+    else:
+        return 'You are not authorized to view this page.'
