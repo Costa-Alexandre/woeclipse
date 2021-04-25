@@ -26,6 +26,16 @@ class Stats(db.Model):
     kills = db.Column(db.Integer, default=0)
     killed = db.Column(db.Integer, default=0)
 
+class Event(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    event_name = db.Column(db.String(50))
+    date = db.Column(db.DateTime, nullable=False)
+    description = db.Column(db.String(600), 
+                            default="No description to this event yet")
+
+class User_event(db.Model):
+    user_id = db.Column(db.Integer, nullable=False, primary_key=True)
+    event_id = db.Column(db.Integer, nullable=False, primary_key=True)
 
 # Connect flask login with the user records in our database:
 @login_manager.user_loader

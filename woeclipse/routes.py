@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask import Blueprint
 from .website import db
-from .models import User, Stats
+from .models import Event, User, Stats
 
 
 routes = Blueprint('routes', __name__, static_folder='static',
@@ -18,15 +18,6 @@ def index():
         return render_template('index.html', username=current_user.username)
     else:
         return render_template('index.html')
-
-
-@routes.route('/admin')
-@login_required
-def admin():
-    if current_user.is_admin:
-        return render_template('admin.html')
-    else:
-        return 'You are not authorized to view this page.'
 
 
 @routes.route('/signup', methods=['POST', 'GET'])
@@ -151,3 +142,47 @@ def profile():
                                )
     else:
         return render_template('signin.html')
+
+# ADMIN ROUTES
+@routes.route('/admin')
+def admin():
+    if current_user.is_admin:
+        return render_template('admin.html', username=current_user.username)
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/events')
+@login_required
+def admin_events():
+    if current_user.is_admin:
+        events = Event.query.all()
+        return render_template('admin_events.html', username=current_user.username, events=events)
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/edit_event/<event_id>', methods=['POST', 'GET'])
+@login_required
+def edit_event(event_id):
+    if current_user.is_admin:
+        event = Event.query.filter_by(id = event_id).first()
+
+        if request.method == 'POST':
+            # Get values from form
+            new_event_name = request.form.get('event_name')
+            new_event_date = request.form.get('event_date')
+            new_event_description = request.form.get('event_description')
+
+            # print(new_event_name, new_event_date, new_event_description)
+            # make edits
+            event.event_name = new_event_name
+            event.date = new_event_date
+            event.description = new_event_description
+
+            db.session.commit()
+            return redirect(url_for('routes.admin_events'))
+
+        else:
+            # When request is GET
+            return render_template('edit_event.html', username=current_user.username, event=event)
+    else:
+        return 'You are not authorized to view this page.'

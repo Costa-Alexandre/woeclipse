@@ -1,0 +1,34 @@
+{% extends "new_base.html" %}
+
+{% block content %}
+
+<h1><a href="/admin">Admin Panel</a>>Events Page </h1>
+
+    <div>
+        <h2>Event: {{ event.event_name }}</h2>
+        <form action="/admin/edit_event/{{ event.id }}" method="post">
+            <p>
+                <label for="event_name">
+                    <input type="text" name="event_name" id="event_name" value="{{ event.event_name }}" maxlength="50" size="50" required>
+                </label>
+            </p>
+            <p>
+            <label for="event_date">
+                <input type="date" name="event_date" id="event_date" value="{{event.date }}" required>
+            </label>
+            </p>
+            <p>
+            <label for="event_description">
+                <textarea name="event_description" id="event_description" rows="10" cols="60%">{{ event.description }}</textarea>
+            </label>
+            </p>
+            <div>
+                <button type="submit" value="confirm">Confirm</button>
+                <button type="button" onclick="history.back()">Cancel</button>
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}  

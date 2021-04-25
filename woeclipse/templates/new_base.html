@@ -49,6 +49,9 @@
             <a href="/stats">Stats</a>
             <a href="/preferences">Preferences</a>
             <a href="/preferences">Change language</a>
+            {% if current_user.is_admin %}
+            <a href="/admin">Admin Panel</a>
+            {% endif %}
             <a href="/signout">Log Out</a>
           </div>
         </div>

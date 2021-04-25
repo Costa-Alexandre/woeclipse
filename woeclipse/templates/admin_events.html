@@ -1,0 +1,32 @@
+{% extends "new_base.html" %}
+
+{% block content %}
+
+<h1><a href="/admin">Admin Panel</a>>Events Page </h1>
+
+    <div>
+        <h2>Events</h2>
+        <table>
+            <thead>
+                <th>Event Name</th>
+                <th>Date</th>
+            </thead>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.event_name }}</td>
+                <td>{{ event.date }}</td>
+                <td><a href="/admin/edit_event/{{ event.id }}">Edit</a></td>
+                <td><a href="/admin/delete_event/{{ event.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        
+        
+        
+        
+        
+        
+    </div>
+
+{% endblock %}  
