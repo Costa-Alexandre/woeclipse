@@ -1,6 +1,6 @@
-from flask_login import UserMixin, LoginManager
+from flask_login import UserMixin
 
-from .website import db, app
+from .website import db, login_manager
 
 
 # Models
@@ -25,11 +25,6 @@ class Stats(db.Model):
     rank = db.Column(db.Integer, default=0)
     kills = db.Column(db.Integer, default=0)
     killed = db.Column(db.Integer, default=0)
-
-
-login_manager = LoginManager()  # initialize flask_login
-login_manager.init_app(app)  # initialize flask_login with our app
-login_manager.login_view = 'index'  # redirect route when @login_required fails
 
 
 # Connect flask login with the user records in our database:
