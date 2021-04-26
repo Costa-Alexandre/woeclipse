@@ -29,7 +29,7 @@
         <tr>
             <td>{{ p.username }}</td>
             <td>{{ p.country }}</td>
-            <td><a href="/admin/remove_participant/{{ p.id }}">Remove</a></td>
+            <td><a href="/admin/remove_participant/{{event.id }}/{{ p.id }}">Remove</a></td>
         </tr>
         {% endfor %}
     </table>

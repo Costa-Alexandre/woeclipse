@@ -106,23 +106,13 @@ def signout():
     return redirect(url_for('routes.index'))
 
 
-@routes.route('/user/<username>')
+@routes.route('/users/<username>')
 def public_profile(username):
     user = User.query.filter_by(username=username).first()
-    stats = Stats.query.filter_by(user_id=user.id).first()
+    stats = user.stats
     # Show the user public profile:
     return render_template('profile.html',
-                           username=current_user.username,
-                           first_name=current_user.first_name,
-                           last_name=current_user.last_name,
-                           country=current_user.country,
-                           team_name=stats.team_name,
-                           matches_w=stats.matches_w,
-                           matches_d=stats.matches_d,
-                           matches_l=stats.matches_l,
-                           rank=stats.rank,
-                           kills=stats.kills,
-                           killed=stats.killed
+                           user=user, stats=stats
                            )
 
 
@@ -130,19 +120,10 @@ def public_profile(username):
 @login_required
 def profile():
     if current_user.is_authenticated:
-        stats = Stats.query.filter_by(id=current_user.id).first()
+        stats = current_user.stats
         return render_template('profile.html',
-                               username=current_user.username,
-                               first_name=current_user.first_name,
-                               last_name=current_user.last_name,
-                               country=current_user.country,
-                               team_name=stats.team_name,
-                               matches_w=stats.matches_w,
-                               matches_d=stats.matches_d,
-                               matches_l=stats.matches_l,
-                               rank=stats.rank,
-                               kills=stats.kills,
-                               killed=stats.killed
+                               user=current_user,
+                               stats=stats
                                )
     else:
         return render_template('signin.html')
@@ -247,5 +228,17 @@ def add_participant(event_id):
         else:
             participants = User.query.all()
             return render_template('add_participant.html', participants=participants, event=event, username = current_user.username)
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/remove_participant/<event_id>/<user_id>')
+@login_required
+def remove_participant(user_id, event_id):
+    if current_user.is_admin:
+        event = Event.query.filter_by(id = event_id).first()
+        user = User.query.filter_by(id = user_id).first()
+        event.users.remove(user)
+        db.session.commit()
+        return redirect(url_for('routes.edit_event', event_id=event_id))
     else:
         return 'You are not authorized to view this page.'

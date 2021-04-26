@@ -5,8 +5,8 @@
     <div id="username-frame">
         <img src="https://via.placeholder.com/120" alt="profile-pic-large">
         <div>
-            <li>{{ username.capitalize() }}
-            <li>{{ first_name.capitalize() }} {{ last_name.capitalize() }}
+            <li>{{ user.username.capitalize() }}
+            <li>{{ user.first_name.capitalize() }} {{ user.last_name.capitalize() }}
         <div>
         <img src="https://via.placeholder.com/40" alt="country-flag">
     </div>
@@ -24,13 +24,13 @@
         </div>
         <div id="values">
             <li></li>
-            <li>{{ team_name }}</li>
-            <li>{{ matches_w }}</li>
-            <li>{{ matches_d }}</li>
-            <li>{{ matches_l }}</li>
-            <li>{{ rank }}</li>
-            <li>{{ kills }}</li>
-            <li>{{ killed }}</li>
+            <li>{{ stats.team_name }}</li>
+            <li>{{ stats.matches_w }}</li>
+            <li>{{ stats.matches_d }}</li>
+            <li>{{ stats.matches_l }}</li>
+            <li>{{ stats.rank }}</li>
+            <li>{{ stats.kills }}</li>
+            <li>{{ stats.killed }}</li>
         </div>
     </div>
 

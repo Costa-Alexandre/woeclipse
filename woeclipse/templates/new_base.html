@@ -41,7 +41,7 @@
       {% if current_user.is_authenticated %}
       <div class="navbar" style="float: right;">
         <div class="dropdown">
-          <button class="dropbtn">Hello, {{ username.capitalize() }}
+          <button class="dropbtn">Hello, {{ current_user.username.capitalize() }}
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
