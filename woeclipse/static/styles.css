@@ -93,3 +93,103 @@ footer {
   #profile-pic-link {
     padding: 0;
   }
+
+  #hero-news{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* Inside Auto Layout */
+    align-self: stretch;
+    margin: 0px 0px;
+  }
+
+  #news-components{
+    /* Auto Layout */
+  
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    
+    flex: 0 380px;
+    }
+  
+  #news-title{
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 32px 0px;
+  }
+  
+  #signup-login-pills{
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  margin: 32px 0px;
+  }
+
+  #news-content{
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  margin: 32px 0px;
+  }
+
+  #news-cards{
+  /* Auto Layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+
+  flex: 0 1204px;
+  height: 380px;
+  }
+
+  .news-card{
+  width: 380px;
+  height: 380px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  flex-grow: 0;
+  margin: 0px 32px;
+  }
+
+  #hero-events {
+  height: 400px;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0px 0px;  
+  }
+
+  #hero-users{
+  height: 552px;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 3;
+  align-self: stretch;
+  flex-grow: 0;
+  margin: 0px 0px;
+  }
+
+
+

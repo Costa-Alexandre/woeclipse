@@ -2,27 +2,34 @@
 
 {% block content %}
 
-<div id="hero-intro">
-  <div id="banner-components">
-    <h1>Warriors of Eclipse</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sapiente ipsum corrupti enim fugiat tempora nobis
-      ducimus itaque, modi accusamus?</p>
-    <button class="blue-pill">Sign Up</button>
-    <button class="blue-pill">Login</button>
+<div id="hero-news">
+  <div id="news-components">
+    <div id='news-title'>
+      <h1>Warriors of Eclipse</h1>
+    </div>
+    <div id="news-content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sapiente ipsum corrupti enim fugiat tempora nobis
+      ducimus itaque, modi accusamus?
+    </div>
+    <div id="signup-login-pills">
+      <button class="blue-pill">Sign Up</button>
+      <button class="blue-pill">Login</button>
+    </div>
   </div>
-  {% for n in range(3) %}
+
   <div id="news-cards">
-    <div class='news-card-image'>
-      <img src="https://via.placeholder.com/384x180" alt="#">
+    {% for n in range(3) %}
+    <div class="news-card">
+      <div class='news-card-image'>
+        <img src="https://via.placeholder.com/384x180" alt="#">
+      </div>
+      <div id='news-card-contents'>
+        <p>Title</p><br><br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias aspernatur aliquid?</p>
+      </div>
     </div>
-    <div>
-      <!--  news.title <br><br>
-      news.content  -->
-      <p>Title</p><br><br>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias aspernatur aliquid?</p>
-    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 
 <div id="hero-events">

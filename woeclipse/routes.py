@@ -107,8 +107,6 @@ def signout():
 def index():
     events = Event.query.limit(3).all()
     users = User.query.limit(8).all()
-    
-    print(users)
 
     if current_user.is_authenticated:
         return render_template(
