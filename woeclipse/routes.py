@@ -15,7 +15,7 @@ routes = Blueprint('routes', __name__, static_folder='static',
 @routes.route('/')
 def index():
     if current_user.is_authenticated:
-        return render_template('index.html', username=current_user.username)
+        return render_template('index.html')
     else:
         return render_template('index.html')
 
@@ -121,10 +121,7 @@ def public_profile(username):
 def profile():
     if current_user.is_authenticated:
         stats = current_user.stats
-        return render_template('profile.html',
-                               user=current_user,
-                               stats=stats
-                               )
+        return render_template('profile.html', stats=stats)
     else:
         return render_template('signin.html')
 
@@ -132,7 +129,7 @@ def profile():
 @routes.route('/admin')
 def admin():
     if current_user.is_admin:
-        return render_template('admin.html', username=current_user.username)
+        return render_template('admin.html')
     else:
         return 'You are not authorized to view this page.'
 
@@ -141,7 +138,7 @@ def admin():
 def admin_events():
     if current_user.is_admin:
         events = Event.query.all()
-        return render_template('admin_events.html', username=current_user.username, events=events)
+        return render_template('admin_events.html', events=events)
     else:
         return 'You are not authorized to view this page.'
 
@@ -171,7 +168,7 @@ def edit_event(event_id):
             # When request is GET
             participants = event.users 
 
-            return render_template('edit_event.html', username=current_user.username, event=event, participants=participants)
+            return render_template('edit_event.html', event=event, participants=participants)
     else:
         return 'You are not authorized to view this page.'
 
@@ -181,13 +178,11 @@ def edit_event(event_id):
 def delete_event(event_id):
     if current_user.is_admin:
         event = Event.query.filter_by(id = event_id).first()
-        try: 
-            db.session.delete(event)
-            db.session.commit()
-            return redirect(url_for('routes.admin_events'))
-        except Exception:
-            db.session.rollback()
-            return redirect(url_for('routes.admin_events'))
+         
+        db.session.delete(event)
+        db.session.commit()
+
+        return redirect(url_for('routes.admin_events'))
     else:
         return 'You are not authorized to view this page.'
 
