@@ -2,6 +2,72 @@
 
 {% block content %}
 
-<button onclick="warnUser()"> Push Me. I Dare You. </button>
+<div id="hero-intro">
+  <div id="banner-components">
+    <h1>Warriors of Eclipse</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sapiente ipsum corrupti enim fugiat tempora nobis
+      ducimus itaque, modi accusamus?</p>
+    <button class="blue-pill">Sign Up</button>
+    <button class="blue-pill">Login</button>
+  </div>
+  {% for n in range(3) %}
+  <div id="news-cards">
+    <div class='news-card-image'>
+      <img src="https://via.placeholder.com/384x180" alt="#">
+    </div>
+    <div>
+      <!--  news.title <br><br>
+      news.content  -->
+      <p>Title</p><br><br>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias aspernatur aliquid?</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div id="hero-events">
+  <div id="menu-scroll">
+    <h1>Upcoming Events</h1>
+    <img style='float: right;' src="https://via.placeholder.com/40" alt="">
+    <img style='float: right;' src="https://via.placeholder.com/40" alt="">
+  </div>
+  {% for event in events %}
+  <div class="event-cards">
+    <div class="event-card-image">
+      <img src="https://via.placeholder.com/280x140" alt="#">
+      {{ event.date }}
+    </div>
+    <div>
+      {{ event.event_name }}<br><br>
+      {{ event.description }}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div id="hero-users">
+  <div id="menu-seemore">
+    <h1>Champions</h1>
+    <button class='blue-pill' style='float: right;'>See more</button>
+  </div>
+  <div class="user-row">
+    {% for user in users1row %}
+    <div class="user-cards">
+      <img src="https://via.placeholder.com/80" alt="#"><br>
+      {{ user.username }}<br>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="user-row">
+    {% for user in users2row %}
+    <div class="user-cards">
+      <img src="https://via.placeholder.com/80" alt="#">
+      {{ user.username }}<br>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 
 {% endblock %}
