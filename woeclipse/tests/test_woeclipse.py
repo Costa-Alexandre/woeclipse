@@ -1,7 +1,8 @@
-from woeclipse.website import app
+from woeclipse.website import create_app
 
 
 def test_index():
+    app = create_app()
     # create a version of our website that we can use for testing
     with app.test_client() as test_client:
         # mimic a browser: 'GET /', as if you visit the site
