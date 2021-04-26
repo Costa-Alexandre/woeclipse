@@ -1,50 +1,51 @@
 {% extends 'new_base.html' %}
 
 {% block head %}
-    <title>Woeclipse - Signup</title>
+<title>Woeclipse - Signup</title>
 {% endblock %}
 
 {% block content %}
-    <header>
-        <h1>Signup</h1>
-    </header>
+<header>
+  <h1>Signup</h1>
+</header>
 
-    <main>
-        <form action="/signup" method="POST">
-        <div>
-            <input type="text" name="first_name" id="signup_first_name" placeholder="First Name">
-        </div>
-        <div>
-            <input type="text" name="last_name" id="signup_last_name" placeholder="Last Name">
-        </div>
-        <div>
-            <input type="date" name="birthday" id="signup_birthday">
-        </div>
-        <div>
-            <input type="text" name="country" id="signup_country" placeholder="Country">
-        </div>
-        <div>
-            <input type="email" name="email" id="signup_email" placeholder="E-mail" required>
-        </div>
-        <div>
-            <input type="text" name="username" id="signup_username" placeholder="Username" required>
-        </div>
-        <div>
-            <input type="password" name="password" id="signup_password" placeholder="Password" required>
-        </div>
-        <div>
-            <input type="password" name="password_confirmation" id="signup_password_confirmation" placeholder="Confirm Password" required>
-        </div>
+<main>
+  <form action="/signup" method="POST">
+    <div>
+      <input type="text" name="first_name" id="signup_first_name" placeholder="First Name">
+    </div>
+    <div>
+      <input type="text" name="last_name" id="signup_last_name" placeholder="Last Name">
+    </div>
+    <div>
+      <input type="date" name="birthday" id="signup_birthday">
+    </div>
+    <div>
+      <input type="text" name="country" id="signup_country" placeholder="Country">
+    </div>
+    <div>
+      <input type="email" name="email" id="signup_email" placeholder="E-mail" required>
+    </div>
+    <div>
+      <input type="text" name="username" id="signup_username" placeholder="Username" required>
+    </div>
+    <div>
+      <input type="password" name="password" id="signup_password" placeholder="Password" required>
+    </div>
+    <div>
+      <input type="password" name="password_confirmation" id="signup_password_confirmation"
+        placeholder="Confirm Password" required>
+    </div>
 
-        <input type="submit" value="Signup">
-        </form>
-    
-        {% if error %}
-        <p class="error">{{error}}</p>
-        {% endif %}
-    </main>
+    <input type="submit" value="Signup">
+  </form>
 
-    <footer>
-        Already have an account? <a href="/signin">Log In</a>
-    </footer>
+  {% if error %}
+  <p class="error">{{error}}</p>
+  {% endif %}
+</main>
+
+<footer>
+  Already have an account? <a href="/signin">Log In</a>
+</footer>
 {% endblock %}

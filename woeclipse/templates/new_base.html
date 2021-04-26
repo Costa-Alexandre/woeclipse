@@ -1,14 +1,14 @@
 <html>
 
 <head>
-    {% block head %}
-      <title>Woeclipse - Home</title>
-    {% endblock %}
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  {% block head %}
+  <title>Woeclipse - Home</title>
+  {% endblock %}
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -27,15 +27,15 @@
       </div>
       <a href="/ranking">Ranking</a>
       <div class="dropdown">
-          <button class="dropbtn">More
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a href="/community">Community</a>
-            <a href="/rules">Rules</a>
-            <a href="/resources">Resources</a>
-            <a href="/about">About Us</a>
-          </div>
+        <button class="dropbtn">More
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="/community">Community</a>
+          <a href="/rules">Rules</a>
+          <a href="/resources">Resources</a>
+          <a href="/about">About Us</a>
+        </div>
       </div>
       <a href="/contact">Contact Us</a>
       {% if current_user.is_authenticated %}
@@ -57,23 +57,23 @@
         </div>
         <a href="/profile" id="profile-pic-link">
           <img src="https://via.placeholder.com/40" alt="profile-pic" style="float: right;">
-        </a> 
+        </a>
       </div>
       {% else %}
       <div class="navbar" style="float: right;">
         <a href="/signin">Log In</a>
         <a href="/signup">Sign Up</a>
       </div>
-    {% endif %}
+      {% endif %}
     </div>
-      
-        
-        
+
+
+
   </header>
   <main>
-      {% block content%} {% endblock %}
+    {% block content%} {% endblock %}
   </main>
   <footer>
-      <h3> <em> Links and Social Media </em></h3>
+    <h3> <em> Links and Social Media </em></h3>
   </footer>
 </body>

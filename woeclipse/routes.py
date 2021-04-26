@@ -11,15 +11,9 @@ routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
 
 
-# Routes
-@routes.route('/')
-def index():
-    if current_user.is_authenticated:
-        return render_template('index.html')
-    else:
-        return render_template('index.html')
-
-
+# ........................................................................... #
+# ............................... AUTH ROUTES ............................... #
+# ........................................................................... #
 @routes.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
@@ -106,12 +100,23 @@ def signout():
     return redirect(url_for('routes.index'))
 
 
+# --------------------------------------------------------------------------- #
+# ----------------------------- MAIN ROUTES --------------------------------- #
+# --------------------------------------------------------------------------- #
+@routes.route('/')
+def index():
+    if current_user.is_authenticated:
+        return render_template('index.html')
+    else:
+        return render_template('index.html')
+
+
 @routes.route('/users/<username>')
 def public_profile(username):
     user = User.query.filter_by(username=username).first()
     stats = user.stats
     # Show the user public profile:
-    return render_template('profile.html', user=user, stats=stats)
+    return render_template('public_profile.html', user=user, stats=stats)
 
 
 @routes.route('/profile')
@@ -124,7 +129,9 @@ def profile():
         return render_template('signin.html')
 
 
-# ADMIN ROUTES
+# ########################################################################### #
+# ######################## ADMIN PANEL ROUTES ############################### #
+# ########################################################################### #
 @routes.route('/admin')
 def admin():
     if current_user.is_admin:

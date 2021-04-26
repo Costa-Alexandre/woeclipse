@@ -1,33 +1,33 @@
 {% extends 'new_base.html' %}
 
 {% block head %}
-    <title>Woeclipse - Log In</title>
+<title>Woeclipse - Log In</title>
 {% endblock %}
 
 {% block content %}
-    <header>
-        <h1>Log In</h1>
-    </header>
+<header>
+  <h1>Log In</h1>
+</header>
 
-    <main>
-        <form action="/signin" method="POST">
-            <div>
-                <input type="text" name="username" id="login_username" placeholder="Username" required>
-            </div>
-            
-            <div>
-                <input type="password" name="password" id="signin_password" placeholder="Password" required>
-            </div>
+<main>
+  <form action="/signin" method="POST">
+    <div>
+      <input type="text" name="username" id="login_username" placeholder="Username" required>
+    </div>
 
-            <input type="submit" value="Log In">
-        </form>
-    
-        {% if error %}
-        <p class="error">{{error}}</p>
-        {% endif %}
-    </main>
+    <div>
+      <input type="password" name="password" id="signin_password" placeholder="Password" required>
+    </div>
 
-    <footer>
-        <a href="/signup">CREATE YOUR ACCOUNT</a>
-    </footer>
+    <input type="submit" value="Log In">
+  </form>
+
+  {% if error %}
+  <p class="error">{{error}}</p>
+  {% endif %}
+</main>
+
+<footer>
+  <a href="/signup">CREATE YOUR ACCOUNT</a>
+</footer>
 {% endblock %}
