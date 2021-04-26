@@ -7,8 +7,8 @@ from .website import db
 from .models import Event, User, Stats
 
 
-routes = Blueprint('routes', __name__, static_folder='static',
-                   template_folder='templates')
+routes = Blueprint(
+    'routes', __name__, static_folder='static', template_folder='templates')
 
 
 # Routes
@@ -34,8 +34,8 @@ def signup():
             password_confirmation = request.form.get('password_confirmation')
 
             if not email or not password or not username:
-                raise ValueError('Email, username or password\
-                                 parameter was missing.')
+                raise ValueError(
+                    'Email, username or password parameter was missing.')
 
             if not password == password_confirmation:
                 raise ValueError('The two passwords are not matching.')
@@ -60,7 +60,7 @@ def signup():
 
             # Change name to a customized default
             stats.team_name = f"{new_user.username.capitalize()}'s Team"
-            
+
             # Set relation
             new_user.stats = stats
             db.session.commit()
@@ -69,9 +69,9 @@ def signup():
             return redirect('/')
 
         except Exception as error_message:
-            return render_template('signup.html',
-                                   error="User could not be created.\
-                                   " + str(error_message))
+            return render_template(
+                'signup.html',
+                error="User could not be created." + str(error_message))
     else:
         # When request = GET:
         return render_template('signup.html')
@@ -92,8 +92,8 @@ def signin():
             else:
                 raise ValueError("Couldn't login with given login parameters.")
         except Exception:
-            return render_template('signin.html',
-                                   error="Invalid username or password.")
+            return render_template(
+                'signin.html', error="Invalid username or password.")
     else:
         return render_template('signin.html')
 
@@ -111,9 +111,7 @@ def public_profile(username):
     user = User.query.filter_by(username=username).first()
     stats = user.stats
     # Show the user public profile:
-    return render_template('profile.html',
-                           user=user, stats=stats
-                           )
+    return render_template('profile.html', user=user, stats=stats)
 
 
 @routes.route('/profile')
@@ -125,6 +123,7 @@ def profile():
     else:
         return render_template('signin.html')
 
+
 # ADMIN ROUTES
 @routes.route('/admin')
 def admin():
@@ -132,6 +131,7 @@ def admin():
         return render_template('admin.html')
     else:
         return 'You are not authorized to view this page.'
+
 
 @routes.route('/admin/events')
 @login_required
@@ -147,7 +147,7 @@ def admin_events():
 @login_required
 def edit_event(event_id):
     if current_user.is_admin:
-        event = Event.query.filter_by(id = event_id).first()
+        event = Event.query.filter_by(id=event_id).first()
 
         if request.method == 'POST':
             # Get values from form
@@ -166,9 +166,10 @@ def edit_event(event_id):
 
         else:
             # When request is GET
-            participants = event.users 
+            participants = event.users
 
-            return render_template('edit_event.html', event=event, participants=participants)
+            return render_template(
+                'edit_event.html', event=event, participants=participants)
     else:
         return 'You are not authorized to view this page.'
 
@@ -177,8 +178,8 @@ def edit_event(event_id):
 @login_required
 def delete_event(event_id):
     if current_user.is_admin:
-        event = Event.query.filter_by(id = event_id).first()
-         
+        event = Event.query.filter_by(id=event_id).first()
+
         db.session.delete(event)
         db.session.commit()
 
@@ -196,7 +197,10 @@ def create_event():
             event_date = request.form.get('event_date')
             event_description = request.form.get('event_description')
 
-            new_event = Event(event_name=event_name, date=event_date, description=event_description)
+            new_event = Event(
+                event_name=event_name,
+                date=event_date,
+                description=event_description)
 
             db.session.add(new_event)
             db.session.commit()
@@ -206,11 +210,12 @@ def create_event():
     else:
         return 'You are not authorized to view this page.'
 
+
 @routes.route('/admin/add_participant/<event_id>', methods=['POST', 'GET'])
 @login_required
 def add_participant(event_id):
     if current_user.is_admin:
-        event = Event.query.filter_by(id = event_id).first()
+        event = Event.query.filter_by(id=event_id).first()
 
         if request.method == 'POST':
             username = request.form.get('participants')
@@ -222,16 +227,18 @@ def add_participant(event_id):
             return redirect(url_for('routes.edit_event', event_id=event_id))
         else:
             participants = User.query.all()
-            return render_template('add_participant.html', participants=participants, event=event, username = current_user.username)
+            return render_template(
+                'add_participant.html', participants=participants, event=event)
     else:
         return 'You are not authorized to view this page.'
+
 
 @routes.route('/admin/remove_participant/<event_id>/<user_id>')
 @login_required
 def remove_participant(user_id, event_id):
     if current_user.is_admin:
-        event = Event.query.filter_by(id = event_id).first()
-        user = User.query.filter_by(id = user_id).first()
+        event = Event.query.filter_by(id=event_id).first()
+        user = User.query.filter_by(id=user_id).first()
         event.users.remove(user)
         db.session.commit()
         return redirect(url_for('routes.edit_event', event_id=event_id))

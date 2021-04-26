@@ -1,12 +1,13 @@
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
-from sqlalchemy.sql.schema import ForeignKey
 
 from .website import db, login_manager
 
 
 # Tables
-user_event = db.Table('user_event', db.Column('user_id', db.Integer, db.ForeignKey('user.id')), db.Column('event_id', db.Integer, db.ForeignKey('event.id')))
+user_event = db.Table(
+    'user_event', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('event_id', db.Integer, db.ForeignKey('event.id')))
+
 
 # Models
 class User(UserMixin, db.Model):
@@ -47,14 +48,13 @@ class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     event_name = db.Column(db.String(50), unique=True)
     date = db.Column(db.DateTime, nullable=False)
-    description = db.Column(db.String(600), 
-                            default="No description to this event yet")
-    users = db.relationship('User', secondary=user_event, backref='events',lazy='select')
-        
+    description = db.Column(
+        db.String(600), default="No description to this event yet")
+    users = db.relationship(
+        'User', secondary=user_event, backref='events', lazy='select')
 
     def __repr__(self):
         return f'<Event {self.event_name}>'
-
 
 
 # Connect flask login with the user records in our database:
