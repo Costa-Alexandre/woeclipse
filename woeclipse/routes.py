@@ -42,6 +42,10 @@ def signup():
 
             hashed_password = generate_password_hash(password, method='sha256')
 
+            # Create blank stats entry
+            stats = Stats(team_name='No team name')
+            db.session.add(stats)
+
             # Create a new use record in the database:
             new_user = User(first_name=first_name,
                             last_name=last_name,
@@ -49,16 +53,16 @@ def signup():
                             country=country,
                             email=email,
                             username=username,
-                            password=hashed_password)
+                            password=hashed_password
+                            )
 
             db.session.add(new_user)
-            db.session.commit()
 
-            # Create stats entry for newly created user
-            team_name = f"{new_user.username.capitalize()}'s Team"
-            new_stats_entry = Stats(user_id=new_user.id, team_name=team_name)
-
-            db.session.add(new_stats_entry)
+            # Change name to a customized default
+            stats.team_name = f"{new_user.username.capitalize()}'s Team"
+            
+            # Set relation
+            new_user.stats = stats
             db.session.commit()
             login_user(new_user)
 
@@ -160,6 +164,7 @@ def admin_events():
     else:
         return 'You are not authorized to view this page.'
 
+
 @routes.route('/admin/edit_event/<event_id>', methods=['POST', 'GET'])
 @login_required
 def edit_event(event_id):
@@ -183,9 +188,12 @@ def edit_event(event_id):
 
         else:
             # When request is GET
+            # participants = db.session.query(User).join(User_event).filter(User_event.event_id == event_id)
+
             return render_template('edit_event.html', username=current_user.username, event=event)
     else:
         return 'You are not authorized to view this page.'
+
 
 @routes.route('/admin/delete_event/<event_id>')
 @login_required
@@ -201,6 +209,7 @@ def delete_event(event_id):
             return redirect(url_for('routes.admin_events'))
     else:
         return 'You are not authorized to view this page.'
+
 
 @routes.route('/admin/create_event', methods=['POST', 'GET'])
 @login_required

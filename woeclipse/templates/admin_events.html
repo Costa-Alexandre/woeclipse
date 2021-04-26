@@ -7,25 +7,14 @@
 <div>
     <h2>Create Events</h2>
     <form id="event-form" action="/admin/create_event" method="post">
-        <p>
-            <label for="event_name">
-                <input type="text" name="event_name" id="event_name" maxlength="50" size="50" required>
-            </label>
-        </p>
-        <p>
-        <label for="event_date">
-            <input type="date" name="event_date" id="event_date" required>
-        </label>
-        </p>
-        <p>
-        <label for="event_description">
-            <textarea name="event_description" id="event_description" rows="10" cols="60%">No description to this event yet</textarea>
-        </label>
-        </p>
-        <div>
-            <button type="submit" value="confirm">Create</button>
-            <button type="button" onclick="document.getElementById('event-form').reset()">Reset</button>
-        </div>
+        <label for="event_name">Event Name: </label><br>
+        <input type="text" name="event_name" id="event_name" maxlength="50" size="50" required><br>
+        <label for="event_date">Date: </label><br>
+        <input type="datetime-local" name="event_date" id="event_date" required><br>
+        <label for="event_description">Description: </label><br>
+        <textarea name="event_description" id="event_description" rows="10" cols="60%">No description to this event yet</textarea><br><br>
+        <input type="submit" value="Create Event">
+        <input type="button" onclick="document.getElementById('event-form').reset()" value="Reset">
     </form>
 </div>
 <div>
