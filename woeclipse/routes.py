@@ -130,7 +130,7 @@ def public_profile(username):
 @login_required
 def profile():
     if current_user.is_authenticated:
-        stats = Stats.query.filter_by(user_id=current_user.id).first()
+        stats = Stats.query.filter_by(id=current_user.id).first()
         return render_template('profile.html',
                                username=current_user.username,
                                first_name=current_user.first_name,
@@ -188,9 +188,9 @@ def edit_event(event_id):
 
         else:
             # When request is GET
-            # participants = db.session.query(User).join(User_event).filter(User_event.event_id == event_id)
+            participants = event.users 
 
-            return render_template('edit_event.html', username=current_user.username, event=event)
+            return render_template('edit_event.html', username=current_user.username, event=event, participants=participants)
     else:
         return 'You are not authorized to view this page.'
 
@@ -227,5 +227,25 @@ def create_event():
             return redirect(url_for('routes.admin_events'))
         else:
             return redirect(url_for('routes.admin_events'))
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/add_participant/<event_id>', methods=['POST', 'GET'])
+@login_required
+def add_participant(event_id):
+    if current_user.is_admin:
+        event = Event.query.filter_by(id = event_id).first()
+
+        if request.method == 'POST':
+            username = request.form.get('participants')
+            participant = User.query.filter_by(username=username).first()
+            print(event.event_name, participant.username)
+            event.users.append(participant)
+
+            db.session.commit()
+            return redirect(url_for('routes.edit_event', event_id=event_id))
+        else:
+            participants = User.query.all()
+            return render_template('add_participant.html', participants=participants, event=event, username = current_user.username)
     else:
         return 'You are not authorized to view this page.'

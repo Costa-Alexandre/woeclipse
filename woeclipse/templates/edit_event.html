@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1><a href="/admin">Admin Panel</a>>Events Page </h1>
+<h1><a href="/admin">Admin Panel</a>: Events Page </h1>
 
 <div>
     <h2>Event: {{ event.event_name }}</h2>
@@ -10,15 +10,16 @@
         <label for="event_name">Event Name: </label><br>
         <input type="text" name="event_name" id="event_name" value="{{ event.event_name }}" maxlength="50" size="50" required><br>
         <label for="event_date">Date: </label><br>
-        <input type="datetime-local" name="event_date" id="event_date" value="{{event.date }}" required><br>
+        <input type="text" name="event_date" id="event_date" value="{{event.date }}" required><br>
         <label for="event_description">Description: </label><br>
         <textarea name="event_description" id="event_description" rows="10" cols="60%">{{ event.description }}</textarea><br><br>
         <input type="submit" value="Confirm">
-        <input type="button" value="Cancel" onclick="history.back()">
+        <a href="/admin/events"><button type="button">Back</button></a>
     </form>
 </div>
 <div>
-    <h2>Participants</h2>
+    <h2>Participants</h2> 
+    <a href="/admin/add_participant/{{ event.id }}">add a participant</a>
     <table>
         <thead>
             <th>Username</th>

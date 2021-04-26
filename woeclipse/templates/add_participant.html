@@ -1,0 +1,16 @@
+{% extends "new_base.html" %}
+
+{% block content %}
+
+<h2>Event: {{ event.event_name }}</h2>
+<form action="/admin/add_participant/{{ event.id }}" method="post">
+    <label for="participants">Select participant:</label>
+    <select id="participants" name="participants">
+        {% for p in participants %}
+        <option value="{{ p.username }}">{{ p.username }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit">
+</form>
+
+{% endblock %}  
