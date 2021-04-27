@@ -21,7 +21,15 @@
 </div>
 <div>
   <h2>Participants</h2>
-  <a href="/admin/add_participant/{{ event.id }}">add a participant</a>
+  <form action="/admin/add_participant/{{ event.id }}" method="post">
+    <label for="participants">Add participant:</label>
+    <select id="participants" name="participants">
+      {% for u in users %}
+      <option value="{{ u.username }}">{{ u.username }}</option>
+      {% endfor %}
+    </select>
+    <input type="submit">
+  </form>
   <table>
     <thead>
       <th>Username</th>

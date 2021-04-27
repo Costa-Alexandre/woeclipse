@@ -179,9 +179,11 @@ def edit_event(event_id):
         else:
             # When request is GET
             participants = event.users
+            users = User.query.all()
 
             return render_template(
-                'edit_event.html', event=event, participants=participants)
+                'edit_event.html', event=event, 
+                participants=participants, users=users)
     else:
         return 'You are not authorized to view this page.'
 
