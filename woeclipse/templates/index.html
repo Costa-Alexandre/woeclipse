@@ -22,7 +22,7 @@
 
   <div id="news-cards">
     {% for n in range(3) %}
-    <div class="news-card">
+    <div class="news-card card">
       <div class='news-card-image'>
         <img src="https://via.placeholder.com/380x180" alt="#">
       </div>
@@ -36,7 +36,7 @@
 </div>
 
 <div id="hero-events" class="hero">
-  <div id="menu-scroll">
+  <div id="menu-scroll" class="horizontal-menu">
     <div>
       <h1>Upcoming Events</h1>
     </div>
@@ -47,7 +47,7 @@
   </div>
   <div id="event-cards">
     {% for event in events %}
-    <div class="event-card">
+    <div class="event-card card">
       <div class="event-card-image">
       <img src="https://via.placeholder.com/280x140" alt="#">
       {{ event.date }}
@@ -63,27 +63,31 @@
 </div>
 
 <div id="hero-users" class="hero">
-  <div id="menu-seemore">
+  <div id="menu-seemore" class="horizontal-menu">
     <h1>Champions</h1>
     <button class='blue-pill' style='float: right;'>See more</button>
   </div>
   <div class="user-row">
-    {% for user in users1row %}
     <div class="user-cards">
-      <img src="https://via.placeholder.com/80" alt="#"><br>
-      {{ user.username }}<br>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
-    </div>
-    {% endfor %}
+      {% for user in users1row %}
+      <div class="user-card card">
+        <img src="https://via.placeholder.com/80" alt="#">
+        {{ user.username }}<br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
+      </div>
+      {% endfor %}
+    </div>  
   </div>
   <div class="user-row">
-    {% for user in users2row %}
     <div class="user-cards">
-      <img src="https://via.placeholder.com/80" alt="#">
-      {{ user.username }}<br>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
-    </div>
-    {% endfor %}
+      {% for user in users2row %}
+      <div class="user-card card">
+        <img src="https://via.placeholder.com/80" alt="#">
+        {{ user.username }}<br>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
+      </div>
+      {% endfor %}
+    </div>  
   </div>
 </div>
 
