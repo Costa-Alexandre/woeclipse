@@ -2,29 +2,32 @@
 
 {% block content %}
 
-<div id="hero-news">
+<div id="hero-news" class="hero">
   <div id="news-components">
-    <div id='news-title'>
-      <h1>Warriors of Eclipse</h1>
-    </div>
-    <div id="news-content">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sapiente ipsum corrupti enim fugiat tempora nobis
-      ducimus itaque, modi accusamus
-    </div>
-    <div id="signup-login-pills">
-      <button class="blue-pill">Sign Up</button>
-      <button class="blue-pill">Login</button>
-    </div>
+    <div id="news-main">
+      <div id='news-title'>
+        <h1>Warriors of Eclipse</h1>
+      </div>
+      <div id="news-content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia sapiente ipsum corrupti enim fugiat tempora nobis
+        ducimus itaque, modi accusamus
+      </div>
+      <div id="signup-login-pills">
+        <button class="blue-pill">Sign Up</button>
+        <button class="blue-pill">Login</button>
+      </div>
+    </div>      
   </div>
+
 
   <div id="news-cards">
     {% for n in range(3) %}
     <div class="news-card">
       <div class='news-card-image'>
-        <img src="https://via.placeholder.com/384x180" alt="#">
+        <img src="https://via.placeholder.com/380x180" alt="#">
       </div>
       <div id='news-card-contents'>
-        <p>Title</p><br><br>
+        <p>Title</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias aspernatur aliquid?</p>
       </div>
     </div>
@@ -32,27 +35,34 @@
   </div>
 </div>
 
-<div id="hero-events">
+<div id="hero-events" class="hero">
   <div id="menu-scroll">
-    <h1>Upcoming Events</h1>
-    <img style='float: right;' src="https://via.placeholder.com/40" alt="">
-    <img style='float: right;' src="https://via.placeholder.com/40" alt="">
-  </div>
-  {% for event in events %}
-  <div class="event-cards">
-    <div class="event-card-image">
-      <img src="https://via.placeholder.com/280x140" alt="#">
-      {{ event.date }}
+    <div>
+      <h1>Upcoming Events</h1>
     </div>
     <div>
-      {{ event.event_name }}<br><br>
-      {{ event.description }}
+      <img style='float: right;' src="https://via.placeholder.com/40" alt="">
+      <img style='float: right;' src="https://via.placeholder.com/40" alt="">
     </div>
   </div>
-  {% endfor %}
+  <div id="event-cards">
+    {% for event in events %}
+    <div class="event-card">
+      <div class="event-card-image">
+      <img src="https://via.placeholder.com/280x140" alt="#">
+      {{ event.date }}
+      </div>
+      <div>
+        {{ event.event_name }}<br><br>
+        {{ event.description }}
+      </div>
+    </div>
+  {% endfor %}  
+  </div>
+  
 </div>
 
-<div id="hero-users">
+<div id="hero-users" class="hero">
   <div id="menu-seemore">
     <h1>Champions</h1>
     <button class='blue-pill' style='float: right;'>See more</button>

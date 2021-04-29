@@ -105,7 +105,7 @@ def signout():
 # --------------------------------------------------------------------------- #
 @routes.route('/')
 def index():
-    events = Event.query.limit(3).all()
+    events = Event.query.limit(4).all()
     users = User.query.limit(8).all()
 
     if current_user.is_authenticated:
