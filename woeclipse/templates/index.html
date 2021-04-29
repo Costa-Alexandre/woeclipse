@@ -52,7 +52,7 @@
       <img src="https://via.placeholder.com/280x140" alt="#">
       {{ event.date }}
       </div>
-      <div>
+      <div class="content">
         {{ event.event_name }}<br><br>
         {{ event.description }}
       </div>
@@ -67,28 +67,20 @@
     <h1>Champions</h1>
     <button class='blue-pill' style='float: right;'>See more</button>
   </div>
+  {% for row in range(2) %}
   <div class="user-row">
     <div class="user-cards">
-      {% for user in users1row %}
-      <div class="user-card card">
-        <img src="https://via.placeholder.com/80" alt="#">
-        {{ user.username }}<br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
+      {% for user in users[row] %}
+      <div class="user-card card content">
+        <div><img src="https://via.placeholder.com/80" alt="#"></div>
+        <div><br>{{ user.username.capitalize() }}<br><br></div>
+        <div>Lorem ipsum dolor sit amet consectetur.</div>
       </div>
       {% endfor %}
     </div>  
   </div>
-  <div class="user-row">
-    <div class="user-cards">
-      {% for user in users2row %}
-      <div class="user-card card">
-        <img src="https://via.placeholder.com/80" alt="#">
-        {{ user.username }}<br>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita, ad.</p>
-      </div>
-      {% endfor %}
-    </div>  
-  </div>
+  {% endfor %}
+
 </div>
 
 {% endblock %}

@@ -13,58 +13,62 @@
 
 <body>
   <header>
-    <div class="navbar">
-      <a href="/">Woeclipse</a>
-      <div class="dropdown">
-        <button class="dropbtn">Battle
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="/tournments">Tournments</a>
-          <a href="/challenges">Challenges</a>
-          <a href="/rankedmatches">Ranked Matches</a>
-        </div>
-      </div>
-      <a href="/ranking">Ranking</a>
-      <div class="dropdown">
-        <button class="dropbtn">More
-          <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-          <a href="/community">Community</a>
-          <a href="/rules">Rules</a>
-          <a href="/resources">Resources</a>
-          <a href="/about">About Us</a>
-        </div>
-      </div>
-      <a href="/contact">Contact Us</a>
-      {% if current_user.is_authenticated %}
-      <div class="navbar" style="float: right;">
+    <div id="navbar">
+      <div id="navbar-left">
+        <a href="/">Woeclipse</a>
         <div class="dropdown">
-          <button class="dropbtn">Hello, {{ current_user.username.capitalize() }}
+          <button class="dropbtn">Battle
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="/profile">Profile</a>
-            <a href="/stats">Stats</a>
-            <a href="/preferences">Preferences</a>
-            <a href="/preferences">Change language</a>
-            {% if current_user.is_admin %}
-            <a href="/admin">Admin Panel</a>
-            {% endif %}
-            <a href="/signout">Log Out</a>
+            <a href="/tournments">Tournments</a>
+            <a href="/challenges">Challenges</a>
+            <a href="/rankedmatches">Ranked Matches</a>
           </div>
         </div>
-        <a href="/profile" id="profile-pic-link">
-          <img src="https://via.placeholder.com/40" alt="profile-pic" style="float: right;">
-        </a>
+        <a href="/ranking">Ranking</a>
+        <div class="dropdown">
+          <button class="dropbtn">More
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/community">Community</a>
+            <a href="/rules">Rules</a>
+            <a href="/resources">Resources</a>
+            <a href="/about">About Us</a>
+          </div>
+        </div>
+        <a href="/contact">Contact Us</a>
       </div>
-      {% else %}
-      <div class="navbar" style="float: right;">
-        <a href="/signin">Log In</a>
-        <a href="/signup">Sign Up</a>
+      <div id="navbar-right">
+        {% if current_user.is_authenticated %}
+        <div class="navbar" style="float: right;">
+          <div class="dropdown">
+            <button class="dropbtn">Hello, {{ current_user.username.capitalize() }}
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a href="/profile">Profile</a>
+              <a href="/stats">Stats</a>
+              <a href="/preferences">Preferences</a>
+              <a href="/preferences">Change language</a>
+              {% if current_user.is_admin %}
+              <a href="/admin">Admin Panel</a>
+              {% endif %}
+              <a href="/signout">Log Out</a>
+            </div>
+          </div>
+          <a href="/profile" id="profile-pic-link">
+            <img src="https://via.placeholder.com/40" alt="profile-pic" style="float: right;">
+          </a>
+        </div>
+        {% else %}
+        <div style="float: right;">
+          <a href="/signin" class="blue-pill">Log In</a>
+          <a href="/signup" class="blue-pill">Sign Up</a>
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
     </div>
 
 

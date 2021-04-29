@@ -106,14 +106,16 @@ def signout():
 @routes.route('/')
 def index():
     events = Event.query.limit(4).all()
-    users = User.query.limit(8).all()
+    query_users = User.query.limit(8).all()
+    users = [query_users[0:4], query_users[4:]]
+    
 
     if current_user.is_authenticated:
         return render_template(
-            'index.html', events=events, users1row=users[:4], users2row=users[4:])
+            'index.html', events=events, users=users)
     else:
         return render_template(
-            'index.html', events=events, users1row=users[:4], users2row=users[4:])
+            'index.html', events=events, users=users)
 
 
 @routes.route('/users/<username>')
