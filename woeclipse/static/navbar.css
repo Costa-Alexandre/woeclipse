@@ -1,0 +1,113 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin-left: 2rem;
+}
+
+/* NAVBAR CSS */
+
+/* Navbar container */
+#navbar {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#navbar-left{
+  /* overflow: hidden; */
+
+  flex: 1 1 100%;
+}
+
+#navbar-right{
+  flex: 0 0 300px;
+}
+
+
+/* Links inside the navbar */
+#navbar-left a {
+  float: left;
+  font-size: 16px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: rgb(0, 0, 0);
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+#navbar-left a:hover, .dropdown:hover .dropbtn {
+  background-color: rgb(141, 141, 141);
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f5f5f5;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  text-align: left;
+  min-width: 160px;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: rgb(141, 141, 141);
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#profile-pic-link {
+  padding: 0;
+}
+
+.pill{
+width: 128px;
+height: 32px;
+border-radius: 48px;
+padding: 0 16px;
+color: white;
+border: 2px white solid;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.pill:hover{
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+.pill a{
+  text-decoration: none;
+  color: white;
+}
