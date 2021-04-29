@@ -8,27 +8,31 @@ body {
 
 /* Navbar container */
 #navbar {
-  background-color: rgb(255, 255, 255);
+  background-color: #222;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 8px 0;
 }
 
 #navbar-left{
   overflow: hidden;
   flex: 1 1 100%;
+  margin-left: calc(50vw - 602px);
 }
 
 #navbar-right{
   flex: 0 0 300px;
+  margin-right: 64px;
 }
-
 
 /* Links inside the navbar */
 #navbar-left a {
   float: left;
   font-size: 16px;
-  color: rgb(0, 0, 0);
+  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -45,7 +49,7 @@ body {
   font-size: 16px;
   border: none;
   outline: none;
-  color: rgb(0, 0, 0);
+  color: white;
   padding: 14px 16px;
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
@@ -53,14 +57,14 @@ body {
 }
 
 #navbar-left a:hover, .dropdown:hover .dropbtn {
-  background-color: rgb(141, 141, 141);
+  background-image: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
 }
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f5f5f5;
+  background-image: linear-gradient(90deg, rgba(218, 165, 32, 0.75), rgba(233, 139, 17, 0.75));
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -93,21 +97,32 @@ body {
   padding: 0;
 }
 
+.gold-gradient{
+  background-image:linear-gradient(90deg, rgba(218, 165, 32, 0.75), rgba(233, 139, 17, 0.75));
+}
+
+.gold-gradient:hover{
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+}
+
 .pill{
-width: 128px;
-height: 32px;
-border-radius: 48px;
-padding: 0 16px;
-color: white;
-border: 2px white solid;
-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  width: 128px;
+  height: 40px;
+  border-radius: 48px;
+  padding: 0 16px;
+  color: white;
+  border: 2px white solid;
+  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  font-size: 1.25rem;
+  margin-left: 16px;
 }
 
 .pill:hover{
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
 }
 
 .pill a{
   text-decoration: none;
   color: white;
+  width: 128px;
 }

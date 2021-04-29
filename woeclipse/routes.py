@@ -108,7 +108,6 @@ def index():
     events = Event.query.limit(4).all()
     query_users = User.query.limit(8).all()
     users = [query_users[0:4], query_users[4:]]
-    
 
     if current_user.is_authenticated:
         return render_template(
@@ -184,7 +183,7 @@ def edit_event(event_id):
             users = User.query.all()
 
             return render_template(
-                'edit_event.html', event=event, 
+                'edit_event.html', event=event,
                 participants=participants, users=users)
     else:
         return 'You are not authorized to view this page.'

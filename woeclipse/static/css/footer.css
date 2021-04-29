@@ -24,6 +24,14 @@ footer {
   padding-bottom: 16px;
 }
 
+.footer h3{
+  color: goldenrod;
+}
+
+.footer a:hover{
+  color: goldenrod;
+}
+
 .footer-links{
   display: flex;
   flex-direction: column;
@@ -38,4 +46,9 @@ footer {
   align-items: flex-start;
   justify-content: space-between;
   flex: 0 0 280px;
+}
+
+.footer-icons i{
+  height: 40px;
+  width: 40px;
 }
