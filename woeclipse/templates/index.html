@@ -13,8 +13,8 @@
         ducimus itaque, modi accusamus
       </div>
       <div id="signup-login-pills">
-        <button class="blue-pill">Sign Up</button>
-        <button class="blue-pill">Login</button>
+        <button class="blue pill">Sign Up</button>
+        <button class="blue pill">Login</button>
       </div>
     </div>      
   </div>
@@ -40,17 +40,17 @@
     <div>
       <h1>Upcoming Events</h1>
     </div>
-    <div>
-      <img style='float: right;' src="https://via.placeholder.com/40" alt="">
-      <img style='float: right;' src="https://via.placeholder.com/40" alt="">
-    </div>
+    <div class="menu-arrows">
+      <button class='gray pill' style='float: right; width: 40px; height: 40px;'></button>
+      <button class='gray pill' style='float: right; width: 40px; height: 40px;'></button>
+      </div>
   </div>
   <div id="event-cards">
     {% for event in events %}
     <div class="event-card card">
       <div class="event-card-image">
       <img src="https://via.placeholder.com/280x140" alt="#">
-      {{ event.date }}
+      <span style="display: none;">{{ event.date }}</span>
       </div>
       <div class="content">
         {{ event.event_name }}<br><br>
@@ -65,7 +65,7 @@
 <div id="hero-users" class="hero">
   <div id="menu-seemore" class="horizontal-menu">
     <h1>Champions</h1>
-    <button class='blue-pill' style='float: right;'>See more</button>
+    <button class='gray pill' style='float: right;'>See more</button>
   </div>
   {% for row in range(2) %}
   <div class="user-row">
@@ -73,7 +73,7 @@
       {% for user in users[row] %}
       <div class="user-card card content">
         <div><img src="https://via.placeholder.com/80" alt="#"></div>
-        <div><br>{{ user.username.capitalize() }}<br><br></div>
+        <div><br><strong>{{ user.username.capitalize() }}</strong><br><br></div>
         <div>Lorem ipsum dolor sit amet consectetur.</div>
       </div>
       {% endfor %}

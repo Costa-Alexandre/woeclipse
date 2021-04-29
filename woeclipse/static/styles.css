@@ -150,11 +150,33 @@ footer {
   padding: 16px 32px;
 }
 
-#event-cards, .user-cards, .horizontal-menu{
+#event-cards, .user-cards{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 1204px;
+}
+
+.horizontal-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1204px;
+  align-items: center;
+}
+
+.menu-arrows{
+  display: flex;
+  flex-direction: row;
+  width: 88px;
+  height: 40px;
+  justify-content: space-between;
+}
+
+.menu-arrows img{
+  border-radius: 50%;
+  border: white 2px solid;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .event-card{
@@ -167,16 +189,47 @@ footer {
   flex-direction: column;
 }
 
+.user-card img{
+  border-radius: 50%;
+}
+
 .user-row{
   display: flex;
   flex-direction: row;
+  margin: 16px 0;
 }
 
-.blue-pill{
-  width: 128px;
-  height: 32px;
+.blue{
   background-color: rgba(7, 78, 232, 1);
-  border-radius: 48px;
-  padding: 0 16px;
+}
+
+.blue:hover{
+  background-color: rgb(76, 129, 243)
+}
+
+.gray{
+  background-color:rgba(170, 170, 170, 1);
+}
+
+.gray:hover{
+  background-color:rgb(221, 221, 221);
+}
+
+.pill{
+width: 128px;
+height: 32px;
+border-radius: 48px;
+padding: 0 16px;
+color: white;
+border: 2px white solid;
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+
+.pill:hover{
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
+}
+
+.pill a{
+  text-decoration: none;
   color: white;
 }
