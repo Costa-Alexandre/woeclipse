@@ -5,9 +5,9 @@
   <title>Woeclipse - Home</title>
   {% endblock %}
   <meta charset="utf-8" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
-  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
@@ -78,6 +78,36 @@
     {% block content%} {% endblock %}
   </main>
   <footer>
-    <h3> <em> Links and Social Media </em></h3>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <div id="footer-container">
+      <div class="footer footer-links">
+        <h3>Links</h3>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+      </div>
+      <div class="footer footer-links">
+        <h3>Links</h3>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+      </div>
+      <div class="footer footer-links">
+        <h3>Links</h3>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+        <a href="#">link1</a>
+      </div>
+      <div class="footer footer-icons">
+        <img src="https://via.placeholder.com/40" alt="icon">
+        <img src="https://via.placeholder.com/40" alt="icon">
+        <img src="https://via.placeholder.com/40" alt="icon">
+        <img src="https://via.placeholder.com/40" alt="icon">
+      </div>
+    </div>
+
   </footer>
 </body>

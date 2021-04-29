@@ -1,6 +1,7 @@
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  margin-left: 2rem;
+  padding: 0;
+  margin: 0;
 }
 
 /* NAVBAR CSS */
@@ -14,8 +15,7 @@ body {
 }
 
 #navbar-left{
-  /* overflow: hidden; */
-
+  overflow: hidden;
   flex: 1 1 100%;
 }
 
