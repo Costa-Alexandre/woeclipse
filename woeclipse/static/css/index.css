@@ -229,6 +229,8 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   color: rgba(255, 255, 255, 0.815);
   border: 2px rgba(255, 255, 255, 0.815) solid;
   box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  width: 40px;
+  height: 40px;
 }
 
 .arrow-btn:hover{

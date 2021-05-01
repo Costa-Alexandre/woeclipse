@@ -76,12 +76,8 @@ body {
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  /* float: none;
-  color: rgb(255, 0, 0); */
   padding: 12px 16px;
   text-decoration: none;
-  /* display: flex; */
-  /* text-align: left; */
   min-width: 160px;
   float: left;
 }
@@ -93,13 +89,20 @@ body {
   align-items: flex-start;
 }
 
-#profile-pic-link {
-  padding: 0 0 0 16px !important;
+#profile-pic {
+  padding: 0 !important;
+  margin-left: 16px;
+  border-radius: 50%;
+  box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
 }
 
-#profile-pic-link img{
+#profile-pic:hover {
+  padding: 0 !important;
+  margin-left: 16px;
   border-radius: 50%;
+  box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
 }
+
 
 #hello-btn{
   min-width: 192px;
