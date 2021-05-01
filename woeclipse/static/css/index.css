@@ -115,7 +115,7 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
   position: relative;
   /* margin-right: 30px; */
-  /* display: none; */
+  display: block;
 }
 
 .event-card:nth-child(n+5):nth-last-child(n){
@@ -237,6 +237,14 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   transform: translate(0, 1px);
   color: white;
   border: 2px white solid;
+}
+
+.disabled, .disabled:hover{
+  background-image: none;
+  background-color: gray;
+  transform: translate(0, 1px);
+  color: rgba(199, 199, 199, 0.555);
+  border: 2px rgba(199, 199, 199, 0.555) solid;
 }
 
 .seemore-btn{
