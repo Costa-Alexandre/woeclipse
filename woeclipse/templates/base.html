@@ -42,30 +42,30 @@
       </div>
       <div id="navbar-right">
         {% if current_user.is_authenticated %}
-        <div class="navbar" style="float: right;">
-          <div class="dropdown">
-            <button class="dropbtn">Hello, {{ current_user.username.capitalize() }}
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="/profile">Profile</a>
-              <a href="/stats">Stats</a>
-              <a href="/preferences">Preferences</a>
-              <a href="/preferences">Change language</a>
-              {% if current_user.is_admin %}
-              <a href="/admin">Admin Panel</a>
-              {% endif %}
-              <a href="/signout">Log Out</a>
-            </div>
+        <div class="dropdown">
+          <button class="dropbtn" id="hello-btn">Hello, {{ current_user.username.capitalize() }}
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="/profile">Profile</a>
+            <a href="/stats">Stats</a>
+            <a href="/preferences">Preferences</a>
+            <a href="/preferences">Change language</a>
+            {% if current_user.is_admin %}
+            <a href="/admin">Admin Panel</a>
+            {% endif %}
+            <a href="/signout">Log Out</a>
           </div>
+        </div>
+        <div>
           <a href="/profile" id="profile-pic-link">
             <img src="https://via.placeholder.com/40" alt="profile-pic" style="float: right;">
           </a>
         </div>
         {% else %}
         <div style="float: right;">
-          <button class="gold-gradient pill"><a href="/signin">Log In</a></button>
-          <button class="gold-gradient pill"><a href="/signup">Sign Up</a></button>
+          <a href="/signin">Log In</a>
+          <a href="/signup">Sign Up</a>
         </div>
         {% endif %}
       </div>
