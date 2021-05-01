@@ -3,6 +3,11 @@ body{
   background-color: #222;
 }
 
+body a{
+  text-decoration: none;
+  color: white;
+}
+
 #background-image{
 position: absolute;
 top: 64px;
@@ -33,12 +38,6 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   background-color: #333;
 }
 
-#news-title::before{
-  content: 'Clan';
-  color:goldenrod;
-  font-weight: bold;
-}
-
 #news-components{
   display: flex;
   flex-direction: row;
@@ -55,6 +54,7 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   align-items: flex-start;
   justify-content: space-evenly;
   padding: 8px 0;
+  z-index: 1;
 }
 
 #signup-login-pills{
@@ -72,7 +72,6 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
 }
 
 .card{
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: black 1px solid;
   background-image: linear-gradient(167deg, #222, #111);
 }
@@ -84,6 +83,7 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   flex: none;
   flex-grow: 0;
   margin: 0px 0px;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
 }
 
 #news-card-contents, .content{
@@ -94,18 +94,36 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   padding: 0;
 }
 
-#event-cards, .user-cards{
+#event-cards, #user-cards{
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 1204px;
   margin: 16px 0;
+  flex-wrap: wrap;
 }
 
-#events-title::before{
-  content: 'Battle';
-  color:goldenrod;
-  font-weight: bold;
+#event-cards{
+  /* left: -60px; */
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.event-card{
+  width: 280px;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  /* margin-right: 30px; */
+  /* display: none; */
+}
+
+.event-card:nth-child(n+5):nth-last-child(n){
+  display: none;
+}
+
+#user-cards{
+  flex-wrap: wrap;
 }
 
 .horizontal-menu{
@@ -127,27 +145,56 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
 .menu-arrows img{
   border-radius: 50%;
   border: white 2px solid;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
 }
 
-.event-card{
-  width: 280px;
-}
 
-#users-title::before{
-  content: 'Members';
+
+#news-title::before, #events-title::before, #users-title::before {
   color:goldenrod;
   font-weight: bold;
 }
 
+#news-title::before{
+  content: "Clan";
+}
+
+#events-title::before{
+  content: 'Battle';
+}
+
+#users-title::before{
+  content: 'Members';
+}
+
 .user-card{
+  position: relative;
   width: calc(280px - 64px);
   display: flex;
   flex-direction: column;
+  margin-bottom: 32px;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
 }
+
+
 
 .user-card img{
   border-radius: 50%;
+}
+
+.clickable-area, .clickable-area-border{
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+
+  z-index: 1;
+}
+
+.clickable-area-border:hover{
+  border: goldenrod solid 2px;
+  box-shadow: 0 0 16px 0 goldenrod;
 }
 
 .user-row{
@@ -155,40 +202,57 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   flex-direction: row;
 }
 
-.gold-gradient{
-  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
-}
-
-.gold-gradient:hover{
-  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
-}
-
-.gray{
-  background-color:rgba(170, 170, 170, 1);
-}
-
-.gray:hover{
-  background-color:rgb(221, 221, 221);
-}
-
-.pill{
+.gold-pill{
   width: 128px;
   height: 40px;
   border-radius: 48px;
   padding: 0 16px;
-  color: white;
-  border: 2px white solid;
-  box-shadow: 0px 4px 4px rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
   font-size: 1.25rem;
   margin-left: 16px;
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17))
 }
 
-.pill:hover{
-  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.25);
-}
-
-.pill a{
-  text-decoration: none;
+.gold-pill:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  transform: translate(0, 1px);
   color: white;
-  width: 128px;
+  border: 2px white solid;
+}
+
+.arrow-btn{
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+.arrow-btn:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
+}
+
+.seemore-btn{
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 48px;
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  height: 40px;
+}
+
+.seemore-btn:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
 }
