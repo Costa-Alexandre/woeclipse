@@ -99,6 +99,19 @@ def signout():
     logout_user()
     return redirect(url_for('routes.index'))
 
+@routes.route('/edit_profile')
+@login_required
+def edit_profile():
+    # Update user signup and stats information
+    
+    if current_user.is_authenticated:
+        stats = current_user.stats
+        user = current_user
+
+        if request.method == 'POST':
+            pass
+        else:
+            return render_template('edit_profile.html', user=user, stats=stats)
 
 # --------------------------------------------------------------------------- #
 # ----------------------------- MAIN ROUTES --------------------------------- #
