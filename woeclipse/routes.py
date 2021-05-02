@@ -1,5 +1,5 @@
 import os
-from flask import render_template, url_for, request, redirect, flash, current_app
+from flask import render_template, url_for, request, redirect, current_app
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -126,22 +126,21 @@ def edit_profile():
             # password = request.form.get('password')
             # password_confirmation = request.form.get('password_confirmation')
             # team_name = request.form.get('team_name')
-            
-
-            if 'avatar' not in request.files:
-                flash('No file part')
-                return redirect(request.url)
             avatar = request.files['avatar']
-            if avatar.filename == '':
-                flash('No selected picture')
-                return redirect(request.url)
+
+            # if avatar.filename == '':
+            #     return redirect(request.url)
+
             if avatar and allowed_file(avatar.filename):
                 filename = secure_filename(avatar.filename)
-                avatar.save(os.path.join(current_app.config['UPLOADS_PATH'], filename))
+                upload_path = os.path.join(current_app.config['UPLOADS_PATH'], str(user.id))
+                if not os.path.exists(upload_path):
+                    os.makedirs(upload_path)
+                avatar.save(os.path.join(upload_path, filename))
                 return redirect(url_for('routes.profile'))
 
         # except Exception:
-
+        #     return redirect(url_for('routes.profile'))
                             
         else:
             return render_template('edit_profile.html', user=user, stats=stats)
