@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="username-frame">
-  <img src="https://via.placeholder.com/120" alt="avatar-large">
+  <img src="{{ url_for('static', filename=avatar) }}" alt="avatar-large">
   <div>
     <li>{{ current_user.username.capitalize() }}
     <li>{{ current_user.first_name.capitalize() }} {{ current_user.last_name.capitalize() }}

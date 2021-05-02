@@ -1,4 +1,4 @@
-import os
+import os, random, shutil
 from flask import render_template, url_for, request, redirect, current_app
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -65,7 +65,24 @@ def signup():
 
             # Set relation
             new_user.stats = stats
+            
             db.session.commit()
+
+            # Create random avatar
+            random_avatar_path = os.path.join(current_app.config['RANDOM_AVATAR_PATH'])
+            avatar_list = os.listdir(random_avatar_path)
+            avatar_file = avatar_list[random.randrange(len(avatar_list))]
+            avatar_path = os.path.join(random_avatar_path, avatar_file)
+
+            upload_path = os.path.join(current_app.config['UPLOADS_PATH'], str(new_user.id))
+            if not os.path.exists(upload_path):
+                        os.makedirs(upload_path)
+            shutil.copy(avatar_path, upload_path)
+
+            wrong_name_file = os.path.join(upload_path, avatar_file)
+            right_name_file = os.path.join(upload_path, 'avatar.png')
+            os.rename(wrong_name_file, right_name_file)
+
             login_user(new_user)
 
             return redirect('/')
@@ -118,29 +135,32 @@ def edit_profile():
         # avatar = current_user.avatar
 
         if request.method == 'POST':
-        # try:
-            # first_name = request.form.get('first_name').lower()
-            # last_name = request.form.get('last_name').lower()
-            # birthday = request.form.get('birthday')
-            # country = request.form.get('country').lower()
-            # password = request.form.get('password')
-            # password_confirmation = request.form.get('password_confirmation')
-            # team_name = request.form.get('team_name')
-            avatar = request.files['avatar']
+            try:
+                first_name = request.form.get('first_name').lower()
+                last_name = request.form.get('last_name').lower()
+                birthday = request.form.get('birthday')
+                country = request.form.get('country').lower()
+                password = request.form.get('password')
+                password_confirmation = request.form.get('password_confirmation')
+                team_name = request.form.get('team_name')
+                avatar = request.files['avatar']
 
-            # if avatar.filename == '':
-            #     return redirect(request.url)
+                if not password == password_confirmation:
+                    raise ValueError('The two passwords are not matching.')
 
-            if avatar and allowed_file(avatar.filename):
-                filename = secure_filename(avatar.filename)
-                upload_path = os.path.join(current_app.config['UPLOADS_PATH'], str(user.id))
-                if not os.path.exists(upload_path):
-                    os.makedirs(upload_path)
-                avatar.save(os.path.join(upload_path, filename))
+                # if avatar.filename == '':
+                #     return redirect(request.url)
+
+                if avatar and allowed_file(avatar.filename):
+                    filename = secure_filename(avatar.filename)
+                    upload_path = os.path.join(current_app.config['UPLOADS_PATH'], str(user.id))
+                    if not os.path.exists(upload_path):
+                        os.makedirs(upload_path)
+                    avatar.save(os.path.join(upload_path, filename))
+                    return redirect(url_for('routes.profile'))
+
+            except Exception:
                 return redirect(url_for('routes.profile'))
-
-        # except Exception:
-        #     return redirect(url_for('routes.profile'))
                             
         else:
             return render_template('edit_profile.html', user=user, stats=stats)
@@ -165,8 +185,9 @@ def index():
 def public_profile(username):
     user = User.query.filter_by(username=username).first()
     stats = user.stats
+    avatar = 'uploads/' + str(user.id) + "/avatar.png"
     # Show the user public profile:
-    return render_template('public_profile.html', user=user, stats=stats)
+    return render_template('public_profile.html', user=user, stats=stats, avatar=avatar)
 
 
 @routes.route('/profile')
@@ -174,7 +195,8 @@ def public_profile(username):
 def profile():
     if current_user.is_authenticated:
         stats = current_user.stats
-        return render_template('profile.html', stats=stats)
+        avatar = 'uploads/' + str(current_user.id) + "/avatar.png"
+        return render_template('profile.html', stats=stats, avatar=avatar)
     else:
         return render_template('signin.html')
 

@@ -22,8 +22,6 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, default=False)
     # One-to-One relationship
     stats_id = db.Column(db.Integer, db.ForeignKey('stats.id'))
-    # One-to-One relationship
-    # avatar_id = db.Column(db.Integer, db.ForeignKey('avatar.id'))
 
     def __repr__(self):
         return f'<User {self.username}>'
@@ -44,18 +42,6 @@ class Stats(db.Model):
 
     def __repr__(self):
         return f'<Stats from User.Id: {self.user_id} - Team: {self.team_name}>'
-
-# class Avatar(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     # One-to-One relationship
-#     user_id = db.relationship(
-#         'User', backref="avatar", lazy='select', uselist=False)
-#     img = db.Column(db.Text, unique=True, nullable=False)
-#     name = db.Column(db.Text, nullable=False)
-#     mime_type = db.Column(db.Text, nullable=False)
-
-#     def __repr__(self):
-#         return f'<Avatar from User.Id {self.user_id}>'
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
