@@ -1,4 +1,5 @@
 import os
+from os.path import join, dirname, realpath
 
 
 SECRET_KEY = os.getenv('DB_SECRET')
@@ -13,3 +14,4 @@ DB_URL = 'postgresql+psycopg2://{user}:{pw}@{host}/{db}'.format(
                                                     host=DB_HOST,
                                                     db=DB_NAME)
 SQLALCHEMY_DATABASE_URI = DB_URL
+UPLOADS_PATH = join(dirname(realpath(__file__)), 'static', 'uploads')

@@ -1,11 +1,19 @@
-from flask import render_template, url_for, request, redirect
+import os
+from flask import render_template, url_for, request, redirect, flash, current_app
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 from flask import Blueprint
 from .website import db
 from .models import Event, User, Stats
 
+AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+# Checks if an extension is valid
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in AVATAR_ALLOWED_EXTENSIONS
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -99,7 +107,7 @@ def signout():
     logout_user()
     return redirect(url_for('routes.index'))
 
-@routes.route('/edit_profile')
+@routes.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
     # Update user signup and stats information
@@ -107,9 +115,34 @@ def edit_profile():
     if current_user.is_authenticated:
         stats = current_user.stats
         user = current_user
+        # avatar = current_user.avatar
 
         if request.method == 'POST':
-            pass
+        # try:
+            # first_name = request.form.get('first_name').lower()
+            # last_name = request.form.get('last_name').lower()
+            # birthday = request.form.get('birthday')
+            # country = request.form.get('country').lower()
+            # password = request.form.get('password')
+            # password_confirmation = request.form.get('password_confirmation')
+            # team_name = request.form.get('team_name')
+            
+
+            if 'avatar' not in request.files:
+                flash('No file part')
+                return redirect(request.url)
+            avatar = request.files['avatar']
+            if avatar.filename == '':
+                flash('No selected picture')
+                return redirect(request.url)
+            if avatar and allowed_file(avatar.filename):
+                filename = secure_filename(avatar.filename)
+                avatar.save(os.path.join(current_app.config['UPLOADS_PATH'], filename))
+                return redirect(url_for('routes.profile'))
+
+        # except Exception:
+
+                            
         else:
             return render_template('edit_profile.html', user=user, stats=stats)
 
