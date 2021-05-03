@@ -1,9 +1,8 @@
-import os, random
+import os, random, string
 from flask import render_template, url_for, request, redirect, current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from PIL import Image
 
 from flask import Blueprint
 from .website import db
@@ -21,6 +20,10 @@ def get_random_avatar():
     avatar_list = os.listdir(path)
     filename = avatar_list[random.randrange(len(avatar_list))]
     return path, filename
+
+def generate_filename():
+    filename = "".join(random.choices(string.ascii_lowercase, k=16))
+    return filename
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -138,16 +141,25 @@ def edit_profile():
                 if not password == password_confirmation:
                     raise ValueError('The two passwords are not matching.')
 
-                # if avatar.filename == '':
-                #     return redirect(request.url)
+                if avatar.filename != '':
+                    if avatar and allowed_file(avatar.filename):
+                        extension = avatar.filename.rsplit('.', 1)[1].lower()
+                        filename = generate_filename() + '.' + extension
+                        upload_path = current_app.config['UPLOADS_PATH']
 
-                if avatar and allowed_file(avatar.filename):
-                    filename = secure_filename(avatar.filename)
-                    upload_path = os.path.join(current_app.config['UPLOADS_PATH'], str(user.id))
-                    if not os.path.exists(upload_path):
-                        os.makedirs(upload_path)
-                    avatar.save(os.path.join(upload_path, filename))
-                    return redirect(url_for('routes.profile'))
+                        avatar.save(os.path.join(upload_path, filename))
+                        user.avatar.filename = filename
+
+                user.first_name = first_name
+                user.last_name = last_name
+                user.birthday = birthday
+                user.country = country
+                if password != '':
+                    user.password = generate_password_hash(password, method='sha256')
+                user.team_name = team_name
+                
+                db.session.commit()
+                return redirect(url_for('routes.profile'))
 
             except Exception:
                 return redirect(url_for('routes.profile'))

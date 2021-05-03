@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="username-frame">
-  <img src="{{ url_for('static', filename=current_user.avatar) }}" alt="avatar-large">
+  <img src="{{ url_for('static', filename=current_user.avatar) }}" alt="avatar-large" width="80px" height="80px">
   <div>
     <li>{{ current_user.username.capitalize() }}
     <li>{{ current_user.first_name.capitalize() }} {{ current_user.last_name.capitalize() }}
@@ -28,7 +28,7 @@
     <li>{{ user.matches_w }}</li>
     <li>{{ user.matches_d }}</li>
     <li>{{ user.matches_l }}</li>
-    <li>{{ user.rank }}</li>
+    <li> ## </li>
     <li>{{ user.kills }}</li>
     <li>{{ user.killed }}</li>
   </div>
