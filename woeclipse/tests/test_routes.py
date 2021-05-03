@@ -42,5 +42,5 @@ import pytest, os
 #     assert "<html>" in html_content
 
 def test_env():
-    os.environ
+    print(os.environ)
     assert 1 == 2
