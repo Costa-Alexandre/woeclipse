@@ -1,29 +1,12 @@
-import os, random, string
+import os
 from flask import render_template, url_for, request, redirect, current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
 
 from flask import Blueprint
 from .website import db
 from .models import Event, User, Avatar
-
-AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
-# Checks if an extension is valid
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in AVATAR_ALLOWED_EXTENSIONS
-
-def get_random_avatar():
-    path = current_app.config['RANDOM_AVATAR_PATH']
-    avatar_list = os.listdir(path)
-    filename = avatar_list[random.randrange(len(avatar_list))]
-    return path, filename
-
-def generate_filename():
-    filename = "".join(random.choices(string.ascii_lowercase, k=16))
-    return filename
+from .helper import allowed_file, get_random_avatar, generate_filename, get_extention
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -34,7 +17,9 @@ routes = Blueprint(
 # ........................................................................... #
 @routes.route('/signup', methods=['POST', 'GET'])
 def signup():
+    # Sign up page
     if request.method == 'POST':
+        # Create a new_user and a avatar entry, and login new_user
         try:
             first_name = request.form.get('first_name').lower()
             last_name = request.form.get('last_name').lower()
@@ -44,12 +29,10 @@ def signup():
             username = request.form.get('username').lower()
             password = request.form.get('password')
             password_confirmation = request.form.get('password_confirmation')
+            # create a default customized name
             team_name = f"{username.capitalize()}'s Team"
 
-            if not email or not password or not username:
-                raise ValueError(
-                    'Email, username or password parameter was missing.')
-
+            # check if password matches and return error message
             if not password == password_confirmation:
                 raise ValueError('The two passwords are not matching.')
 
@@ -65,17 +48,17 @@ def signup():
                             password=hashed_password,
                             team_name=team_name
                             )
-
             db.session.add(new_user)
 
-            path, filename = get_random_avatar()
-            avatar = Avatar(path=path, filename=filename)
-
+            # get randomly a default avatar picture from a list
+            filename = get_random_avatar()
+            # create a new avatar record
+            avatar = Avatar(filename=filename)
             db.session.add(avatar)
+            # create the avatar-user one-to-one relationship
             new_user.avatar = avatar
 
             db.session.commit()
-
             login_user(new_user)
 
             return redirect('/')
@@ -83,25 +66,27 @@ def signup():
         except Exception as error_message:
             return render_template(
                 'signup.html',
-                error="User could not be created." + str(error_message))
+                error="User could not be created. " + str(error_message))
     else:
-        # When request = GET:
+        # Show signup form when method is GET
         return render_template('signup.html')
 
 
 @routes.route('/signin', methods=['POST', 'GET'])
 def signin():
+    # Login page
     if request.method == 'POST':
-
+        # Get credentials and log in user
         try:
+            #  Get data from request and set them to variables
             username = request.form.get('username')
             password = request.form.get('password')
-
+            #  Query user by username
             user = User.query.filter_by(username=username).first()
+            # Log in if user exists and if password matches
             if user and check_password_hash(user.password, password):
                 login_user(user)
-                avatar = '/uploads/' + current_user.avatar.filename
-                return redirect('/', avatar=avatar)
+                return redirect('/')
             else:
                 raise ValueError("Couldn't login with given login parameters.")
         except Exception:
@@ -114,20 +99,19 @@ def signin():
 @routes.route('/signout')
 @login_required
 def signout():
-    # Logout users and send them back to the signin page:
+    # Logout users and send them to index
     logout_user()
     return redirect(url_for('routes.index'))
 
 @routes.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    # Update user signup information
-    
+    # Edit user profile information and avatar
     if current_user.is_authenticated:
+        # Get authenticated user
         user = current_user
-        # avatar = current_user.avatar
-
         if request.method == 'POST':
+            #  Get data from request and set them to variables
             try:
                 first_name = request.form.get('first_name').lower()
                 last_name = request.form.get('last_name').lower()
@@ -138,25 +122,35 @@ def edit_profile():
                 team_name = request.form.get('team_name')
                 avatar = request.files['avatar']
 
-                if not password == password_confirmation:
-                    raise ValueError('The two passwords are not matching.')
-
-                if avatar.filename != '':
-                    if avatar and allowed_file(avatar.filename):
-                        extension = avatar.filename.rsplit('.', 1)[1].lower()
-                        filename = generate_filename() + '.' + extension
-                        upload_path = current_app.config['UPLOADS_PATH']
-
-                        avatar.save(os.path.join(upload_path, filename))
-                        user.avatar.filename = filename
-
+                # These fields will always be updated in the database
                 user.first_name = first_name
                 user.last_name = last_name
                 user.birthday = birthday
                 user.country = country
-                if password != '':
-                    user.password = generate_password_hash(password, method='sha256')
                 user.team_name = team_name
+
+                # Won't change password if field is blank
+                if password != '':
+                    # Check if new password matches confirmation
+                    if not password == password_confirmation:
+                        raise ValueError('The two passwords are not matching.')
+                    
+                    user.password = generate_password_hash(password, method='sha256')
+
+                # Won't change avatar if no files are passed
+                # Check if avatar exists in request, if filename is not blank
+                # and if file extension is allowed
+                if avatar and avatar.filename != '' and allowed_file(avatar.filename):
+                        # get uploaded image extension
+                        ext = get_extention(avatar)
+                        # create a random string filename to the uploaded image
+                        filename = generate_filename(ext)
+                        # get path to upload folder
+                        upload_path = current_app.config['UPLOADS_PATH']
+                        # save renamed file to upload folder
+                        avatar.save(os.path.join(upload_path, filename))
+                        # update user's avatar metadata in the database
+                        user.avatar.filename = filename
                 
                 db.session.commit()
                 return redirect(url_for('routes.profile'))
