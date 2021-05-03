@@ -1,5 +1,5 @@
 # from woeclipse.website import create_app
-# import pytest
+import pytest, os
 
 # @pytest.fixture(scope='module')
 # def test_client():
@@ -40,3 +40,7 @@
 #     html_content = response.data.decode()
 
 #     assert "<html>" in html_content
+
+def test_env():
+    os.environ
+    assert 1 == 2
