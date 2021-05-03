@@ -41,6 +41,12 @@ jobs:
     - name: Test with pytest
       run: |
         pytest --doctest-modules --junitxml=junit/test-results.xml
+      env:
+        DB_PASSWORD: ${{ secrets.PRODUCTION_DATABASE_PASSWORD }}
+        DB_HOST: ${{ secrets.POSTGRES_HOST }}
+        DB_USER: ${{ secrets.POSTGRES_USER }}
+        DB_SECRET: ${{ secrets.SECRET_KEY }}
+        DB_NAME: ${{ secrets.POSTGRES_DB }}
     - name: Deploy to Google App Engine
       uses: google-github-actions/deploy-appengine@main
       with:
