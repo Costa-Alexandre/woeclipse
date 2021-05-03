@@ -10,7 +10,7 @@
 </header>
 
 <main>
-  <form action="/edit_profile" enctype=multipart/form-data method="POST">
+  <form action="/edit_profile" enctype="multipart/form-data" method="POST">
     <div>
       <label for="first_name">First Name:</label><br>
       <input type="text" name="first_name" id="edit_first_name" 
@@ -52,7 +52,7 @@
     <div>
       <label for="team_name">Team Name: </label><br>
       <input type="text" name="team_name" id="edit_team_name" 
-      value="{{stats.team_name}}">
+      value="{{user.team_name}}">
     </div>
     <div>
       <label for="avatar">Change your avatar: </label><br>

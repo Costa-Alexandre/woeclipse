@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="username-frame">
-  <img src="{{ url_for('static', filename=avatar) }}" alt="profile-pic-large">
+  <img src="{{ url_for('static', filename=user.avatar) }}" alt="profile-pic-large">
   <div>
     <li>{{ user.username.capitalize() }}
       <div>
@@ -23,13 +23,13 @@
   </div>
   <div id="values">
     <li></li>
-    <li>{{ stats.team_name }}</li>
-    <li>{{ stats.matches_w }}</li>
-    <li>{{ stats.matches_d }}</li>
-    <li>{{ stats.matches_l }}</li>
-    <li>{{ stats.rank }}</li>
-    <li>{{ stats.kills }}</li>
-    <li>{{ stats.killed }}</li>
+    <li>{{ user.team_name }}</li>
+    <li>{{ user.matches_w }}</li>
+    <li>{{ user.matches_d }}</li>
+    <li>{{ user.matches_l }}</li>
+    <li>{{ user.rank }}</li>
+    <li>{{ user.kills }}</li>
+    <li>{{ user.killed }}</li>
   </div>
 </div>
 

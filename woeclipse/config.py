@@ -15,4 +15,4 @@ DB_URL = 'postgresql+psycopg2://{user}:{pw}@{host}/{db}'.format(
                                                     db=DB_NAME)
 SQLALCHEMY_DATABASE_URI = DB_URL
 UPLOADS_PATH = join(dirname(realpath(__file__)), 'static', 'uploads')
-RANDOM_AVATAR_PATH = join(dirname(realpath(__file__)), 'static', 'img', 'random-avatar')
+RANDOM_AVATAR_PATH = 'woeclipse/static/img/random-avatar'

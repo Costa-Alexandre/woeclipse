@@ -1,4 +1,6 @@
+from enum import unique
 from flask_login import UserMixin
+from sqlalchemy.orm import backref
 
 from .website import db, login_manager
 
@@ -20,28 +22,26 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    # One-to-One relationship
-    stats_id = db.Column(db.Integer, db.ForeignKey('stats.id'))
-
-    def __repr__(self):
-        return f'<User {self.username}>'
-
-
-class Stats(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    # One-to-One relationship
-    user_id = db.relationship(
-        'User', backref="stats", lazy='select', uselist=False)
+    avatar = db.relationship('Avatar', backref='user', lazy='select', uselist=False)
     team_name = db.Column(db.String(50), nullable=False)
     matches_w = db.Column(db.Integer, default=0)
     matches_d = db.Column(db.Integer, default=0)
     matches_l = db.Column(db.Integer, default=0)
-    rank = db.Column(db.Integer, default=0)
     kills = db.Column(db.Integer, default=0)
     killed = db.Column(db.Integer, default=0)
 
     def __repr__(self):
-        return f'<Stats from User.Id: {self.user_id} - Team: {self.team_name}>'
+        return f'<User {self.username}>'
+
+class Avatar(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    path = db.Column(db.String(200), nullable=False)
+    filename = db.Column(db.String(50), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'uploads/{self.filename}'
+
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)

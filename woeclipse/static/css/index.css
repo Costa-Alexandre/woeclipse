@@ -180,6 +180,8 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
 
 .user-card img{
   border-radius: 50%;
+  width: 80px;
+  height: 80px;
 }
 
 .clickable-area, .clickable-area-border{

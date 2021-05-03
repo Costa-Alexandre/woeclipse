@@ -89,20 +89,14 @@ body {
   align-items: flex-start;
 }
 
-#profile-pic {
+#avatar-small {
   padding: 0 !important;
   margin-left: 16px;
   border-radius: 50%;
   box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
+  width: 56px;
+  height: 56px;
 }
-
-#profile-pic:hover {
-  padding: 0 !important;
-  margin-left: 16px;
-  border-radius: 50%;
-  box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
-}
-
 
 #hello-btn{
   min-width: 192px;

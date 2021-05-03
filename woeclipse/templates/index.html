@@ -74,7 +74,7 @@
   <div id="user-cards">
     {% for user in users %}
     <div class="user-card card content">
-      <div><img src="https://via.placeholder.com/80" alt="#"></div>
+      <div><img src="{{url_for('static', filename=user.avatar)}}" alt="#"></div>
       <div>
         <br>
         <a href="/users/{{ user.username }}">

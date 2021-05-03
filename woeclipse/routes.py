@@ -1,12 +1,13 @@
-import os, random, shutil
-from flask import render_template, url_for, request, redirect, current_app
+import os, random
+from flask import render_template, url_for, request, redirect, current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 from flask import Blueprint
 from .website import db
-from .models import Event, User, Stats
+from .models import Event, User, Avatar
 
 AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
@@ -14,6 +15,12 @@ AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in AVATAR_ALLOWED_EXTENSIONS
+
+def get_random_avatar():
+    path = current_app.config['RANDOM_AVATAR_PATH']
+    avatar_list = os.listdir(path)
+    filename = avatar_list[random.randrange(len(avatar_list))]
+    return path, filename
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -34,6 +41,7 @@ def signup():
             username = request.form.get('username').lower()
             password = request.form.get('password')
             password_confirmation = request.form.get('password_confirmation')
+            team_name = f"{username.capitalize()}'s Team"
 
             if not email or not password or not username:
                 raise ValueError(
@@ -44,10 +52,6 @@ def signup():
 
             hashed_password = generate_password_hash(password, method='sha256')
 
-            # Create blank stats entry
-            stats = Stats(team_name='No team name')
-            db.session.add(stats)
-
             # Create a new use record in the database:
             new_user = User(first_name=first_name,
                             last_name=last_name,
@@ -55,33 +59,19 @@ def signup():
                             country=country,
                             email=email,
                             username=username,
-                            password=hashed_password
+                            password=hashed_password,
+                            team_name=team_name
                             )
 
             db.session.add(new_user)
 
-            # Change name to a customized default
-            stats.team_name = f"{new_user.username.capitalize()}'s Team"
+            path, filename = get_random_avatar()
+            avatar = Avatar(path=path, filename=filename)
 
-            # Set relation
-            new_user.stats = stats
-            
+            db.session.add(avatar)
+            new_user.avatar = avatar
+
             db.session.commit()
-
-            # Create random avatar
-            random_avatar_path = os.path.join(current_app.config['RANDOM_AVATAR_PATH'])
-            avatar_list = os.listdir(random_avatar_path)
-            avatar_file = avatar_list[random.randrange(len(avatar_list))]
-            avatar_path = os.path.join(random_avatar_path, avatar_file)
-
-            upload_path = os.path.join(current_app.config['UPLOADS_PATH'], str(new_user.id))
-            if not os.path.exists(upload_path):
-                        os.makedirs(upload_path)
-            shutil.copy(avatar_path, upload_path)
-
-            wrong_name_file = os.path.join(upload_path, avatar_file)
-            right_name_file = os.path.join(upload_path, 'avatar.png')
-            os.rename(wrong_name_file, right_name_file)
 
             login_user(new_user)
 
@@ -107,7 +97,8 @@ def signin():
             user = User.query.filter_by(username=username).first()
             if user and check_password_hash(user.password, password):
                 login_user(user)
-                return redirect('/')
+                avatar = '/uploads/' + current_user.avatar.filename
+                return redirect('/', avatar=avatar)
             else:
                 raise ValueError("Couldn't login with given login parameters.")
         except Exception:
@@ -127,10 +118,9 @@ def signout():
 @routes.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    # Update user signup and stats information
+    # Update user signup information
     
     if current_user.is_authenticated:
-        stats = current_user.stats
         user = current_user
         # avatar = current_user.avatar
 
@@ -163,7 +153,7 @@ def edit_profile():
                 return redirect(url_for('routes.profile'))
                             
         else:
-            return render_template('edit_profile.html', user=user, stats=stats)
+            return render_template('edit_profile.html', user=user)
 
 # --------------------------------------------------------------------------- #
 # ----------------------------- MAIN ROUTES --------------------------------- #
@@ -184,21 +174,22 @@ def index():
 @routes.route('/users/<username>')
 def public_profile(username):
     user = User.query.filter_by(username=username).first()
-    stats = user.stats
-    avatar = 'uploads/' + str(user.id) + "/avatar.png"
     # Show the user public profile:
-    return render_template('public_profile.html', user=user, stats=stats, avatar=avatar)
+    return render_template('public_profile.html', user=user)
 
 
 @routes.route('/profile')
 @login_required
 def profile():
     if current_user.is_authenticated:
-        stats = current_user.stats
-        avatar = 'uploads/' + str(current_user.id) + "/avatar.png"
-        return render_template('profile.html', stats=stats, avatar=avatar)
+        user = current_user
+        return render_template('profile.html', user=user)
     else:
         return render_template('signin.html')
+
+@routes.route('/uploads/<filename>')
+def send_file(filename):
+    return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
 
 
 # ########################################################################### #
