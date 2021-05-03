@@ -4,9 +4,9 @@ from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask import Blueprint
-from .website import db
-from .models import Event, User, Avatar
-from .helper import allowed_file, get_random_avatar, generate_filename, get_extention
+from woeclipse.website import db
+from woeclipse.models import Event, User, Avatar
+from woeclipse.helper import allowed_file, get_random_avatar, generate_filename, get_extention
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')

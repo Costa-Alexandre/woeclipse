@@ -4,10 +4,7 @@ from flask_login import LoginManager
 
 
 db = SQLAlchemy()
-
 login_manager = LoginManager()
-# redirect route when @login_required fails
-login_manager.login_view = 'routes.signin'
 
 
 def create_app():
@@ -15,6 +12,8 @@ def create_app():
     app.config.from_pyfile('config.py')
 
     login_manager.init_app(app)  # initialize flask_login with our app
+    # redirect route when @login_required fails
+    login_manager.login_view = 'routes.signin'
     db.init_app(app)
 
     from .routes import routes
@@ -26,4 +25,4 @@ def create_app():
     return app
 
 
-app = create_app()
+# app = create_app()

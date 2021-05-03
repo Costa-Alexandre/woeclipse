@@ -1,8 +1,6 @@
-from enum import unique
 from flask_login import UserMixin
-from sqlalchemy.orm import backref
 
-from .website import db, login_manager
+from woeclipse.website import db, login_manager
 
 
 # Tables
@@ -23,7 +21,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(80), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     avatar = db.relationship('Avatar', backref='user', lazy='select', uselist=False)
-    team_name = db.Column(db.String(50), nullable=False)
+    team_name = db.Column(db.String(50), nullable=False, default='New Team')
     matches_w = db.Column(db.Integer, default=0)
     matches_d = db.Column(db.Integer, default=0)
     matches_l = db.Column(db.Integer, default=0)
