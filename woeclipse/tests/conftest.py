@@ -7,7 +7,7 @@ load_dotenv()
 
 @pytest.fixture(scope='module')
 def new_user():
-    user = User(first_name='Pie', last_name='Testt', email='test@pytest.com', username='pytester', password='pytestpass', birthday='2000-01-01')
+    user = User(id=999, first_name='Pie', last_name='Testt', email='test@pytest.com', username='pytester', password='pytestpass', birthday='2000-01-01')
     return user
 
 
