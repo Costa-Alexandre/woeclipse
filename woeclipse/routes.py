@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Blueprint
 from woeclipse.website import db
 from woeclipse.models import Event, User, Avatar
-from woeclipse.helper import allowed_file, get_random_avatar, generate_filename, get_extention
+from woeclipse.helper import allowed_file, get_random_avatar, generate_filename, get_extension
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -142,7 +142,7 @@ def edit_profile():
                 # and if file extension is allowed
                 if avatar and avatar.filename != '' and allowed_file(avatar.filename):
                         # get uploaded image extension
-                        ext = get_extention(avatar)
+                        ext = get_extension(avatar)
                         # create a random string filename to the uploaded image
                         filename = generate_filename(ext)
                         # get path to upload folder

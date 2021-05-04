@@ -31,6 +31,6 @@ def generate_filename(ext):
     return fname
 
 
-def get_extention(avatar):
+def get_extension(avatar):
     extension = avatar.filename.rsplit('.', 1)[1].lower()
     return extension
