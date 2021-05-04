@@ -1,7 +1,8 @@
 import pytest
-from woeclipse.website import create_app
+from woeclipse.website import create_app, db
 from woeclipse.models import User, Avatar, Event
 from dotenv import load_dotenv
+from flask_login import login_user
 
 load_dotenv()
 
@@ -35,3 +36,4 @@ def test_client():
 def app():
     app = create_app()
     return app
+
