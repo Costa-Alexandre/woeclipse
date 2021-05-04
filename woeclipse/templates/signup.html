@@ -5,47 +5,90 @@
 {% endblock %}
 
 {% block content %}
-<header>
-  <h1>Signup</h1>
-</header>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/authentication.css') }}">
 <main>
   <form action="/signup" method="POST">
-    <div>
-      <input type="text" name="first_name" id="signup_first_name" placeholder="First Name">
-    </div>
-    <div>
-      <input type="text" name="last_name" id="signup_last_name" placeholder="Last Name">
-    </div>
-    <div>
-      <input type="date" name="birthday" id="signup_birthday">
-    </div>
-    <div>
-      <input type="text" name="country" id="signup_country" placeholder="Country">
-    </div>
-    <div>
-      <input type="email" name="email" id="signup_email" placeholder="E-mail" required>
-    </div>
-    <div>
-      <input type="text" name="username" id="signup_username" placeholder="Username" required>
-    </div>
-    <div>
-      <input type="password" name="password" id="signup_password" placeholder="Password" required>
-    </div>
-    <div>
-      <input type="password" name="password_confirmation" id="signup_password_confirmation"
-        placeholder="Confirm Password" required>
-    </div>
+    <div class="box">
 
-    <input type="submit" value="Signup">
+      <div>
+        <img src="{{url_for('static', filename='img/game-logo.png')}}" alt="woe-logo" id='woe-logo'>
+      </div>
+
+      <div>
+        <h1>JOIN US, WARRIOR!</h1>
+      </div>
+      
+      <div class="double-input">
+        <div>
+          <input type="text" name="first_name" id="signup_first_name" placeholder="First Name">
+        </div>
+
+        <div>
+          <input type="text" name="last_name" id="signup_last_name" placeholder="Last Name">
+        </div>
+      </div>
+      
+      <div class="double-input">
+        <div>
+          <input type="date" name="birthday" id="signup_birthday">
+        </div>
+
+        <div>
+          <input type="text" name="country" id="signup_country" placeholder="Country">
+        </div>
+      </div>
+
+      <div>
+        <input type="email" name="email" id="signup_email" placeholder="E-mail" required>
+      </div>
+
+      <div>
+        <input type="text" name="username" id="signup_username" placeholder="Username" required>
+      </div>
+
+      <div class="double-input">
+        <div>
+          <input type="password" name="password" id="signup_password" placeholder="Password" required>
+        </div>
+
+        <div>
+          <input type="password" name="password_confirmation" id="signup_password_confirmation"
+            placeholder="Confirm Password" required>
+        </div>        
+      </div>
+
+      {% if error %}
+      <p class="error">{{error}}</p>
+      {% endif %}
+
+      <div>
+        <input type="submit" value="Signup">
+      </div>
+      
+      <div id="or-signup-with">
+        <div><hr></div>
+        <div>OR SIGN UP WITH</div>
+        <div><hr></div>
+      </div>
+
+      <div id="icons-login">
+        <span class='icon-blue'>
+          <a href="#"><img src="{{url_for('static', filename='img/facebook-login.svg')}}" alt="facebook-icon"></a>
+        </span>
+        <span class='icon-white'>
+          <a href="#"><img src="{{url_for('static', filename='img/google-login.svg')}}" alt="google-icon"></a>
+        </span>
+        <span class='icon-white'>
+          <a href="#"><img src="{{url_for('static', filename='img/apple-login.svg')}}" alt="apple-icon"></a>
+        </span>   
+      </div>
+
+      <div id="already-have">
+        <span>Already have an account? <a href="/signin"> Login</a></span> 
+      </div>
+
+    </div>
   </form>
-
-  {% if error %}
-  <p class="error">{{error}}</p>
-  {% endif %}
 </main>
 
-<footer>
-  Already have an account? <a href="/signin">Log In</a>
-</footer>
 {% endblock %}
