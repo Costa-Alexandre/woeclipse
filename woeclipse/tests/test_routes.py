@@ -16,6 +16,7 @@ def test_index_get(test_client):
     assert '<header>' in html_content
     assert '<footer>' in html_content
 
+
 def test_index_post(test_client):
     # mimic a browser: 'GET /', as if you visit the site
     response = test_client.post('/')
@@ -29,6 +30,7 @@ def test_index_post(test_client):
 
     assert "Warriors of Eclipse" not in html_content
 
+
 def test_signup_post(test_client):
     # mimic a browser: 'GET /', as if you visit the site
     response = test_client.post('/signup')
@@ -40,7 +42,8 @@ def test_signup_post(test_client):
     # This should be a string with the same content as the file index.html
     html_content = response.data.decode()
 
-    assert "<h1>Signup</h1>" in html_content
+    assert "</form>" in html_content
+
 
 def test_signup_get(test_client):
     # mimic a browser: 'GET /', as if you visit the site
@@ -53,7 +56,8 @@ def test_signup_get(test_client):
     # This should be a string with the same content as the file index.html
     html_content = response.data.decode()
 
-    assert "<h1>Signup</h1>" in html_content
+    assert "</form>" in html_content
+
 
 def test_signin_post(test_client):
     # mimic a browser: 'GET /', as if you visit the site
@@ -68,6 +72,7 @@ def test_signin_post(test_client):
 
     assert "</form>" in html_content
 
+
 def test_signin_get(test_client):
     # mimic a browser: 'GET /', as if you visit the site
     response = test_client.get('/signin')
@@ -80,6 +85,7 @@ def test_signin_get(test_client):
     html_content = response.data.decode()
 
     assert "</form>" in html_content
+
 
 def test_edit_profile(test_client):
     # mimic a browser: 'GET /', as if you visit the site

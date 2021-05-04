@@ -20,7 +20,8 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
-    avatar = db.relationship('Avatar', backref='user', lazy='select', uselist=False)
+    avatar = db.relationship(
+        'Avatar', backref='user', lazy='select', uselist=False)
     team_name = db.Column(db.String(50), nullable=False, default='New Team')
     matches_w = db.Column(db.Integer, default=0)
     matches_d = db.Column(db.Integer, default=0)
@@ -31,10 +32,11 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
+
 class Avatar(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    filename = db.Column(db.String(50), unique=True, nullable=False)
+    filename = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
         return f'uploads/{self.filename}'

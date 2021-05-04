@@ -1,14 +1,16 @@
 import pytest
-from woeclipse.website import create_app, db
+from woeclipse.website import create_app
 from woeclipse.models import User, Avatar, Event
 from dotenv import load_dotenv
-from flask_login import login_user
 
 load_dotenv()
 
+
 @pytest.fixture(scope='module')
 def new_user():
-    user = User(id=999, first_name='Pie', last_name='Testt', email='test@pytest.com', username='pytester', password='pytestpass', birthday='2000-01-01')
+    user = User(id=999, first_name='Pie', last_name='Testt',
+                email='test@pytest.com', username='pytester',
+                password='pytestpass', birthday='2000-01-01')
     return user
 
 
@@ -17,10 +19,14 @@ def avatar():
     avatar = Avatar(filename='img.png')
     return avatar
 
+
 @pytest.fixture(scope='module')
 def new_event():
-    event = Event(event_name='Tournment 2021', date="2000-01-01", description='This is an event')
+    event = Event(
+        event_name='Tournment 2021', date="2000-01-01",
+        description='This is an event')
     return event
+
 
 @pytest.fixture(scope='module')
 def test_client():
@@ -32,8 +38,8 @@ def test_client():
         with app.app_context():
             yield testing_client  # this is where the testing happens!
 
+
 @pytest.fixture(scope='module')
 def app():
     app = create_app()
     return app
-

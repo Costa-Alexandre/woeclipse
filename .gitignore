@@ -7,3 +7,4 @@ junit/
 .DS_Store
 .env
 dotenv
+.coverage

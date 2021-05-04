@@ -18,9 +18,9 @@ def create_app():
 
     from .routes import routes
     app.register_blueprint(routes)
-    # with app.app_context():
-    #     db.drop_all()    
-    #     db.create_all()
+    with app.app_context():
+        # db.drop_all()
+        db.create_all()
 
     return app
 

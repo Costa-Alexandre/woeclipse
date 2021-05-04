@@ -109,3 +109,8 @@ input[type="submit"]:hover{
 .box a:hover {
   text-decoration: underline;
 }
+
+.error{
+  color: red;
+  text-align: center;
+}

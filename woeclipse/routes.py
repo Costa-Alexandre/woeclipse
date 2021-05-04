@@ -1,12 +1,14 @@
 import os
-from flask import render_template, url_for, request, redirect, current_app, send_from_directory
+from flask import render_template, url_for, request, redirect,\
+    current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from flask import Blueprint
 from woeclipse.website import db
 from woeclipse.models import Event, User, Avatar
-from woeclipse.helper import allowed_file, get_random_avatar, generate_filename, get_extension
+from woeclipse.helper import allowed_file, get_random_avatar,\
+    generate_filename, get_extension
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -36,6 +38,14 @@ def signup():
             if not password == password_confirmation:
                 raise ValueError('The two passwords are not matching.')
 
+            if User.query.filter_by(email=email).first():
+                raise ValueError('This e-mail is already registered in our\
+                    database. Use another to sign up or try logging in.')
+
+            if User.query.filter_by(username=username).first():
+                raise ValueError('This username has already been taken.\
+                    Try logging in or choose another username')
+
             hashed_password = generate_password_hash(password, method='sha256')
 
             # Create a new use record in the database:
@@ -61,7 +71,7 @@ def signup():
             db.session.commit()
             login_user(new_user)
 
-            return redirect('/')
+            return redirect('/edit_profile')
 
         except Exception as error_message:
             return render_template(
@@ -79,14 +89,14 @@ def signin():
         # Get credentials and log in user
         try:
             #  Get data from request and set them to variables
-            username = request.form.get('username')
+            username = request.form.get('username').lower()
             password = request.form.get('password')
             #  Query user by username
             user = User.query.filter_by(username=username).first()
             # Log in if user exists and if password matches
             if user and check_password_hash(user.password, password):
                 login_user(user)
-                return redirect('/')
+                return redirect('/profile')
             else:
                 raise ValueError("Couldn't login with given login parameters.")
         except Exception:
@@ -103,6 +113,7 @@ def signout():
     logout_user()
     return redirect(url_for('routes.index'))
 
+
 @routes.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
@@ -118,7 +129,8 @@ def edit_profile():
                 birthday = request.form.get('birthday')
                 country = request.form.get('country').lower()
                 password = request.form.get('password')
-                password_confirmation = request.form.get('password_confirmation')
+                password_confirmation = request.form.get(
+                        'password_confirmation')
                 team_name = request.form.get('team_name')
                 avatar = request.files['avatar']
 
@@ -134,32 +146,35 @@ def edit_profile():
                     # Check if new password matches confirmation
                     if not password == password_confirmation:
                         raise ValueError('The two passwords are not matching.')
-                    
-                    user.password = generate_password_hash(password, method='sha256')
+
+                    user.password = generate_password_hash(
+                        password, method='sha256')
 
                 # Won't change avatar if no files are passed
                 # Check if avatar exists in request, if filename is not blank
                 # and if file extension is allowed
-                if avatar and avatar.filename != '' and allowed_file(avatar.filename):
-                        # get uploaded image extension
-                        ext = get_extension(avatar)
-                        # create a random string filename to the uploaded image
-                        filename = generate_filename(ext)
-                        # get path to upload folder
-                        upload_path = current_app.config['UPLOADS_PATH']
-                        # save renamed file to upload folder
-                        avatar.save(os.path.join(upload_path, filename))
-                        # update user's avatar metadata in the database
-                        user.avatar.filename = filename
-                
+                if avatar and avatar.filename != '' and \
+                        allowed_file(avatar.filename):
+                    # get uploaded image extension
+                    ext = get_extension(avatar)
+                    # create a random string filename to the uploaded image
+                    filename = generate_filename(ext)
+                    # get path to upload folder
+                    upload_path = current_app.config['UPLOADS_PATH']
+                    # save renamed file to upload folder
+                    avatar.save(os.path.join(upload_path, filename))
+                    # update user's avatar metadata in the database
+                    user.avatar.filename = filename
+
                 db.session.commit()
                 return redirect(url_for('routes.profile'))
 
             except Exception:
                 return redirect(url_for('routes.profile'))
-                            
+
         else:
             return render_template('edit_profile.html', user=user)
+
 
 # --------------------------------------------------------------------------- #
 # ----------------------------- MAIN ROUTES --------------------------------- #
@@ -192,6 +207,7 @@ def profile():
         return render_template('profile.html', user=user)
     else:
         return render_template('signin.html')
+
 
 @routes.route('/uploads/<filename>')
 def send_file(filename):
