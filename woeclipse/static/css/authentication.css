@@ -1,0 +1,94 @@
+body{
+  color: white;
+  background-color: #333;
+}
+
+body a{
+  text-decoration: none;
+  color: white;
+}
+
+#box-login, #box-signup{
+  background-color: #222;
+  margin: 64px auto;
+  padding: 32px 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  width: 592px;
+  border: 1px solid black;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+#box-login > div, #box-signup > div{
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin: 16px 32px 16px 32px;
+}
+
+#woe-logo{
+  width: 300px;
+}
+
+#icons-login img{
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+}
+
+#icons-login > span{
+  margin: 0 8px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+}
+
+#icons-login > .icon-white{
+  background-color: white;
+}
+
+#icons-login > .icon-blue{
+  background-color: #3979d1;
+}
+
+input{
+  width: 528px;
+  height: 40px;
+  font-size: 1.25rem;
+}
+
+input[type="submit"]{
+  background-image: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+input[type="submit"]:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
+}
+
+#or-login-with{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: space-around;
+  width: 528px;
+
+}
+
+#or-login-with > div > hr{
+  width: 130px;
+}
+
+#cant-login > a:hover, #create-account > a:hover{
+  text-decoration: underline;
+}

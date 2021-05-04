@@ -1,33 +1,68 @@
 {% extends 'base.html' %}
 
+
 {% block head %}
 <title>Woeclipse - Log In</title>
 {% endblock %}
 
 {% block content %}
-<header>
-  <h1>Log In</h1>
-</header>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/authentication.css') }}">
 <main>
   <form action="/signin" method="POST">
-    <div>
-      <input type="text" name="username" id="login_username" placeholder="Username" required>
-    </div>
+    <div id="box-login">
 
-    <div>
-      <input type="password" name="password" id="signin_password" placeholder="Password" required>
-    </div>
+      <div>
+        <img src="{{url_for('static', filename='img/game-logo.png')}}" alt="woe-logo" id='woe-logo'>
+      </div>
 
-    <input type="submit" value="Log In">
+      <div>
+        <h1>WELCOME BACK, WARRIOR!</h1>
+      </div>
+      
+      <div>
+        <input type="text" name="username" id="login_username" placeholder="Username" required>
+      </div>
+
+      <div>
+        <input type="password" name="password" id="signin_password" placeholder="Password" required>
+      </div>
+
+      {% if error %}
+      <p class="error">{{error}}</p>
+      {% endif %}
+
+      <div>
+        <input type="submit" value="Log In">
+      </div>
+      
+      <div id="or-login-with">
+        <div><hr></div>
+        <div>OR LOGIN WITH</div>
+        <div><hr></div>
+      </div>
+      
+      <div id="icons-login">
+        <span class='icon-blue'>
+          <a href="#"><img src="{{url_for('static', filename='img/facebook-login.svg')}}" alt="facebook-icon"></a>
+        </span>
+        <span class='icon-white'>
+          <a href="#"><img src="{{url_for('static', filename='img/google-login.svg')}}" alt="google-icon"></a>
+        </span>
+        <span class='icon-white'>
+          <a href="#"><img src="{{url_for('static', filename='img/apple-login.svg')}}" alt="apple-icon"></a>
+        </span>   
+      </div>
+
+      <div id="create-account">
+        <a href="/signup">CREATE YOUR ACCOUNT</a>
+      </div>
+
+      <div id="cant-login">
+        <a href="#">CAN'T LOGIN?</a>
+      </div>
+
+    </div>
   </form>
-
-  {% if error %}
-  <p class="error">{{error}}</p>
-  {% endif %}
 </main>
 
-<footer>
-  <a href="/signup">CREATE YOUR ACCOUNT</a>
-</footer>
 {% endblock %}

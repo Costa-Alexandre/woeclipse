@@ -98,7 +98,7 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 1204px;
   margin: 16px 0;
   flex-wrap: wrap;
@@ -172,7 +172,7 @@ mask-image: linear-gradient(to right, calc((50vw - 602px) + 380px), black 75%);
   width: calc(280px - 64px);
   display: flex;
   flex-direction: column;
-  margin-bottom: 32px;
+  margin: 0 32px 32px 0;
   box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
 }
 
