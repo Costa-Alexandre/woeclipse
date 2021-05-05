@@ -32,25 +32,7 @@ body a{
   align-items: center;
 }
 
-.gold-pill{
-  width: 128px;
-  height: 40px;
-  border-radius: 48px;
-  padding: 0 16px;
-  color: rgba(255, 255, 255, 0.815);
-  border: 2px rgba(255, 255, 255, 0.815) solid;
-  box-shadow: var(--button-shadow);
-  font-size: 1.25rem;
-  margin-left: 16px;
-  background-image: var(--gradient-golden);
-}
 
-.gold-pill:hover{
-  box-shadow: var(--button-hover-shadow);
-  transform: translate(0, 1px);
-  color: white;
-  border: 2px white solid;
-}
 
 .clickable-area, .clickable-area-border{
   /* invisible clickable span in front of a card */
@@ -147,12 +129,33 @@ z-index: 0;
 }
 
 #signup-login-pills{
-  align-self: center;
+  width: var(--wide-column-width);
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.gold-pill{
+  width: 128px;
+  height: 40px;
+  border-radius: 48px;
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: var(--button-shadow);
+  font-size: 1.25rem;
+  background-image: var(--gradient-golden);
+}
+
+.gold-pill:hover{
+  box-shadow: var(--button-hover-shadow);
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
 }
 
 .news-card{
   width: var(--wide-column-width);
-  height: var(--wide-column-width);
+  height: 384px;
   padding: 0;
   flex: none;
   box-shadow: var(--card-shadow);
@@ -165,12 +168,12 @@ z-index: 0;
 .news-card:nth-child(3) { border: none; box-shadow: none;}
 
 .news-card-image{
-  height: calc(var(--wide-column-width)/2);
+  height: 192px;
   width: var(--wide-column-width);
 }
 
 #news-card-contents {
-  height: calc(var(--wide-column-width)/2 - 32px);
+  height: calc(192px - 32px);
   padding: var(--content-padding);
   background-image: var(--gradient-dark);
 }
@@ -333,6 +336,11 @@ z-index: 0;
     z-index: 0;
     }
 
+  #signup-login-pills{
+    display: flex;
+    justify-content: space-evenly;
+  }
+
   .hide-1b{
     display: none !important;
   }
@@ -353,4 +361,67 @@ z-index: 0;
   .user-card:nth-child(4n){
     margin-right: var(--gutter);
   }
+}
+
+@media (max-width: 1032px) {
+  :root{
+    --content-width: calc(var(--column-width)*2 + var(--gutter));
+    --wide-column-width: calc(var(--column-width) * 2 + var(--gutter))
+  }
+  
+  #background-image{
+    position: absolute;
+    top: 64px;
+    left: 0px;
+    width: 100%;
+    height: calc(var(--wide-column-width) + 48px);
+    background-image: url(../img/fullpage-banner.jpeg);
+    background-size: cover;
+    background-position: top;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 100%);
+    z-index: 0;
+    }
+  
+  .news-card{
+    height: 384px;
+  }
+
+  .gold-pill{
+    width: 192px;
+    height: 60px;
+  }
+  .hide-1b{
+    display: none !important;
+  }
+
+  .show-1b{
+    display: block !important;
+  }
+
+  #event-cards{
+    flex-wrap: wrap;
+  }
+
+  .event-card{
+    margin-bottom: 32px;
+  }
+
+  .event-card:nth-child(2n){
+    margin-right: 0;
+  }
+  
+  .event-card:nth-child(4){
+    display: block !important;
+  }
+
+  .user-card:nth-child(3n){
+    margin-right: var(--gutter);
+  }
+
+  .user-card:nth-child(2n){
+    margin-right: 0;
+  }
+
+
 }
