@@ -37,7 +37,7 @@
     <div class="news-card">
 
       <div class='news-card-image'>
-        <img src="https://via.placeholder.com/380x180" alt="#">
+        <img src="https://via.placeholder.com/384x192" alt="#">
       </div>
 
       <div id='news-card-contents'>
@@ -49,26 +49,6 @@
     {% endfor %}
 
   </div>
-
-
-  <!-- <div id="news-second-row">
-
-    {% for n in range(3) %}
-    <div class="news-card card">
-
-      <div class='news-card-image'>
-        <img src="https://via.placeholder.com/380x180" alt="#">
-      </div>
-
-      <div id='news-card-contents'>
-        <p>Title</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias aspernatur aliquid?</p>
-      </div>
-
-    </div>
-    {% endfor %}
-
-  </div> -->
 
 </div>
 
@@ -92,49 +72,73 @@
   </div>
 
   <div id="event-cards">
+
     {% for event in events %}
-    <div class="event-card card">
+    <div class="event-card">
+
       <div class="event-card-image">
-      <img src="https://via.placeholder.com/280x140" alt="#">
-      <span style="display: none;">{{ event.date }}</span>
+        <img src="https://via.placeholder.com/278x140" alt="#">
+        <span style="display: none;">{{ event.date }}</span>
       </div>
-      <div class="content">
+
+      <div class="event-content">
         <a href="/events/{{ event.event_name }}">
           <span class="clickable-area"></span> <!-- make card clickable -->
         </a>
         {{ event.event_name }}<br><br>
         {{ event.description }}
       </div>
+
     </div>
   {% endfor %}  
   </div>
   
 </div>
 
-<div id="hero-users" class="hero">
-  <div id="menu-seemore" class="horizontal-menu">
-    <div id="users-title"><h1>Champions</h1></div>
-    <div><button class='seemore-btn' onclick="window.location.href = '/users'">See more</button></div>
+<div class="hero">
+
+  <div class="horizontal-menu">
+
+    <div id="users-title">
+      <h1>Champions</h1>
+    </div>
+
+    <div>
+      <button class='seemore-btn' onclick="window.location.href = '/users'">
+        See more
+      </button>
+    </div>
+
   </div>
+
   <div id="user-cards">
+
     {% for user in users %}
-    <div class="user-card card content">
-      <div><img src="{{url_for('static', filename=user.avatar)}}" alt="#"></div>
+    <div class="user-card">
+
       <div>
-        <br>
-        <a href="/users/{{ user.username }}">
-          <span class="clickable-area-border"></span> <!-- make card clickable -->
-        </a>
-        <strong>{{ user.username.capitalize() }}</strong>
-        <br><br>
+        <img src="{{url_for('static', filename=user.avatar)}}" alt="#">
       </div>
-      <div>Lorem ipsum dolor sit amet consectetur.</div>
+
+      <div>
+        <a href="/users/{{ user.username }}">
+          <span class="clickable-area-border"></span> <!-- make it clickable -->
+        </a>
+      </div>
+
+      <div>
+        <strong>{{ user.username.capitalize() }}</strong>
+      </div>
+
+      <div>
+        Lorem ipsum dolor sit amet consectetur.
+      </div>
+
     </div>
     {% endfor %}
+
   </div>  
 
 </div>
-
-
 
 {% endblock %}
