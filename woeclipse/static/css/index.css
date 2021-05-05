@@ -76,6 +76,10 @@ body a{
   border: 2px rgba(199, 199, 199, 0.555) solid;
 }
 
+.show-1b{
+  display: none !important;
+}
+
 /*************** BACKGROUND ITENS **************/
 
 #background-image{
@@ -308,4 +312,45 @@ z-index: 0;
 
 .user-card:nth-child(4n){
   margin-right: 0;
+}
+
+@media (max-width: 1440px) {
+  :root{
+    --content-width: calc(var(--column-width)*3 + var(--gutter)*2);
+  }
+  
+  #background-image{
+    position: absolute;
+    top: 64px;
+    left: 0px;
+    width: 100%;
+    height: calc(var(--wide-column-width) * 2 + 96px);
+    background-image: url(../img/fullpage-banner.jpeg);
+    background-size: cover;
+    background-position: top;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 50%);
+    mask-image: linear-gradient(to right, transparent 0, black 50%);
+    z-index: 0;
+    }
+
+  .hide-1b{
+    display: none !important;
+  }
+
+  .show-1b{
+    display: block !important;
+  }
+
+  .event-card:nth-child(n+4):nth-last-child(n){
+    /* Hides the 4th until the last card */
+    display: none;
+  }
+
+  .user-card:nth-child(3n){
+    margin-right: 0;
+  }
+
+  .user-card:nth-child(4n){
+    margin-right: var(--gutter);
+  }
 }
