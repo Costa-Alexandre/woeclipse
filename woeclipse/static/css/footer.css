@@ -1,54 +1,112 @@
+/* :root{
+  
+  --column-width: 280px;
+  --wide-column-width: 384px;
+  --gutter: 32px;
+  --content-width: calc(var(--column-width)*4 + var(--gutter)*3);
+  --light-dark: #333;
+  --strong-dark: #222;
+  --gradient-golden: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  --gradient-dark: linear-gradient(167deg, #222, #000);
+  --content-padding: 16px 32px;
+  --card-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  --button-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  --light-golden: rgb(209, 169, 68);
+
+} */
+
 footer {
-  background-color: black;
+  display: flex;
+  justify-content: center;
+  background-image: var(--gradient-dark);
   color: white;
-  margin: 0 0;
-  padding: 128px 0 32px 0;
+  padding-top: 32px;
 }
 
 #footer-container{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
-  width: 1204px;
-  margin: 0 auto 0 auto;
+  width: var(--content-width);
 }
 
-.footer{
-  border: 1px transparent;
-}
-
-.footer a{
+.footer-links div{
   text-decoration: none;
   color: white;
   padding-bottom: 16px;
+  width: 100%;
 }
 
-.footer h3{
+.footer-links a:hover, .footer-links h3{
   color: goldenrod;
-}
-
-.footer a:hover{
-  color: goldenrod;
+  font-weight: bold;
 }
 
 .footer-links{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: flex-start;
-  flex: 0 0 280px;
+  flex: none;
+  width: var(--column-width);
 }
 
-.footer-icons{
+#footer-container > .footer-icons{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
-  flex: 0 0 280px;
+  flex: none;
+  width: var(--column-width);
+  margin-bottom: 16px;
 }
 
 .footer-icons i{
   height: 40px;
   width: 40px;
+}
+
+@media (max-width: 1440px) {
+  #footer-container{
+    flex-wrap: wrap-reverse;
+  }
+
+  .footer-icons i{
+    transform: scale(0.75);
+  }
+
+}
+
+@media (max-width: 1032px) {
+  #footer-container{
+    flex-wrap: wrap;
+  }
+
+  .footer-icons i{
+    transform: scale(0.75);
+  }
+
+  .footer-icons{
+    order: -1;
+  }
+}
+
+@media (max-width: 660px) {
+  #footer-container{
+    flex-wrap: wrap;
+  }
+
+  .footer-links{
+    justify-content: center;
+  }
+
+  .footer-links div{
+    text-align: center;
+  }
+
+  .footer-icons{
+    order: -1;
+  }
 }

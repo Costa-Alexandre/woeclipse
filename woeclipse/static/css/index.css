@@ -11,7 +11,8 @@
   --content-padding: 16px 32px;
   --card-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
   --button-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
-  --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3)
+  --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  --light-golden: rgb(209, 169, 68);
 
 } */
 
@@ -524,6 +525,10 @@ z-index: 0;
 
   .user-card:nth-child(n+5):nth-child(n){
     display: none !important;
+  }
+
+  #user-cards .show-3b{
+    margin-bottom: 32px;
   }
 
 }

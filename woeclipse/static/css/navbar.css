@@ -133,9 +133,9 @@ body {
   #navbar-left-collapsed{
     flex: 1 1 100%;
     display: flex;
-    margin-left: calc((100% - var(--content-width))/2 + 56px);
+    margin-left: calc((100% - var(--content-width))/2);
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   #navbar-right-collapsed{
