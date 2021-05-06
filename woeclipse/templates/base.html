@@ -42,7 +42,9 @@
         <a href="/soon">Contact Us</a>
       </div>
       <div id="navbar-left-collapsed">
-        <a href="/"><strong>Woeclipse</strong></a>
+        <div>
+          <a href="/"><strong>Woeclipse</strong></a>
+        </div>
       </div>
       <div id="navbar-right">
         {% if current_user.is_authenticated %}
@@ -60,7 +62,7 @@
           </div>
         </div>
         <div>
-            <img  id="avatar-small" src="{{ url_for('static', filename=current_user.avatar) }}" alt="avatar" onclick="window.location.href = '/profile'">
+          <img  id="avatar-small" src="{{ url_for('static', filename=current_user.avatar) }}" alt="avatar" onclick="window.location.href = '/profile'">
         </div>
         {% else %}
         <div>
@@ -71,10 +73,10 @@
       </div>
       <div id="navbar-right-collapsed">
         <div class="dropdown-collapsed">
-          <button class="dropbtn-collapsed" id="hamburguer">
+          <button class="dropbtn" id="hamburguer">
             <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
           </button>
-          <div class="dropdown-content-collapsed">
+          <div class="dropdown-content">
             {% if current_user.is_authenticated %}
             {% if current_user.is_admin %}
             <a href="/admin">Admin Panel</a>

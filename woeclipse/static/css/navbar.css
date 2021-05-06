@@ -11,7 +11,8 @@
   --content-padding: 16px 32px;
   --card-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
   --button-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
-  --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3)
+  --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  --light-golden: rgb(209, 169, 68);
 
 }
 
@@ -22,7 +23,7 @@ body {
   overflow-x: hidden;
 }
 
-/* NAVBAR CSS */
+/************ NAVBAR ***************/
 
 /* Navbar container */
 #navbar {
@@ -37,7 +38,6 @@ body {
   flex: 1 1 100%;
   display: flex;
   margin-left: calc((100% - var(--content-width))/2);
-  /* border: 1px solid red; */
   align-items: center;
 }
 
@@ -45,27 +45,20 @@ body {
   flex: none;
   display: flex;
   margin-right: calc((100% - var(--content-width))/2);
-  /* border: 1px solid blue; */
   align-items: center;
 }
 
+/* fill whole navbar vertically (1 odd pixel) */
 #navbar > div{
   height: 100%;
 }
+
 /* Links inside the navbar */
 #navbar > div a {
-  /* float: left; */
   font-size: 16px;
   color: white;
-  /* text-align: left; */
   padding: 22px 16px;
   text-decoration: none;
-}
-
-/* The dropdown container */
-.dropdown {
-  float: left;
-  overflow: hidden;
 }
 
 /* Dropdown button */
@@ -78,43 +71,38 @@ body {
   background-color: inherit;
   font-family: inherit; /* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
-  height: 100%;
 }
 
+/* Hover effect applied to navbar links and buttons */
 #navbar > div a:hover, .dropdown:hover .dropbtn {
-  background-image: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  background-image: var(--gradient-golden);
 }
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: rgb(209, 169, 68);
+  background-color: var(--light-golden);
   min-width: 160px;
-  box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--button-shadow);
   z-index: 2;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  padding: 12px 16px;
-  text-decoration: none;
   min-width: 160px;
-  float: left;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
 #avatar-small {
-  padding: 0 !important;
   margin-left: 16px;
   border-radius: 50%;
-  box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--button-shadow);
   width: 56px;
   height: 56px;
 }
@@ -144,29 +132,40 @@ body {
 
   #navbar-left-collapsed{
     flex: 1 1 100%;
-    margin-left: 0;
     display: flex;
-    height: 100%;
+    margin-left: calc((100% - var(--content-width))/2 + 56px);
     align-items: center;
     justify-content: center;
   }
 
   #navbar-right-collapsed{
     flex: none;
-    margin-right: calc((100% - var(--content-width))/2);
     display: flex;
-    height: 100%;
+    margin-right: calc((100% - var(--content-width))/2);
     align-items: center;
   }
 
-  /* Links inside the navbar */
-  #navbar-collapsed > div a {
-    float: right;
-    font-size: 16px;
-    color: white;
-    text-align: left;
-    padding: 22px 16px;
-    border: none;
+  #navbar-left-collapsed > div a:hover{
+    background-image: none;
+  }
+
+  /* Hover effect applied to navbar links and buttons */
+  .dropdown-collapsed:hover .dropbtn {
+    background-image: var(--gradient-golden);
+  }
+
+ /* The dropdown container */
+  .dropdown-collapsed{
+    position: relative;
+  }
+
+  /* Show the dropdown menu on hover */
+  .dropdown-collapsed:hover .dropdown-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 56px;
+    left: -136px;
   }
 
   #hamburguer{
@@ -177,48 +176,8 @@ body {
     color: white;
     background-color: var(--strong-dark);
     border: none;
-  }
-
-  /* The dropdown container */
-  .dropdown-collapsed{
-    position: relative;
-  }
-  /* Dropdown button */
-  .dropdown-collapsed .dropbtn-collapse {
-    /* position: relative; */
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0; /* Important for vertical align on mobile phones */
   }
 
-  .dropdown-collapsed:hover .dropbtn-collapsed {
-    background-image: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
-  }
-
-  /* Dropdown content (hidden by default) */
-  .dropdown-content-collapsed {
-    display: none;
-    background-color: rgb(209, 169, 68);
-    min-width: 160px;
-    box-shadow: 8px 8px 16px 0px rgba(0, 0, 0, 0.3);
-    z-index: 2;
-  }
-
-  /* Links inside the dropdown */
-  .dropdown-content-collapsed a {
-    padding: 12px 16px;
-    text-decoration: none;
-    min-width: 160px;
-    float: left;
-  }
-
-  /* Show the dropdown menu on hover */
-  .dropdown-collapsed:hover .dropdown-content-collapsed {
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    align-items: flex-start;
-    top: 56px;
-    left: -136px;
-    /* justify-content: flex-end; */
-  }
 }
