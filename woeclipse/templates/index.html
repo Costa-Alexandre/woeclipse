@@ -42,7 +42,7 @@
     <div class="news-card">
 
       <div class='news-card-image'>
-        <img src="https://via.placeholder.com/384x192" alt="#">
+        <img src="{{ url_for('static', filename='img/news2.jpg') }}" alt="#">
       </div>
 
       <div id='news-card-contents'>
@@ -74,7 +74,7 @@
       </button>
     </div>
 
-    <div class="show-1b">
+    <div class="show-1b hide-3b">
       <button class='seemore-btn' onclick="window.location.href = '/events'">
         See more
       </button>
@@ -88,7 +88,7 @@
     <div class="event-card">
 
       <div class="event-card-image">
-        <img src="https://via.placeholder.com/278x140" alt="#">
+        <img src="{{ url_for('static', filename='img/news2.jpg') }}" alt="#">
         <span style="display: none;">{{ event.date }}</span>
       </div>
 
@@ -101,8 +101,16 @@
       </div>
 
     </div>
-  {% endfor %}  
+    {% endfor %}
+
+    <div class="show-3b">
+      <button class='seemore-btn' onclick="window.location.href = '/events'">
+        See more
+      </button>
+    </div>
+
   </div>
+  
   
 </div>
 
@@ -114,7 +122,7 @@
       <h1>Champions</h1>
     </div>
 
-    <div>
+    <div class="hide-3b">
       <button class='seemore-btn' onclick="window.location.href = '/users'">
         See more
       </button>
@@ -127,7 +135,7 @@
     {% for user in users %}
     <div class="user-card">
 
-      <div>
+      <div id="user-avatar">
         <img src="{{url_for('static', filename=user.avatar)}}" alt="#">
       </div>
 
@@ -147,6 +155,12 @@
 
     </div>
     {% endfor %}
+
+    <div class="show-3b">
+      <button class='seemore-btn' onclick="window.location.href = '/users'">
+        See more
+      </button>
+    </div>
 
   </div>  
 

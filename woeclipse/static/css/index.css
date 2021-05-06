@@ -1,4 +1,4 @@
-:root{
+/* :root{
   
   --column-width: 280px;
   --wide-column-width: 384px;
@@ -13,7 +13,7 @@
   --button-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
   --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3)
 
-}
+} */
 
 body{
   color: white;
@@ -58,8 +58,8 @@ body a{
   border: 2px rgba(199, 199, 199, 0.555) solid;
 }
 
-.show-1b{
-  display: none !important;
+.show-1b, .show-3b{
+  display: none;
 }
 
 /*************** BACKGROUND ITENS **************/
@@ -172,6 +172,12 @@ z-index: 0;
   width: var(--wide-column-width);
 }
 
+.news-card-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover
+}
+
 #news-card-contents {
   height: calc(192px - 32px);
   padding: var(--content-padding);
@@ -238,6 +244,12 @@ z-index: 0;
 .event-card-image{
   width: var(--column-width);
   height: calc(var(--column-width)/2);
+}
+
+.event-card-image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover
 }
 
 .event-content{
@@ -307,10 +319,11 @@ z-index: 0;
   /* border: 1px solid black; */
 }
 
-.user-card img{
+#user-avatar img{
   border-radius: 50%;
   width: 80px;
   height: 80px;
+  object-fit: cover;
 }
 
 .user-card:nth-child(4n){
@@ -423,5 +436,94 @@ z-index: 0;
     margin-right: 0;
   }
 
+
+}
+
+@media (max-width: 660px) {
+  .hero div{
+    flex-shrink: 1;
+    flex-grow: 1;
+  }
+
+  :root{
+    --content-width: 346px;
+    --wide-column-width: 346px;
+    --column-width: 346px;
+  }
+  
+  h1{
+    font-size: 1.75rem;
+  }
+
+  #background-image{
+    position: absolute;
+    top: 64px;
+    left: 0px;
+    width: 100%;
+    height: calc(var(--wide-column-width) + 48px);
+    background-image: url(../img/fullpage-banner.jpeg);
+    background-size: cover;
+    background-position: top;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 100%);
+    mask-image: linear-gradient(to right, transparent 0, black 100%);
+    z-index: 0;
+    }
+  
+  #news-main div{
+    text-align: center;
+    width: 100%;
+  }
+
+  .news-card{
+    height: 384px;
+  }
+
+  .horizontal-menu div{
+    text-align: center;
+  }
+
+  #user-title{
+    width: 100%;
+  }
+
+  .gold-pill{
+    width: 128px;
+    height: 40px;
+  }
+
+  .hide-1b{
+    display: none !important;
+  }
+
+  .show-1b{
+    display: block !important;
+  }
+
+  .show-3b{
+    display: flex !important;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .hide-3b{
+    display: none !important;
+  }
+
+
+  .event-card{
+    margin: 0 0 32px 0;
+  }
+
+  .event-card:nth-child(4){
+    display: block !important;
+  }
+
+  .user-card{
+    margin: 0 0 32px 0 !important;
+  }
+
+  .user-card:nth-child(n+5):nth-child(n){
+    display: none !important;
+  }
 
 }

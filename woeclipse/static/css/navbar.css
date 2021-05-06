@@ -1,7 +1,25 @@
+:root{
+  
+  --column-width: 280px;
+  --wide-column-width: 384px;
+  --gutter: 32px;
+  --content-width: calc(var(--column-width)*4 + var(--gutter)*3);
+  --light-dark: #333;
+  --strong-dark: #222;
+  --gradient-golden: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  --gradient-dark: linear-gradient(167deg, #222, #000);
+  --content-padding: 16px 32px;
+  --card-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  --button-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  --button-hover-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3)
+
+}
+
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 /* NAVBAR CSS */
