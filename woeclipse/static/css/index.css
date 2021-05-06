@@ -18,6 +18,7 @@
 
 body{
   color: white;
+  background-color: var(--strong-dark);
 }
 
 body a{
