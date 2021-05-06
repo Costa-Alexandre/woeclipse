@@ -21,9 +21,10 @@
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="/tournments">Tournments</a>
-            <a href="/challenges">Challenges</a>
-            <a href="/rankedmatches">Ranked Matches</a>
+            <a href="/events">All Events</a>
+            <a href="/soon">Tournments</a>
+            <a href="/soon">Challenges</a>
+            <a href="/soon">Ranked Matches</a>
           </div>
         </div>
         <a href="/ranking">Ranking</a>
@@ -33,12 +34,15 @@
           </button>
           <div class="dropdown-content">
             <a href="/community">Community</a>
-            <a href="/rules">Rules</a>
-            <a href="/resources">Resources</a>
-            <a href="/about">About Us</a>
+            <a href="/soon">Rules</a>
+            <a href="/soon">Resources</a>
+            <a href="/soon">About Us</a>
           </div>
         </div>
-        <a href="/contact">Contact Us</a>
+        <a href="/soon">Contact Us</a>
+      </div>
+      <div id="navbar-left-collapsed">
+        <a href="/"><strong>Woeclipse</strong></a>
       </div>
       <div id="navbar-right">
         {% if current_user.is_authenticated %}
@@ -48,9 +52,7 @@
           </button>
           <div class="dropdown-content">
             <a href="/profile">Profile</a>
-            <a href="/stats">Stats</a>
-            <a href="/preferences">Preferences</a>
-            <a href="/preferences">Change language</a>
+            <a href="/soon">Change language</a>
             {% if current_user.is_admin %}
             <a href="/admin">Admin Panel</a>
             {% endif %}
@@ -61,16 +63,42 @@
             <img  id="avatar-small" src="{{ url_for('static', filename=current_user.avatar) }}" alt="avatar" onclick="window.location.href = '/profile'">
         </div>
         {% else %}
-        <div style="float: right;">
+        <div>
           <a href="/signin">Log In</a>
           <a href="/signup">Sign Up</a>
         </div>
         {% endif %}
       </div>
+      <div id="navbar-right-collapsed">
+        <div class="dropdown-collapsed">
+          <button class="dropbtn-collapsed" id="hamburguer">
+            <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-content-collapsed">
+            {% if current_user.is_authenticated %}
+            {% if current_user.is_admin %}
+            <a href="/admin">Admin Panel</a>
+            {% endif %}
+            <a href="/profile">Profile</a>
+            <a href="/preferences">Change language</a>
+            {% else %}
+            <a href="/signup">Sign Up</a>
+            <a href="/signin">Log In</a>
+            {% endif %}
+            <a href="/events">All Events</a>
+            <a href="/ranking">Ranking</a>
+            <a href="/community">Community</a>
+            <a href="/soon">Rules</a>
+            <a href="/soon">Resources</a>
+            <a href="/soon">About Us</a>
+            <a href="/soon">Contact Us</a>
+            {% if current_user.is_authenticated %}
+            <a href="/signout">Log Out</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
     </div>
-
-
-
   </header>
   <main>
     {% block content%} {% endblock %}
