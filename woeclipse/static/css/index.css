@@ -336,6 +336,10 @@ z-index: 0;
     --content-width: calc(var(--column-width)*3 + var(--gutter)*2);
   }
   
+  body, body a{
+    font-size: 1.25em;
+  }
+
   #background-image{
     position: absolute;
     top: 64px;
@@ -379,30 +383,28 @@ z-index: 0;
 
 @media (max-width: 1032px) {
   :root{
-    --content-width: calc(var(--column-width)*2 + var(--gutter));
-    --wide-column-width: calc(var(--column-width) * 2 + var(--gutter))
+    --column-width: calc((var(--content-width) - var(--gutter)) / 2);
+    --wide-column-width: var(--column-width);
+    --gutter: 32px;
+    --content-width: calc(100vw - 64px);
+
   }
   
   #background-image{
     position: absolute;
-    top: 64px;
-    left: 0px;
-    width: 100%;
-    height: calc(var(--wide-column-width) + 48px);
-    background-image: url(../img/fullpage-banner.jpeg);
-    background-size: cover;
-    background-position: top;
+    top: 96px;
+    height: calc(2 * 384px + 96px );
+
     -webkit-mask-image: linear-gradient(to right, transparent 0, black 100%);
     mask-image: linear-gradient(to right, transparent 0, black 100%);
-    z-index: 0;
-    }
-  
+  }
+
   .news-card{
     height: 384px;
   }
 
   .gold-pill{
-    width: 192px;
+    width: 128px;
     height: 60px;
   }
   .hide-1b{
@@ -429,6 +431,11 @@ z-index: 0;
     display: block !important;
   }
 
+  #user-avatar{
+    width: 160px;
+    height: 160px;
+  }
+
   .user-card:nth-child(3n){
     margin-right: var(--gutter);
   }
@@ -441,15 +448,17 @@ z-index: 0;
 }
 
 @media (max-width: 660px) {
+  :root{
+    --column-width: var(--content-width);
+    --wide-column-width: var(--column-width);
+    --gutter: 32px;
+    --content-width: calc(100vw - 64px);
+
+  }
+
   .hero div{
     flex-shrink: 1;
     flex-grow: 1;
-  }
-
-  :root{
-    --content-width: 346px;
-    --wide-column-width: 346px;
-    --column-width: 346px;
   }
   
   h1{
@@ -458,7 +467,7 @@ z-index: 0;
 
   #background-image{
     position: absolute;
-    top: 64px;
+    top: 96px;
     left: 0px;
     width: 100%;
     height: calc(var(--wide-column-width) + 48px);
@@ -485,6 +494,11 @@ z-index: 0;
 
   #user-title{
     width: 100%;
+  }
+
+  #user-avatar img{
+    width: 160px;
+    height: 160px;
   }
 
   .gold-pill{
