@@ -2,7 +2,7 @@ import os
 from os.path import join, dirname, realpath
 
 
-SECRET_KEY = os.getenv('DB_SECRET')
+SECRET_KEY = os.getenv('SECRET_KEY')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_USER = os.getenv('DB_USER')
 DB_HOST = os.getenv('DB_HOST')

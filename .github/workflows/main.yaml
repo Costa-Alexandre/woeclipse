@@ -35,7 +35,7 @@ jobs:
         echo "  DB_PASSWORD: \"${{ secrets.PRODUCTION_DATABASE_PASSWORD }}\" " >> app.yaml
         echo "  DB_HOST: \"${{ secrets.POSTGRES_HOST }}\" " >> app.yaml
         echo "  DB_USER: \"${{ secrets.POSTGRES_USER }}\" " >> app.yaml
-        echo "  DB_SECRET: \"${{ secrets.SECRET_KEY }}\" " >> app.yaml
+        echo "  SECRET_KEY: \"${{ secrets.SECRET_KEY }}\" " >> app.yaml
         echo "  DB_NAME: \"${{ secrets.POSTGRES_DB }}\" " >> app.yaml
         more app.yaml
     - name: Test with pytest
@@ -45,7 +45,7 @@ jobs:
         DB_PASSWORD: ${{ secrets.PRODUCTION_DATABASE_PASSWORD }}
         DB_HOST: ${{ secrets.POSTGRES_HOST }}
         DB_USER: ${{ secrets.POSTGRES_USER }}
-        DB_SECRET: ${{ secrets.SECRET_KEY }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DB_NAME: ${{ secrets.POSTGRES_DB }}
     - name: Deploy to Google App Engine
       uses: google-github-actions/deploy-appengine@main
