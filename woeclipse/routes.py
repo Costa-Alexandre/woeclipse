@@ -342,10 +342,10 @@ def remove_participant(user_id, event_id):
 
 
 @routes.route('/admin/populate_database')
-@login_required
 def populate_database():
-    if current_user.is_admin:
-
+    if os.getenv('FLASK_ENV') == 'development':
+        db.drop_all()
+        db.create_all()
         u_file = open('woeclipse/static/json/users.json')
         users_list = json.load(u_file)
         for user in users_list:
@@ -384,6 +384,6 @@ def populate_database():
         
         db.session.commit()
 
-        return redirect(url_for('routes.admin'))
+        return redirect(url_for('routes.index'))
     else:
-        return 'You are not authorized to view this page.'
+        return "Not allowed in production"
