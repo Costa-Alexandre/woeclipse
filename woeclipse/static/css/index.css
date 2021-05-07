@@ -382,7 +382,7 @@ z-index: 0;
   }
 }
 
-@media (max-width: 1032px) {
+@media (max-width: 1200px) {
   :root{
     --column-width: calc((var(--content-width) - var(--gutter)) / 2);
     --wide-column-width: var(--column-width);
@@ -393,7 +393,7 @@ z-index: 0;
   
   #background-image{
     position: absolute;
-    top: 96px;
+    top: 64px;
     height: calc(2 * 384px + 96px );
 
     -webkit-mask-image: linear-gradient(to right, transparent 0, black 100%);
@@ -408,6 +408,13 @@ z-index: 0;
     width: 128px;
     height: 60px;
   }
+
+  .seemore-btn{
+    font-size: 1.25em;
+    height: 60px;
+  }
+  
+
   .hide-1b{
     display: none !important;
   }
@@ -448,7 +455,7 @@ z-index: 0;
 
 }
 
-@media (max-width: 660px) {
+@media (max-width: 1000px) {
   :root{
     --column-width: var(--content-width);
     --wide-column-width: var(--column-width);
@@ -457,36 +464,50 @@ z-index: 0;
 
   }
 
+  body, body a{
+    font-size: 2em;
+  }
+
   .hero div{
     flex-shrink: 1;
     flex-grow: 1;
   }
   
   h1{
-    font-size: 1.75rem;
+    font-size: 4rem;
+  }
+
+  h3{
+    font-size: 3em;
   }
 
   #background-image{
-    position: absolute;
     top: 96px;
-    left: 0px;
-    width: 100%;
-    height: calc(var(--wide-column-width) + 48px);
-    background-image: url(../img/fullpage-banner.jpeg);
-    background-size: cover;
-    background-position: top;
-    -webkit-mask-image: linear-gradient(to right, transparent 0, black 100%);
-    mask-image: linear-gradient(to right, transparent 0, black 100%);
-    z-index: 0;
+    height: 860px;
+
+    -webkit-mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.75) 100%);
+    mask-image: linear-gradient(to right, transparent 0, rgba(0, 0, 0, 0.75) 100%);
     }
+  
+  #signup-login-pills{
+    align-items: center;
+  }
   
   #news-main div{
     text-align: center;
     width: 100%;
   }
 
+
   .news-card{
-    height: 384px;
+    height: 540px !important;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-card-image img {
+    height: 270px;
   }
 
   .horizontal-menu div{
@@ -497,14 +518,44 @@ z-index: 0;
     width: 100%;
   }
 
+  .user-card{
+
+    height: initial;
+    display: flex;
+    flex-direction: column;
+    flex: none;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: 0;
+
+    /* border: 1px solid black; */
+  }
+
+  .user-card div{
+    margin-bottom: 16px;
+  }
+
+  #user-avatar{
+    width: initial;
+    height: initial;
+    padding: 0;
+  }
+
   #user-avatar img{
-    width: 160px;
-    height: 160px;
+    width: 320px;
+    height: 320px;
+    margin: 0;
+    padding: 0;
   }
 
   .gold-pill{
-    width: 128px;
-    height: 40px;
+    width: 400px;
+    height: 80px;
+  }
+
+  .seemore-btn{
+    width: 800px;
+    height: 120px;
   }
 
   .hide-1b{
@@ -528,6 +579,32 @@ z-index: 0;
 
   .event-card{
     margin: 0 0 32px 0;
+  }
+
+  .event-card{
+    width: calc(var(--column-width) - 2px);
+    box-shadow: var(--card-shadow);
+    margin-right: var(--gutter);
+    position: relative;
+    display: block;
+    border: 1px solid black;
+  }
+  
+  .event-card-image{
+    width: var(--column-width);
+    height: 270px;
+  }
+  
+  .event-card-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+  }
+
+  .event-content{
+    padding: 32px 32px;
+    background-image: var(--gradient-dark);
+    height: calc(270px - 64px);
   }
 
   .event-card:nth-child(4){

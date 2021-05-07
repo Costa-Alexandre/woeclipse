@@ -79,7 +79,7 @@ footer {
 
 }
 
-@media (max-width: 1032px) {
+@media (max-width: 1200px) {
   #footer-container{
     flex-wrap: wrap;
   }
@@ -93,7 +93,7 @@ footer {
   }
 }
 
-@media (max-width: 660px) {
+@media (max-width: 1000px) {
   #footer-container{
     flex-wrap: wrap;
   }

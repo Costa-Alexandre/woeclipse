@@ -121,7 +121,7 @@ body {
   display: none;
 }
 
-@media (max-width: 1032px) {
+@media (max-width: 1000px) {
 
   #navbar{
     height: 96px;
@@ -174,8 +174,8 @@ body {
     display: flex;
     flex-direction: column;
     top: 96px;
-    left: -144px;
-    min-width: 240px;
+    left: -224px;
+    min-width: 320px;
   }
 
   #hamburguer{
