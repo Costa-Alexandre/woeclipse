@@ -1,4 +1,5 @@
 import os
+import json
 from flask import render_template, url_for, request, redirect,\
     current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
@@ -336,5 +337,53 @@ def remove_participant(user_id, event_id):
         event.users.remove(user)
         db.session.commit()
         return redirect(url_for('routes.edit_event', event_id=event_id))
+    else:
+        return 'You are not authorized to view this page.'
+
+
+@routes.route('/admin/populate_database')
+@login_required
+def populate_database():
+    if current_user.is_admin:
+
+        u_file = open('woeclipse/static/json/users.json')
+        users_list = json.load(u_file)
+        for user in users_list:
+            new_user = User(first_name=user["first_name"],
+                            last_name=user["last_name"],
+                            birthday=user["birthday"],
+                            country=user["country"],
+                            email=user["email"],
+                            username=user["username"],
+                            password=generate_password_hash(user["password"], method='sha256'),
+                            team_name=user["team_name"],
+                            matches_w=user["matches_w"],
+                            matches_d=user["matches_d"],
+                            matches_l=user["matches_l"],
+                            kills=user["kills"],
+                            killed=user["killed"]
+                            )
+
+            db.session.add(new_user)
+
+            avatar = Avatar(filename=user["avatar"])
+            db.session.add(avatar)
+            # create the avatar-user one-to-one relationship
+            new_user.avatar = avatar
+        
+        e_file = open('woeclipse/static/json/events.json')
+        events_list = json.load(e_file)
+        for event in events_list:
+            new_event = Event(
+                event_name=event["event_name"],
+                date=event["date"],
+                description=event["description"]
+                )
+            
+            db.session.add(new_event)
+        
+        db.session.commit()
+
+        return redirect(url_for('routes.admin'))
     else:
         return 'You are not authorized to view this page.'

@@ -1,0 +1,43 @@
+[
+    {
+        "event_name": "Woeclipse DeathMatch",
+        "date": "2021-10-17",
+        "description": "A series of battles to climb quickly in the rankings"
+    },
+    {
+        "event_name": "Nationals: Germany",
+        "date": "2021-11-05",
+        "description": "This tournment will determine the German champion. Semifinalists earn a spot in the world championship"
+    },
+    {
+        "event_name": "Nationals: Brazil",
+        "date": "2021-11-12",
+        "description": "This tournment will determine the Brazilian champion. Semifinalists earn a spot in the world championship"
+    },
+    {
+        "event_name": "Nationals: France",
+        "date": "2021-11-17",
+        "description": "This tournment will determine the French champion. Semifinalists earn a spot in the world championship"
+    },
+    {
+        "event_name": "Nationals: India",
+        "date": "2021-11-24",
+        "description": "This tournment will determine the Indian champion. Semifinalists earn a spot in the world championship"
+    },
+    {
+        "event_name": "Nationals: Australia",
+        "date": "2021-11-30",
+        "description": "This tournment will determine the Australian champion. Semifinalists earn a spot in the world championship"
+    },
+    {
+        "event_name": "Nationals: USA",
+        "date": "2021-12-04",
+        "description": "This tournment will determine the champion from USA. Semifinalists earn a spot in the world championship"
+    },
+    {
+        "event_name": "Woeclipse World War",
+        "date": "2021-12-15",
+        "description": "WWW is the greatest Worms Armageddon clan event that ever existed. The World Champion earns bragging rights for eternity, and a bright shining virtual trophy to display in their profile"
+    }
+
+]
