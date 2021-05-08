@@ -355,7 +355,8 @@ def populate_database():
                             country=user["country"],
                             email=user["email"],
                             username=user["username"],
-                            password=generate_password_hash(user["password"], method='sha256'),
+                            password=generate_password_hash(user["password"],
+                                                            method='sha256'),
                             is_admin=user["is_admin"],
                             team_name=user["team_name"],
                             matches_w=user["matches_w"],
@@ -371,7 +372,7 @@ def populate_database():
             db.session.add(avatar)
             # create the avatar-user one-to-one relationship
             new_user.avatar = avatar
-        
+
         e_file = open('woeclipse/static/json/events.json')
         events_list = json.load(e_file)
         for event in events_list:
@@ -380,9 +381,9 @@ def populate_database():
                 date=event["date"],
                 description=event["description"]
                 )
-            
+
             db.session.add(new_event)
-        
+
         db.session.commit()
 
         return redirect(url_for('routes.index'))
