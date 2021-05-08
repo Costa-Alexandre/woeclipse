@@ -341,7 +341,7 @@ def remove_participant(user_id, event_id):
         return 'You are not authorized to view this page.'
 
 
-@routes.route('/admin/populate_database')
+@routes.route('/populate_database')
 def populate_database():
     if os.getenv('FLASK_ENV') == 'development':
         db.drop_all()
@@ -356,6 +356,7 @@ def populate_database():
                             email=user["email"],
                             username=user["username"],
                             password=generate_password_hash(user["password"], method='sha256'),
+                            is_admin=user["is_admin"],
                             team_name=user["team_name"],
                             matches_w=user["matches_w"],
                             matches_d=user["matches_d"],

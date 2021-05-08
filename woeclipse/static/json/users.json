@@ -7,7 +7,7 @@
         "email": "alexandre.costa@code.berlin",
         "username": "zymmac",
         "password": "123",
-        "is_admin": false,
+        "is_admin": true,
         "team_name": "Cartoon",
         "matches_w": 372,
         "matches_d": 40,
