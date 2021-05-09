@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="username-frame">
-  <img src="{{ url_for('static', filename=user.avatar) }}" alt="profile-pic-large" width="80px" height="80px">
+  <img src="{{ url_for('get_file', filename=user.avatar) }}" alt="profile-pic-large" width="80px" height="80px">
   <div>
     <li>{{ user.username.capitalize() }}
       <div>
