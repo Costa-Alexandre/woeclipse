@@ -37,6 +37,7 @@ jobs:
         echo "  DB_USER: \"${{ secrets.POSTGRES_USER }}\" " >> app.yaml
         echo "  SECRET_KEY: \"${{ secrets.SECRET_KEY }}\" " >> app.yaml
         echo "  DB_NAME: \"${{ secrets.POSTGRES_DB }}\" " >> app.yaml
+        echo "  MY_BUCKET_NAME: \"${{ secrets.MY_BUCKET_NAME }}\" " >> app.yaml
         more app.yaml
     - name: Test with pytest
       run: |
