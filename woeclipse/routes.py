@@ -1,7 +1,7 @@
 import os
 import json
 from flask import render_template, url_for, request, redirect,\
-    current_app, send_from_directory
+    current_app, send_from_directory, send_file
 from flask_login import login_user, login_required, logout_user, current_user
 from google.cloud.storage import bucket
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -218,9 +218,13 @@ def profile():
         return render_template('signin.html')
 
 
-@routes.route('/uploads/<filename>')
-def send_file(filename):
-    return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
+@routes.route('/static/uploads/<filename>')
+def get_file(filename):
+    if os.getenv('FLASK_ENV') == 'development':
+        return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
+    else: 
+        filename = filename
+        return redirect(f'https://storage.googleapis.com/storage/v1/b/woeclip-se.appspot.com/o/uploads%2F{filename}?alt=media')
 
 
 # ########################################################################### #
