@@ -3,7 +3,9 @@ import json
 from flask import render_template, url_for, request, redirect,\
     current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
+from google.cloud.storage import bucket
 from werkzeug.security import generate_password_hash, check_password_hash
+from woeclipse.uploads import upload_blob
 
 from flask import Blueprint
 from woeclipse.website import db
@@ -14,6 +16,7 @@ from woeclipse.helper import allowed_file, get_random_avatar,\
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
 
+bucket_name = os.getenv("MY_BUCKET_NAME")
 
 # ........................................................................... #
 # ............................... AUTH ROUTES ............................... #
@@ -160,10 +163,14 @@ def edit_profile():
                     ext = get_extension(avatar)
                     # create a random string filename to the uploaded image
                     filename = generate_filename(ext)
-                    # get path to upload folder
-                    upload_path = current_app.config['UPLOADS_PATH']
-                    # save renamed file to upload folder
-                    avatar.save(os.path.join(upload_path, filename))
+
+                    if os.getenv('FLASK_ENV') == 'development':
+                        # get path to upload folder
+                        upload_path = current_app.config['UPLOADS_PATH']
+                        # save renamed file to upload folder
+                        avatar.save(os.path.join(upload_path, filename))
+                    else:
+                        upload_blob(bucket_name, avatar, f'uploads/{filename}')
                     # update user's avatar metadata in the database
                     user.avatar.filename = filename
 

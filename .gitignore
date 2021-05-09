@@ -8,3 +8,4 @@ junit/
 .env
 dotenv
 .coverage
+*key.json
