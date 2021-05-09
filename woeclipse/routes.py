@@ -171,7 +171,7 @@ def edit_profile():
                         avatar.save(os.path.join(upload_path, filename))
                     else:
                         upload_blob(
-                            bucket_name, avatar, f'uploads/img/{filename}')
+                            bucket_name, avatar, f'uploads/{filename}')
                     # update user's avatar metadata in the database
                     user.avatar.filename = filename
 

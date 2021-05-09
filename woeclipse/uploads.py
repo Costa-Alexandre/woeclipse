@@ -14,14 +14,3 @@ def upload_blob(bucket_name, source_file, destination_blob_name):
     blob = bucket.blob(destination_blob_name)
 
     blob.upload_from_file(source_file)
-
-# def get_avatar():
-#     storage_client = storage.anonymous()
-#     bucket = storage_client.bucket('woeclip-se.appspot.com')
-#     file = bucket.file('uploads/1.png')
-
-#     downloaded = file.download
-#     downloaded.rewind()
-#     downloaded.read()
-
-# get_avatar()
