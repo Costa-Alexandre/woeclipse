@@ -54,4 +54,4 @@ jobs:
         deliverables: app.yaml
         credentials: ${{ secrets.GAE_SA_KEY }}
     - name: Cleanup Old Versions on Google App Engine 
-      run: gcloud app versions delete --project ${{ secrets.GCP_PROJECT }} --quiet `gcloud app versions list --format="value(id)[terminator=' ']" --filter="traffic_split=0"`
+      run: gcloud app versions delete --project woeclip-se --quiet `gcloud app versions list --format="value(id)[terminator=' ']" --filter="traffic_split=0"`
