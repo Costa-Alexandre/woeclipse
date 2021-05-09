@@ -164,14 +164,14 @@ def edit_profile():
                     # create a random string filename to the uploaded image
                     filename = generate_filename(ext)
 
-                    # if os.getenv('FLASK_ENV') == 'development':
-                    #     # get path to upload folder
-                    #     upload_path = current_app.config['UPLOADS_PATH']
-                    #     # save renamed file to upload folder
-                    #     avatar.save(os.path.join(upload_path, filename))
-                    # else:
-                    upload_blob(
-                        bucket_name, avatar, f'uploads/{filename}')
+                    if os.getenv('FLASK_ENV') == 'development':
+                        # get path to upload folder
+                        upload_path = current_app.config['UPLOADS_PATH']
+                        # save renamed file to upload folder
+                        avatar.save(os.path.join(upload_path, filename))
+                    else:
+                        upload_blob(
+                            bucket_name, avatar, f'uploads/{filename}')
                     # update user's avatar metadata in the database
                     user.avatar.filename = filename
 
@@ -220,13 +220,13 @@ def profile():
 
 @routes.route('/uploads/<filename>')
 def get_file(filename):
-    # if os.getenv('FLASK_ENV') == 'development':
-    #     return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
-    # else:
+    if os.getenv('FLASK_ENV') == 'development':
+        return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
+    else:
     #     # This is bad, bad, programming. Not proud of it, but the deadline is
     #     # tomorrow and there is still much to do. It works.
-    filename = filename
-    return redirect(f'https://storage.googleapis.com/storage/v1/b/woeclip-se.appspot.com/o/uploads%2F{filename}?alt=media')
+        filename = filename
+        return redirect(f'https://storage.googleapis.com/storage/v1/b/woeclip-se.appspot.com/o/uploads%2F{filename}?alt=media')
 
 
 # ########################################################################### #
