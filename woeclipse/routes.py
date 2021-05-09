@@ -121,6 +121,13 @@ def signout():
 @routes.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
+    """ When the user is authenticated, this function ALWAYS updates first_name
+    last_name, birthday, country and team_name. Optionally, checks if a new
+    password was given and updates if so. If a new avatar file is selected, it
+    will rename the file and upload to the bucket, on production, or save to a
+    static file, on development. Only the filename is associated to a user and
+    stored in the database. Files uploaded during development will 404 during production, so reset database before deploying (localhost:[PORT]/populate_database)
+    """
     # Edit user profile information and avatar
     if current_user.is_authenticated:
         # Get authenticated user
@@ -164,14 +171,18 @@ def edit_profile():
                     # create a random string filename to the uploaded image
                     filename = generate_filename(ext)
 
+                    # in development, saves to a static folder.
+                    # In production, saves to bucket.
                     if os.getenv('FLASK_ENV') == 'development':
                         # get path to upload folder
                         upload_path = current_app.config['UPLOADS_PATH']
                         # save renamed file to upload folder
                         avatar.save(os.path.join(upload_path, filename))
                     else:
+                        # upload to bucket
                         upload_blob(
                             bucket_name, avatar, f'uploads/{filename}')
+
                     # update user's avatar metadata in the database
                     user.avatar.filename = filename
 

@@ -1,42 +1,110 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 
-<div id="username-frame">
-  <img src="{{ url_for('routes.get_file', filename=current_user.avatar) }}" alt="avatar-large" width="80px" height="80px">
-  <div>
-    <li>{{ current_user.username.capitalize() }}
-    <li>{{ current_user.first_name.capitalize() }} {{ current_user.last_name.capitalize() }}
-      <div>
+<div id="page-container">
+
+  <div id="menu">
+
+    <div class="menu-item">
+      <div><a href="/edit_profile">Edit Profile</a></div>
+    </div>
+
+    <div class="menu-item">
+      <div><a href="/delete_account">Delete Account</a></div>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+  
+    <div id="username-frame">
+  
+      <div id="avatar">
+        <img src="{{ url_for('routes.get_file', filename=current_user.avatar) }}" alt="avatar-large" width="80px" height="80px">
+      </div>
+      
+      <div id="names">
+  
+          <div>
+            <h1>{{ current_user.username.capitalize() }}</h1>
+          </div>
+  
+          <div>
+            <h2>{{ current_user.first_name.capitalize() }} {{ current_user.last_name.capitalize() }}</h2>
+          </div>
+  
+      </div>
+  
+      <div id="flag">
         <img src="https://via.placeholder.com/40" alt="country-flag">
       </div>
+  
+    </div>
+  
+  
+    <div id="stats-frame">
+  
+      <div class="title">
+        <h2>Team Stats</h2>
+      </div>
+  
+      <div id="stats-items">
+        <div class="stats-line">
+          <div class="stats-title">Team Name</div>
+          <div class="stats-value">{{ user.team_name }}</div>
+        </div>
+        <div class="stats-line">
+          <div class="stats-title">Matches Won</div>
+          <div class="stats-value">{{ user.matches_w }}</div>
+        </div>
+        <div class="stats-line">
+          <div class="stats-title">Matches Drawn</div>
+          <div class="stats-value">{{ user.matches_d }}</div>
+        </div>
+        <div class="stats-line">
+          <div class="stats-title">Matches Lost</div>
+          <div class="stats-value">{{ user.matches_l }}</div>
+        </div>
+        <div class="stats-line">
+          <div class="stats-title">Rank</div>
+          <div class="stats-value">{{ user.rank }}</div>
+        </div>
+        <div class="stats-line">
+          <div class="stats-title">Kills</div>
+          <div class="stats-value">{{ user.kills }}</div>
+        </div>
+        <div class="stats-line">
+          <div class="stats-title">Killed</div>
+          <div class="stats-value">{{ user.killed }}</div>
+        </div>
+      </div>
+    </div>
+  
+    <div id="badges-frame">
+  
+      <div class="title">
+        <h2>Badges</h2>
+      </div>
+  
+      <div id="badges-container">
+        <div>..</div>
+        <div>..</div>
+        <div>..</div>
+        <div>..</div>
+        <div>..</div>
+      </div>
+      
+    </div>
+  </div>
 
-      <div id="stats-frame">
-        <div id="labels">
-          <h2>Stats</h2>
-    <li>Team Name:</li>
-    <li>Matches Won:</li>
-    <li>Matches Drawn:</li>
-    <li>Matches Lost:</li>
-    <li>Rank:</li>
-    <li>Kills:</li>
-    <li>Killed:</li>
+  <div id="blank">
+    <span> </span>
   </div>
-  <div id="values">
-    <li></li>
-    <li>{{ user.team_name }}</li>
-    <li>{{ user.matches_w }}</li>
-    <li>{{ user.matches_d }}</li>
-    <li>{{ user.matches_l }}</li>
-    <li> ## </li>
-    <li>{{ user.kills }}</li>
-    <li>{{ user.killed }}</li>
-  </div>
+
 </div>
 
-<div id="badges-frame">
-  <h2>Badges</h2>
-</div>
 
 
 {% endblock %}
