@@ -62,7 +62,7 @@
           </div>
         </div>
         <div>
-          <img  id="avatar-small" src="{{ url_for('static', filename=current_user.avatar) }}" alt="avatar" onclick="window.location.href = '/profile'">
+          <img  id="avatar-small" src="{{ url_for('routes.get_file', filename=current_user.avatar) }}" alt="avatar" onclick="window.location.href = '/profile'">
         </div>
         {% else %}
         <div>

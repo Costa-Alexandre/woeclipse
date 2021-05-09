@@ -39,7 +39,7 @@ class Avatar(db.Model):
     filename = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
-        return f'uploads/{self.filename}'
+        return self.filename
 
 
 class Event(db.Model):

@@ -218,7 +218,7 @@ def profile():
         return render_template('signin.html')
 
 
-@routes.route('/static/uploads/<filename>')
+@routes.route('/uploads/<filename>')
 def get_file(filename):
     # if os.getenv('FLASK_ENV') == 'development':
     #     return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
