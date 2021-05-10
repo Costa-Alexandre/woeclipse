@@ -524,3 +524,7 @@ def community():
 @routes.route('/users')
 def users():
     return redirect(url_for('routes.doesnt_exist_404'))
+
+@routes.route('/events/<title>')
+def event(title):
+    return redirect(url_for('routes.doesnt_exist_404'))
