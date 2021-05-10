@@ -22,6 +22,7 @@ def test_new_event(new_event):
     assert new_event.date == '2000-01-01'
     assert new_event.description == 'This is an event'
     assert new_event.event_name == 'Tournment 2021'
+    assert new_event.filename == "filename.jpg"
     assert str(new_event) == '<Event Tournment 2021>'
 
 

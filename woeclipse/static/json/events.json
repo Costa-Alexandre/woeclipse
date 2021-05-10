@@ -9,43 +9,43 @@
         "event_name": "Nationals: Germany",
         "date": "2021-11-05",
         "description": "This tournment will determine the German champion.",
-        "filename": "event1.jpg"
+        "filename": "event2.jpg"
     },
     {
         "event_name": "Nationals: Brazil",
         "date": "2021-11-12",
         "description": "This tournment will determine the Brazilian champion.",
-        "filename": "event1.jpg"
+        "filename": "event3.jpg"
     },
     {
         "event_name": "Nationals: France",
         "date": "2021-11-17",
         "description": "This tournment will determine the French champion.",
-        "filename": "event1.jpg"
+        "filename": "event4.jpg"
     },
     {
         "event_name": "Nationals: India",
         "date": "2021-11-24",
         "description": "This tournment will determine the Indian champion.",
-        "filename": "event1.jpg"
+        "filename": "event5.jpg"
     },
     {
         "event_name": "Nationals: Australia",
         "date": "2021-11-30",
         "description": "This tournment will determine the Australian champion.",
-        "filename": "event1.jpg"
+        "filename": "event6.jpg"
     },
     {
         "event_name": "Nationals: USA",
         "date": "2021-12-04",
         "description": "This tournment will determine the champion from USA.",
-        "filename": "event1.jpg"
+        "filename": "event7.jpg"
     },
     {
         "event_name": "Woeclipse World War",
         "date": "2021-12-15",
         "description": "WWW is the greatest Worms Armageddon clan event that ever existed.",
-        "filename": "event1.jpg"
+        "filename": "event8.jpg"
     }
 
 ]

@@ -24,7 +24,7 @@ def avatar():
 def new_event():
     event = Event(
         event_name='Tournment 2021', date="2000-01-01",
-        description='This is an event')
+        description='This is an event', filename="filename.jpg")
     return event
 
 
