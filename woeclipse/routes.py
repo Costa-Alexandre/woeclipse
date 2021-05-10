@@ -1,17 +1,15 @@
 import os
 import json
 from flask import render_template, url_for, request, redirect,\
-    current_app, send_from_directory, send_file
+    current_app, send_from_directory
 from flask_login import login_user, login_required, logout_user, current_user
-from google.cloud.storage import bucket
 from werkzeug.security import generate_password_hash, check_password_hash
-from woeclipse.uploads import upload_blob
 
 from flask import Blueprint
 from woeclipse.website import db
 from woeclipse.models import Event, User, Avatar
 from woeclipse.helper import allowed_file, get_random_avatar,\
-    generate_filename, get_extension, rank_users, user_rank
+    rank_users, save_image, user_rank
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -166,22 +164,8 @@ def edit_profile():
                 # and if file extension is allowed
                 if avatar and avatar.filename != '' and \
                         allowed_file(avatar.filename):
-                    # get uploaded image extension
-                    ext = get_extension(avatar)
-                    # create a random string filename to the uploaded image
-                    filename = generate_filename(ext)
-
-                    # in development, saves to a static folder.
-                    # In production, saves to bucket.
-                    if os.getenv('FLASK_ENV') == 'development':
-                        # get path to upload folder
-                        upload_path = current_app.config['UPLOADS_PATH']
-                        # save renamed file to upload folder
-                        avatar.save(os.path.join(upload_path, filename))
-                    else:
-                        # upload to bucket
-                        upload_blob(
-                            bucket_name, avatar, f'uploads/{filename}')
+                    # saves images to uploads folder and return filename
+                    filename = save_image(avatar)
 
                     # update user's avatar metadata in the database
                     user.avatar.filename = filename
@@ -284,12 +268,15 @@ def edit_event(event_id):
             new_event_name = request.form.get('event_name')
             new_event_date = request.form.get('event_date')
             new_event_description = request.form.get('event_description')
+            new_event_image = request.form.get('event-image')
 
-            # print(new_event_name, new_event_date, new_event_description)
             # make edits
             event.event_name = new_event_name
             event.date = new_event_date
             event.description = new_event_description
+
+            filename = save_image(new_event_image)
+            event.filename = filename
 
             db.session.commit()
             return redirect(url_for('routes.admin_events'))
@@ -416,7 +403,8 @@ def populate_database():
             new_event = Event(
                 event_name=event["event_name"],
                 date=event["date"],
-                description=event["description"]
+                description=event["description"],
+                filename=event["filename"]
                 )
 
             db.session.add(new_event)
@@ -445,4 +433,8 @@ def events():
 
 @routes.route('/community')
 def community():
+    return redirect(url_for('routes.doesnt_exist_404'))
+
+@routes.route('/users')
+def users():
     return redirect(url_for('routes.doesnt_exist_404'))

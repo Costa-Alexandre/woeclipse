@@ -2,9 +2,10 @@ import random
 import os
 import string
 from flask import current_app
+from woeclipse.uploads import upload_blob
 
 AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-
+bucket_name = os.getenv("MY_BUCKET_NAME")
 
 # Checks if an extension is valid
 def allowed_file(filename):
@@ -55,3 +56,25 @@ def user_rank(user, users):
     sorted_users = rank_users(users)
     rank = sorted_users.index(user) + 1
     return rank
+
+def save_image(image):
+    """ Given a image file, checks if extension is allowed, saves to
+    appropriate uploads folder depending on FLASK_ENV variable, and return the
+    random generated filename
+    """
+    # get uploaded image extension
+    ext = get_extension(image)
+    # create a random string filename to the uploaded image
+    filename = generate_filename(ext)
+    # in development, saves to a static folder.
+    # In production, saves to bucket.
+    if os.getenv('FLASK_ENV') == 'development':
+        # get path to upload folder
+        upload_path = current_app.config['UPLOADS_PATH']
+        # save renamed file to upload folder
+        image.save(os.path.join(upload_path, filename))
+    else:
+        # upload to bucket
+        upload_blob(
+            bucket_name, image, f'uploads/{filename}')
+    return filename
