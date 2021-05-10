@@ -29,25 +29,30 @@
     </div>
 
     <div id="main-frame">
+
       <div>
         <h2>Manage Roles:</h2>
       </div>
+      
+      <form action="/admin/set_permission/" method="post">
+        <label for="not-admins">Set as admin:</label><br>
+        <div class="row">
+          
+            <div class="input">
+              <select id="not-admins" name="not-admins">
+                {% for n in not_admins %}
+                <option value="{{ n.username }}">{{ n.username }}</option>
+                {% endfor %}
+              </select>
+            </div>
 
-      <div>
-        <form action="/admin/set_permission/" method="post">
-          <label for="not-admins">Set as admin:</label><br>
-      
-          <select id="not-admins" name="not-admins">
-            {% for n in not_admins %}
-            <option value="{{ n.username }}">{{ n.username }}</option>
-            {% endfor %}
-          </select>
-      
-          <input type="submit" value="Make admin">
-        </form>
+            <div class="submit">
+              <input type="submit" value="Make admin">
+            </div>
+          
 
-      </div>
-      
+        </div>
+      </form>
     </div>
 
     <div id="table">

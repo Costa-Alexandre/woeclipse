@@ -76,11 +76,11 @@ body a{
 }
 
 
-#content-container > div{
-  border: 1px solid red;
+#title, #main-frame, #table{
   box-shadow: var(--card-shadow);
   background-image: var(--gradient-dark);
-  width: 100%;
+  width: calc(100% - 64px);
+  padding: 32px;
   display: flex;
   flex-direction: column;
   align-content: flex-start;
@@ -88,16 +88,43 @@ body a{
   margin-bottom: 32px;
 }
 
-#main-frame > div{
-  border: 1px green solid;
-  display: flex;
-  flex-direction: column;
+form{
+  width: 100%;
 }
 
+.row{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+
+.input{
+  flex-grow: 1;
+  margin-right: 8px;
+}
 select{
-  width: 248px;
+  width: 100%;
   font-size: 16px;
   padding: 8px;
+  border: 1px blue solid;
+}
+
+input[type="submit"]{
+  background-image: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  padding: 8px 16px;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+}
+
+input[type="submit"]:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
 }
 
 table{
@@ -111,6 +138,10 @@ td, th{
   padding: 8px;
 }
 
+th{
+  background-color: var(--strong-dark);
+}
+
 tr:nth-child(odd){
   background-color: var(--light-dark);
 }
@@ -119,7 +150,7 @@ tr:nth-child(even){
   background-color: var(--strong-dark);
 }
 
-.table a:hover {
+table a:hover {
   text-decoration: underline;
 }
 
