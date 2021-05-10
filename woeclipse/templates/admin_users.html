@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+
+<div id="page-container">
+
+  <div id="menu">
+    
+    <div class="menu-item">
+      <a href="/admin">Admin Panel</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/events">Events</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/users">Users</a>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+
+    <div id="title">
+      <h1>Admin Panel: Users Page</h1>
+    </div>
+
+    <div id="main-frame">
+      <div>
+        <h2>Manage Roles:</h2>
+      </div>
+
+      <div>
+        <form action="/admin/set_permission/" method="post">
+          <label for="not-admins">Set as admin:</label><br>
+      
+          <select id="not-admins" name="not-admins">
+            {% for n in not_admins %}
+            <option value="{{ n.username }}">{{ n.username }}</option>
+            {% endfor %}
+          </select>
+      
+          <input type="submit" value="Make admin">
+        </form>
+
+      </div>
+      
+    </div>
+
+    <div id="table">
+      <table>
+        <thead>
+          <th>Admins</th>
+          <th>Action</th>
+        </thead>
+        {% for a in admins %}
+        <tr>
+          <td>{{ a.username }}</td>
+          <td><a href="/admin/remove_admin/{{ a.username }}">Remove</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </div>
+
+  <div id="blank">
+    <span> </span>
+  </div>
+
+</div>
+
+
+
+
+{% endblock %}  

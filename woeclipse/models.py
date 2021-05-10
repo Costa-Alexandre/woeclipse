@@ -4,6 +4,8 @@ from woeclipse.website import db, login_manager
 
 
 # Tables
+
+# Link Table USER EVENT
 user_event = db.Table(
     'user_event', db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('event_id', db.Integer, db.ForeignKey('event.id')))
@@ -33,6 +35,9 @@ class User(UserMixin, db.Model):
         return f'<User {self.username}>'
 
     def points(self):
+        """ return and int representing the total points based in the
+        points_system list
+        """
         points_system = [
             3,
             1,
@@ -53,7 +58,7 @@ class User(UserMixin, db.Model):
         return int(round(points,0))
 
 
-
+# TODO: delete user + avatar cascading
 class Avatar(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

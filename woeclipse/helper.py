@@ -16,7 +16,9 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in AVATAR_ALLOWED_EXTENSIONS
 
-
+# TODO: Change source from random image collection
+#  This is bad. Looks for file in one folder and return a file in another
+#  folder. Won't work if files are not duplicate. GoHorsePower Go!
 def get_random_avatar():
     """ Selects randomly one file from the RANDOM_AVATAR_PATH, specified
     at config.py, and returns this file's name.
@@ -28,11 +30,15 @@ def get_random_avatar():
 
 
 def generate_filename(ext):
+    """ returns a string with 16 lowercase random characters joined to the extension passed as an argument.
+    """
     fname = "".join(random.choices(string.ascii_lowercase, k=16)) + "." + ext
     return fname
 
 
 def get_extension(image):
+    """ split filename and get extension after dot
+    """
     extension = image.filename.rsplit('.', 1)[1].lower()
     return extension
 
@@ -42,17 +48,24 @@ def rank_users(users):
     """
     users_rank = []
     sorted_users = []
+    #  get a list of lists, containing user and points
     for user in users:
         user_stats = [user, user.points()]
         users_rank.append(user_stats)
     
+    # sort users by points, in a descreasing order
     users_rank.sort(key=lambda i: i[1], reverse=True)
     
+    # get the sorted list of users
     for user_stats in users_rank:
         sorted_users.append(user_stats[0])
+
     return sorted_users
 
 def user_rank(user, users):
+    """ GIVEN a user and a list of all users, return index position starting
+    from 1
+    """
     sorted_users = rank_users(users)
     rank = sorted_users.index(user) + 1
     return rank

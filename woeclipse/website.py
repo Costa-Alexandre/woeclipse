@@ -8,6 +8,7 @@ login_manager = LoginManager()
 
 
 def create_app():
+    """ initializes a flask app instance """
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
 
@@ -18,11 +19,7 @@ def create_app():
 
     from .routes import routes
     app.register_blueprint(routes)
-    with app.app_context():
-        # db.drop_all()
-        db.create_all()
 
     return app
 
 
-# app = create_app()

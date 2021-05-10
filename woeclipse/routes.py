@@ -419,6 +419,58 @@ def populate_database():
     else:
         return "Not allowed in production"
 
+@routes.route('/admin/users')
+@login_required
+def admin_users():
+    if current_user.is_admin:
+
+        admins = User.query.filter_by(is_admin=True).all()
+        not_admins = User.query.filter_by(is_admin=False).all()
+
+        return render_template(
+            'admin_users.html', admins=admins, not_admins=not_admins)
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/set_permission/', methods=['POST', 'GET'])
+@login_required
+def set_permission():
+    if current_user.is_admin:
+
+        if request.method == 'POST':
+            username = request.form.get('not-admins')
+
+            new_admin = User.query.filter_by(username=username).first()
+            new_admin.is_admin = True
+
+            db.session.commit()
+
+            return redirect(url_for('routes.admin_users'))
+        else:
+            return redirect(url_for('routes.admin_users'))
+    else:
+        return 'You are not authorized to view this page.'
+
+@routes.route('/admin/remove_admin/<username>')
+@login_required
+def remove_admin(username):
+    if current_user.is_admin:
+        try:
+            if len(User.query.filter_by(is_admin=True).all()) <= 1:
+                raise ValueError('You must have at least one admin')
+            else:
+                admin = User.query.filter_by(username=username).first()
+                admin.is_admin = False
+
+                db.session.commit()
+                return redirect(url_for('routes.admin_users'))
+        except:
+            # TODO: make it display an error message
+            return redirect(url_for('routes.admin_users'))
+
+    else:
+        return 'You are not authorized to view this page.'
+
 # --------------------------------------------------------------------------- #
 # ----------------------------- TO DO ROUTES -------------------------------- #
 # --------------------------------------------------------------------------- #
