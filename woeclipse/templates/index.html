@@ -23,6 +23,9 @@
         ducimus itaque, modi accusamus
       </div>
 
+      {% if current_user.is_authenticated %}
+      <div id="signup-login-pills"><div></div><div></div></div>
+      {% else %}
       <div id="signup-login-pills">
         <div>
           <button class="gold-pill" onclick="window.location.href = '/signin'">Log In</button>
@@ -30,8 +33,11 @@
         <div>
           <button class="gold-pill" onclick="window.location.href = '/signup'">Sign Up</button>
         </div>
+      </div>  
+      {% endif %}
         
-      </div>
+        
+      
 
     </div>
 

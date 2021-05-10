@@ -438,3 +438,11 @@ def doesnt_exist_404():
 @routes.route('/soon')
 def soon():
     return redirect(url_for('routes.doesnt_exist_404'))
+
+@routes.route('/events')
+def events():
+    return redirect(url_for('routes.doesnt_exist_404'))
+
+@routes.route('/community')
+def community():
+    return redirect(url_for('routes.doesnt_exist_404'))
