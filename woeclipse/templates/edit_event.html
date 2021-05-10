@@ -6,7 +6,7 @@
 
 <div>
   <h2>Event: {{ event.event_name }}</h2>
-  <form action="/admin/edit_event/{{ event.id }}" method="post">
+  <form action="/admin/edit_event/{{ event.id }}" method="post" enctype="multipart/form-data">
     <label for="event_name">Event Name: </label><br>
     <input type="text" name="event_name" id="event_name" value="{{ event.event_name }}" maxlength="50" size="50"
       required><br>
@@ -15,10 +15,15 @@
     <label for="event_description">Description: </label><br>
     <textarea name="event_description" id="event_description" rows="10"
       cols="60%">{{ event.description }}</textarea><br><br>
+      <label for="event-image">Add Image</label><br>
+      <input type="file" name="event-image" id="event-image">
     <input type="submit" value="Confirm">
     <a href="/admin/events"><button type="button">Back</button></a>
   </form>
 </div>
+
+
+
 <div>
   <h2>Participants</h2>
   <form action="/admin/add_participant/{{ event.id }}" method="post">

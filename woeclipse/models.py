@@ -71,6 +71,7 @@ class Event(db.Model):
         db.String(600), default="No description to this event yet")
     users = db.relationship(
         'User', secondary=user_event, backref='events', lazy='select')
+    filename = filename = db.Column(db.String(50), nullable=False)
 
     def __repr__(self):
         return f'<Event {self.event_name}>'

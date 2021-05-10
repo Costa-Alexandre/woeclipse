@@ -117,7 +117,7 @@
     <div class="event-card">
 
       <div class="event-card-image">
-        <img src="{{ url_for('static', filename='img/news2.jpg') }}" alt="#">
+        <img src="{{ url_for('routes.get_file', filename=event.filename) }}" alt="#">
         <span style="display: none;">{{ event.date }}</span>
       </div>
 
