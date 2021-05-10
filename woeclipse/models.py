@@ -32,6 +32,27 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
+    def points(self):
+        points_system = [
+            3,
+            1,
+            0,
+            0.2,
+            -0.1
+            ]
+        stats = [
+            self.matches_w,
+            self.matches_d,
+            self.matches_l,
+            self.kills,
+            self.killed
+            ]
+        points = 0
+        for i in range(len(stats)):
+            points += stats[i] * points_system[i]
+        return int(round(points,0))
+
+
 
 class Avatar(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ranking.css') }}">
+
+<div id="page-container">
+
+  <div id="menu">
+    
+    <div class="menu-item">
+      <a href="#">Item 1</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="#">Longer Item 2</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="#">Item 3</a>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+  
+    <div id="ranking-frame">
+  
+      <div class="title">
+        <h1>Clan Ranking</h1>
+      </div>
+  
+      <div id="table">
+        <table>
+          {% if users|length > 0 %}
+          <tr>
+            <th>#</th>
+            <th>Username</th>
+            <th>Won</th>
+            <th>Drawn</th>
+            <th>Lost</th>
+            <th>Kills</th>
+            <th>Killed</th>
+            <th>Points</th>
+          </tr>
+          {% for user in users %}
+          {% if current_user and user.username == current_user.username %}
+          <tr id="current-user">
+          {% else %}
+          <tr>
+          {% endif %}
+            <td>{{ loop.index }}</td>
+            <td><a href="/users/{{ user.username }}">{{user.username}}</a></td>
+            <td>{{user.matches_w}}</td>
+            <td>{{user.matches_d}}</td>
+            <td>{{user.matches_l}}</td>
+            <td>{{user.kills}}</td>
+            <td>{{user.killed}}</td>
+            <td>{{user.points()}}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% else %}
+          <p>No data available yet!</p>
+        {% endif %}
+      </div>
+    </div>
+  
+  </div>
+
+</div>
+
+{% endblock %}

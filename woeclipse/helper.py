@@ -34,3 +34,19 @@ def generate_filename(ext):
 def get_extension(avatar):
     extension = avatar.filename.rsplit('.', 1)[1].lower()
     return extension
+
+def rank_users(users):
+    """ given a list of users, return the same list sorted by the points_system
+    set as method for a user in models.py, with an additional list for points
+    """
+    users_rank = []
+    sorted_users = []
+    for user in users:
+        user_stats = [user, user.points()]
+        users_rank.append(user_stats)
+    
+    users_rank.sort(key=lambda i: i[1], reverse=True)
+    
+    for user_stats in users_rank:
+        sorted_users.append(user_stats[0])
+    return sorted_users

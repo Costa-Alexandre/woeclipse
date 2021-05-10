@@ -11,7 +11,7 @@ from flask import Blueprint
 from woeclipse.website import db
 from woeclipse.models import Event, User, Avatar
 from woeclipse.helper import allowed_file, get_random_avatar,\
-    generate_filename, get_extension
+    generate_filename, get_extension, rank_users
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -238,6 +238,14 @@ def get_file(filename):
     #     # tomorrow and there is still much to do. It works.
         filename = filename
         return redirect(f'https://storage.googleapis.com/storage/v1/b/woeclip-se.appspot.com/o/uploads%2F{filename}?alt=media')
+
+@routes.route('/ranking')
+def ranking():
+    users = User.query.all()
+    sorted_users = rank_users(users)
+
+    # Show the user public profile:
+    return render_template('ranking.html', users=sorted_users)
 
 
 # ########################################################################### #
