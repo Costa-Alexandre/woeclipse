@@ -53,11 +53,11 @@ body a{
 }
 
 .disabled, .disabled:hover{
-  background-image: none;
-  background-color: gray;
-  transform: translate(0, 1px);
-  color: rgba(199, 199, 199, 0.555);
-  border: 2px rgba(199, 199, 199, 0.555) solid;
+  background-image: none !important;
+  background-color: gray !important;
+  transform: translate(0, 1px) !important;
+  color: rgba(199, 199, 199, 0.555) !important;
+  border: 2px rgba(199, 199, 199, 0.555) solid !important;
 }
 
 .show-1b, .show-3b{

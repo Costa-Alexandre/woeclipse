@@ -45,7 +45,18 @@
     <div class="news-card hide-1b"></div>
     <div class="news-card hide-1b"></div>
 
-    {% for n in range(3) %}
+    <div class="news-card">
+
+      <div class='news-card-image'>
+        <img src="{{ url_for('static', filename='img/news1.jpg') }}" alt="#">
+      </div>
+
+      <div id='news-card-contents'>
+        <p>Great News 1</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias</p>
+      </div>
+  
+    </div>
     <div class="news-card">
 
       <div class='news-card-image'>
@@ -53,12 +64,23 @@
       </div>
 
       <div id='news-card-contents'>
-        <p>Title</p>
+        <p>Unbelievable News 2</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias</p>
       </div>
   
     </div>
-    {% endfor %}
+    <div class="news-card">
+
+      <div class='news-card-image'>
+        <img src="{{ url_for('static', filename='img/news3.jpg') }}" alt="#">
+      </div>
+
+      <div id='news-card-contents'>
+        <p>Fake News 3</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit molestias</p>
+      </div>
+  
+    </div>
 
   </div>
 
