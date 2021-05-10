@@ -244,8 +244,7 @@ def get_file(filename):
         # tomorrow and there is still much to do. It works.
         filename = filename
         return redirect(
-            f'https://storage.googleapis.com/storage/v1/b/woeclip-se.\
-                appspot.com/o/uploads%2F{filename}?alt=media')
+            f'https://storage.googleapis.com/storage/v1/b/woeclip-se.appspot.com/o/uploads%2F{filename}?alt=media')
 
 
 @routes.route('/ranking')
