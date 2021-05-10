@@ -44,18 +44,18 @@ class User(UserMixin, db.Model):
             0,
             0.2,
             -0.1
-            ]
+        ]
         stats = [
             self.matches_w,
             self.matches_d,
             self.matches_l,
             self.kills,
             self.killed
-            ]
+        ]
         points = 0
         for i in range(len(stats)):
             points += stats[i] * points_system[i]
-        return int(round(points,0))
+        return int(round(points, 0))
 
 
 # TODO: delete user + avatar cascading

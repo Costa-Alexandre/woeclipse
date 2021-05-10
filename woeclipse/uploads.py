@@ -1,5 +1,6 @@
 from google.cloud import storage
 
+
 def upload_blob(bucket_name, source_file, destination_blob_name):
     """Uploads a file to the bucket."""
     # The ID of your GCS bucket

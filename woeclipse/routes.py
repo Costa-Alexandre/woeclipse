@@ -19,6 +19,8 @@ bucket_name = os.getenv("MY_BUCKET_NAME")
 # ........................................................................... #
 # ............................... AUTH ROUTES ............................... #
 # ........................................................................... #
+
+
 @routes.route('/signup', methods=['POST', 'GET'])
 def signup():
     # Sign up page
@@ -119,12 +121,14 @@ def signout():
 @routes.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-    """ When the user is authenticated, this function ALWAYS updates first_name
-    last_name, birthday, country and team_name. Optionally, checks if a new
-    password was given and updates if so. If a new avatar file is selected, it
-    will rename the file and upload to the bucket, on production, or save to a
-    static file, on development. Only the filename is associated to a user and
-    stored in the database. Files uploaded during development will 404 during production, so reset database before deploying (localhost:[PORT]/populate_database)
+    """ When the user is authenticated, this function ALWAYS updates
+    first_name, last_name, birthday, country and team_name. Optionally,
+    checks if a new password was given and updates if so. If a new avatar
+    file is selected, it will rename the file and upload to the bucket, on
+    production, or save to a static file, on development. Only the filename
+    is associated to a user and stored in the database. Files uploaded
+    during development will 404 during production, so reset database
+    before deploying (localhost:[PORT]/populate_database)
     """
     # Edit user profile information and avatar
     if current_user.is_authenticated:
@@ -139,7 +143,7 @@ def edit_profile():
                 country = request.form.get('country').lower()
                 password = request.form.get('password')
                 password_confirmation = request.form.get(
-                        'password_confirmation')
+                    'password_confirmation')
                 team_name = request.form.get('team_name')
                 avatar = request.files['avatar']
 
@@ -179,6 +183,7 @@ def edit_profile():
         else:
             return render_template('edit_profile.html', user=user)
 
+
 @routes.route('/delete_account')
 @login_required
 def delete_account():
@@ -201,7 +206,7 @@ def index():
     users = User.query.all()
 
     sorted_users = rank_users(users)
-    
+
     return render_template(
         'index.html', events=events, users=sorted_users[:8])
 
@@ -232,12 +237,16 @@ def profile():
 @routes.route('/uploads/<filename>')
 def get_file(filename):
     if os.getenv('FLASK_ENV') == 'development':
-        return send_from_directory(current_app.config['UPLOADS_PATH'], filename)
+        return send_from_directory(
+            current_app.config['UPLOADS_PATH'], filename)
     else:
-    #     # This is bad, bad, programming. Not proud of it, but the deadline is
-    #     # tomorrow and there is still much to do. It works.
+        # This is bad, bad, programming. Not proud of it, but the deadline is
+        # tomorrow and there is still much to do. It works.
         filename = filename
-        return redirect(f'https://storage.googleapis.com/storage/v1/b/woeclip-se.appspot.com/o/uploads%2F{filename}?alt=media')
+        return redirect(
+            f'https://storage.googleapis.com/storage/v1/b/woeclip-se.\
+                appspot.com/o/uploads%2F{filename}?alt=media')
+
 
 @routes.route('/ranking')
 def ranking():
@@ -423,7 +432,7 @@ def populate_database():
                 date=event["date"],
                 description=event["description"],
                 filename=event["filename"]
-                )
+            )
 
             db.session.add(new_event)
 
@@ -432,6 +441,7 @@ def populate_database():
         return redirect(url_for('routes.index'))
     else:
         return "Not allowed in production"
+
 
 @routes.route('/admin/users')
 @login_required
@@ -445,6 +455,7 @@ def admin_users():
             'admin_users.html', admins=admins, not_admins=not_admins)
     else:
         return 'You are not authorized to view this page.'
+
 
 @routes.route('/admin/set_permission/', methods=['POST', 'GET'])
 @login_required
@@ -465,6 +476,7 @@ def set_permission():
     else:
         return 'You are not authorized to view this page.'
 
+
 @routes.route('/admin/remove_admin/<username>')
 @login_required
 def remove_admin(username):
@@ -478,7 +490,7 @@ def remove_admin(username):
 
                 db.session.commit()
                 return redirect(url_for('routes.admin_users'))
-        except:
+        except Exception:
             # TODO: make it display an error message
             return redirect(url_for('routes.admin_users'))
 
@@ -489,21 +501,26 @@ def remove_admin(username):
 # ----------------------------- TO DO ROUTES -------------------------------- #
 # --------------------------------------------------------------------------- #
 
+
 @routes.route('/page_not_found')
 def doesnt_exist_404():
     return render_template('404.html')
+
 
 @routes.route('/soon')
 def soon():
     return redirect(url_for('routes.doesnt_exist_404'))
 
+
 @routes.route('/events')
 def events():
     return redirect(url_for('routes.doesnt_exist_404'))
 
+
 @routes.route('/community')
 def community():
     return redirect(url_for('routes.doesnt_exist_404'))
+
 
 @routes.route('/users')
 def users():

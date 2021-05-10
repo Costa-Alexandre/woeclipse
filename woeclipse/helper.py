@@ -8,6 +8,7 @@ from datetime import datetime
 AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 bucket_name = os.getenv("MY_BUCKET_NAME")
 
+
 # Checks if an extension is valid
 def allowed_file(filename):
     """ Given a filename, splits the string to get the file's extension
@@ -16,6 +17,7 @@ def allowed_file(filename):
     """
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in AVATAR_ALLOWED_EXTENSIONS
+
 
 # TODO: Change source from random image collection
 #  This is bad. Looks for file in one folder and return a file in another
@@ -31,7 +33,8 @@ def get_random_avatar():
 
 
 def generate_filename(ext):
-    """ returns a string with 16 lowercase random characters joined to the extension passed as an argument.
+    """ returns a string with 16 lowercase random characters joined to
+    the extension passed as an argument.
     """
     fname = "".join(random.choices(string.ascii_lowercase, k=16)) + "." + ext
     return fname
@@ -43,6 +46,7 @@ def get_extension(image):
     extension = image.filename.rsplit('.', 1)[1].lower()
     return extension
 
+
 def rank_users(users):
     """ given a list of users, return the same list sorted by the points_system
     set as method for a user in models.py, with an additional list for points
@@ -53,15 +57,16 @@ def rank_users(users):
     for user in users:
         user_stats = [user, user.points()]
         users_rank.append(user_stats)
-    
+
     # sort users by points, in a descreasing order
     users_rank.sort(key=lambda i: i[1], reverse=True)
-    
+
     # get the sorted list of users
     for user_stats in users_rank:
         sorted_users.append(user_stats[0])
 
     return sorted_users
+
 
 def user_rank(user, users):
     """ GIVEN a user and a list of all users, return index position starting
@@ -70,6 +75,7 @@ def user_rank(user, users):
     sorted_users = rank_users(users)
     rank = sorted_users.index(user) + 1
     return rank
+
 
 def save_image(image):
     """ Given a image file, checks if extension is allowed, saves to
@@ -93,5 +99,6 @@ def save_image(image):
             bucket_name, image, f'uploads/{filename}')
     return filename
 
-def toString(Date): 
+
+def toString(Date):
     return datetime.strftime(Date, "%Y-%m-%dT%H:%M")
