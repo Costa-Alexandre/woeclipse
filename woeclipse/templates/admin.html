@@ -1,12 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 
-<h1> Admin Panel</h1>
+<div id="page-container">
 
-<div>
-  <li><a href="/admin/events">Events</a></li>
-  <li><a href="/admin/users">Users</a></li>
+  <div id="menu">
+    
+    <div class="menu-item">
+      <a href="/admin">Admin Panel</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/events">Events</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/users">Users</a>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+
+    <div id="title">
+      <h1>Admin Panel</h1>
+    </div>
+
+  </div>
+
+  <div id="blank">
+    <span> </span>
+  </div>
+
 </div>
 
 {% endblock %}

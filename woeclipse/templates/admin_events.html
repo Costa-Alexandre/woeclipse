@@ -1,40 +1,95 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin_events.css') }}">
 
-<h1><a href="/admin">Admin Panel</a>: Events Page </h1>
+<div id="page-container">
 
-<div>
-  <h2>Create Events</h2>
-  <form id="event-form" action="/admin/create_event" method="post" enctype="multipart/form-data">
-    <label for="event_name">Event Name: </label><br>
-    <input type="text" name="event_name" id="event_name" maxlength="50" size="50" required><br>
-    <label for="event_date">Date: </label><br>
-    <input type="datetime-local" name="event_date" id="event_date" required><br>
-    <label for="event_description">Description: </label><br>
-    <textarea name="event_description" id="event_description" rows="10" cols="60%">No description to this event yet</textarea><br><br>
-    <label for="event-image">Add Image</label><br>
-      <input type="file" name="event-image" id="event-image">
-    <input type="submit" value="Create Event">
-    <input type="button" onclick="document.getElementById('event-form').reset()" value="Reset">
-  </form>
-</div>
-<div>
-  <h2>Existing Events</h2>
-  <table>
-    <thead>
-      <th>Event Name</th>
-      <th>Date</th>
-    </thead>
-    {% for event in events %}
-    <tr>
-      <td>{{ event.event_name }}</td>
-      <td>{{ event.date }}</td>
-      <td><a href="/admin/edit_event/{{ event.id }}">Edit</a></td>
-      <td><a href="/admin/delete_event/{{ event.id }}">Delete</a></td>
-    </tr>
-    {% endfor %}
-  </table>
+  <div id="menu">
+    
+    <div class="menu-item">
+      <a href="/admin">Admin Panel</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/events">Events</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/users">Users</a>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+
+    <div id="title">
+      <h1>Admin Panel: Events Page</h1>
+    </div>
+
+    <div id="main-frame">
+
+      <div>
+        <h2>Create Events</h2>
+      </div>
+
+      <form id="event-form" action="/admin/create_event" method="post" enctype="multipart/form-data">
+
+        <label for="event_name">Event Name: </label><br>
+        <div class="row">
+            <input type="text" name="event_name" id="event_name" maxlength="50" size="50" required>
+        </div>
+
+        <label for="event_date">Date: </label><br>
+        <div class="row">
+            <input type="datetime-local" name="event_date" id="event_date" required><br>
+        </div>
+
+        <label for="event_description">Description: </label><br>
+        <div class="row">
+          <textarea name="event_description" id="event_description" rows="10" cols="60%">No description to this event yet</textarea><br><br>
+        </div>
+
+        <label for="event-image">Add Image: </label><br>
+        <div class="row">
+          <input type="file" name="event-image" id="event-image">
+        </div>
+
+        <div class="row">
+          <button id="cancel-btn" onclick="document.getElementById('event-form').reset()">Reset</button>
+          <input type="submit" value="Create Event">
+        </div>
+      
+      </form>
+
+    </div>
+
+    <div id="table">
+      <h2>Existing Events</h2>
+      <table>
+        <thead>
+          <th>Event Name</th>
+          <th>Date</th>
+          <th colspan="2">Action</th>
+        </thead>
+        {% for event in events %}
+        <tr>
+          <td>{{ event.event_name }}</td>
+          <td>{{ event.date }}</td>
+          <td><a href="/admin/edit_event/{{ event.id }}">Edit</a></td>
+          <td><a href="/admin/delete_event/{{ event.id }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+
+    </div>
+
+  </div>
+
+  <div id="blank">
+    <span> </span>
+  </div>
+
 </div>
 
 {% endblock %}  
