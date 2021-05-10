@@ -14,7 +14,7 @@
         "matches_l": 4,
         "kills": 2550,
         "killed": 1203,
-        "avatar": "1.png"
+        "avatar": "alexandre.jpg"
     },
     {
         "first_name": "Patricia",
@@ -31,7 +31,7 @@
         "matches_l": 15,
         "kills": 796,
         "killed": 215,
-        "avatar": "2.png"
+        "avatar": "pati.jpeg"
     },
     {
         "first_name": "Gronkowski",
@@ -49,6 +49,23 @@
         "kills": 5,
         "killed": 120,
         "avatar": "3.png"
+    },
+    {
+        "first_name": "Alexandre",
+        "last_name": "Alves",
+        "birthday": "1989-11-09",
+        "country": "Brazil",
+        "email": "sapo@yahoo.com",
+        "username": "sapo",
+        "password": "123",
+        "is_admin": false,
+        "team_name": "Kika Gada",
+        "matches_w": 27,
+        "matches_d": 8,
+        "matches_l": 6,
+        "kills": 160,
+        "killed": 60,
+        "avatar": "sapo.jpeg"
     },
     {
         "first_name": "Vulpix",
@@ -82,7 +99,7 @@
         "matches_l": 35,
         "kills": 402,
         "killed": 289,
-        "avatar": "2.png"
+        "avatar": "ricardo.jpeg"
     },
     {
         "first_name": "Marcelo",
@@ -99,7 +116,7 @@
         "matches_l": 250,
         "kills": 746,
         "killed": 1502,
-        "avatar": "3.png"
+        "avatar": "zoio.jpeg"
     },
     {
         "first_name": "Caroline",
@@ -134,6 +151,23 @@
         "kills": 530,
         "killed": 489,
         "avatar": "1.png"
+    },
+    {
+        "first_name": "Andre Lucas",
+        "last_name": "Berto",
+        "birthday": "1985-06-19",
+        "country": "Brazil",
+        "email": "andrelucas@gmail.com",
+        "username": "andrezao",
+        "password": "123",
+        "is_admin": false,
+        "team_name": "Arteiro's",
+        "matches_w": 43,
+        "matches_d": 0,
+        "matches_l": 65,
+        "kills": 320,
+        "killed": 578,
+        "avatar": "andrezao.jpeg"
     }
 
 ]
