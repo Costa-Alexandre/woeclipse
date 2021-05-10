@@ -11,7 +11,7 @@ from flask import Blueprint
 from woeclipse.website import db
 from woeclipse.models import Event, User, Avatar
 from woeclipse.helper import allowed_file, get_random_avatar,\
-    generate_filename, get_extension, rank_users
+    generate_filename, get_extension, rank_users, user_rank
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -202,21 +202,22 @@ def edit_profile():
 @routes.route('/')
 def index():
     events = Event.query.limit(8).all()
-    users = User.query.limit(8).all()
+    users = User.query.all()
 
-    if current_user.is_authenticated:
-        return render_template(
-            'index.html', events=events, users=users)
-    else:
-        return render_template(
-            'index.html', events=events, users=users)
+    sorted_users = rank_users(users)
+    
+    return render_template(
+        'index.html', events=events, users=sorted_users[:8])
 
 
 @routes.route('/users/<username>')
 def public_profile(username):
     user = User.query.filter_by(username=username).first()
+
+    users = User.query.all()
+    rank = user_rank(user, users)
     # Show the user public profile:
-    return render_template('public_profile.html', user=user)
+    return render_template('public_profile.html', user=user, rank=rank)
 
 
 @routes.route('/profile')
@@ -224,7 +225,10 @@ def public_profile(username):
 def profile():
     if current_user.is_authenticated:
         user = current_user
-        return render_template('profile.html', user=user)
+
+        users = User.query.all()
+        rank = user_rank(user, users)
+        return render_template('profile.html', user=user, rank=rank)
     else:
         return render_template('signin.html')
 

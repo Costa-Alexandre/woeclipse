@@ -50,3 +50,8 @@ def rank_users(users):
     for user_stats in users_rank:
         sorted_users.append(user_stats[0])
     return sorted_users
+
+def user_rank(user, users):
+    sorted_users = rank_users(users)
+    rank = sorted_users.index(user) + 1
+    return rank

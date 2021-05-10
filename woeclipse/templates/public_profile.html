@@ -6,11 +6,7 @@
 <div id="page-container">
 
   <div id="menu">
-
-    <div>
-      <div><span> </span></div>
-    </div>
-
+    <span> </span>
   </div>
   
   <div id="content-container">
@@ -18,13 +14,17 @@
     <div id="username-frame">
   
       <div id="avatar">
-        <img src="{{ url_for('routes.get_file', filename=user.avatar) }}" alt="avatar-large" width="80px" height="80px">
+        <img src="{{ url_for('routes.get_file', filename=current_user.avatar) }}" alt="avatar-large" width="80px" height="80px">
       </div>
       
       <div id="names">
   
           <div>
             <h1>{{ user.username.capitalize() }}</h1>
+          </div>
+  
+          <div>
+            <h2>{{ user.first_name.capitalize() }} {{ user.last_name.capitalize() }}</h2>
           </div>
   
       </div>
@@ -61,7 +61,7 @@
         </div>
         <div class="stats-line">
           <div class="stats-title">Rank</div>
-          <div class="stats-value">{{ user.rank }}</div>
+          <div class="stats-value">{{ rank }}</div>
         </div>
         <div class="stats-line">
           <div class="stats-title">Kills</div>
