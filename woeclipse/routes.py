@@ -179,6 +179,18 @@ def edit_profile():
         else:
             return render_template('edit_profile.html', user=user)
 
+@routes.route('/delete_account')
+@login_required
+def delete_account():
+    # delete accounts
+    # TODO: get confirmation from user
+    user = current_user
+    db.session.delete(user.avatar)
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect(url_for('routes.index'))
+
 
 # --------------------------------------------------------------------------- #
 # ----------------------------- MAIN ROUTES --------------------------------- #
