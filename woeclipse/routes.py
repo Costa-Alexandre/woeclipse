@@ -268,7 +268,7 @@ def edit_event(event_id):
             new_event_name = request.form.get('event_name')
             new_event_date = request.form.get('event_date')
             new_event_description = request.form.get('event_description')
-            new_event_image = request.form.get('event-image')
+            new_event_image = request.files['event-image']
 
             # make edits
             event.event_name = new_event_name
@@ -315,11 +315,15 @@ def create_event():
             event_name = request.form.get('event_name')
             event_date = request.form.get('event_date')
             event_description = request.form.get('event_description')
+            event_image = request.files['event-image']
+
+            filename = save_image(event_image)
 
             new_event = Event(
                 event_name=event_name,
                 date=event_date,
-                description=event_description)
+                description=event_description,
+                filename=filename)
 
             db.session.add(new_event)
             db.session.commit()
