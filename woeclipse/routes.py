@@ -426,3 +426,15 @@ def populate_database():
         return redirect(url_for('routes.index'))
     else:
         return "Not allowed in production"
+
+# --------------------------------------------------------------------------- #
+# ----------------------------- TO DO ROUTES -------------------------------- #
+# --------------------------------------------------------------------------- #
+
+@routes.route('/page_not_found')
+def doesnt_exist_404():
+    return render_template('404.html')
+
+@routes.route('/soon')
+def soon():
+    return redirect(url_for('routes.doesnt_exist_404'))

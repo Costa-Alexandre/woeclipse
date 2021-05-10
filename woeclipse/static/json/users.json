@@ -110,7 +110,7 @@
         "username": "zoio",
         "password": "123",
         "is_admin": false,
-        "team_name": "Leo, Liz, Pacoca e Cia",
+        "team_name": "Zoio Fada - Card Lendario",
         "matches_w": 98,
         "matches_d": 12,
         "matches_l": 250,
@@ -153,7 +153,7 @@
         "avatar": "1.png"
     },
     {
-        "first_name": "Andre Lucas",
+        "first_name": "Andre",
         "last_name": "Berto",
         "birthday": "1985-06-19",
         "country": "Brazil",

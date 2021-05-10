@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}">
+
+<div id="page-container">
+
+  <div id="menu">
+    
+    <div class="menu-item">
+      <a href="#">Item 1</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="#">Longer Item 2</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="#">Item 3</a>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+  
+    <div id="page-not-found-frame">
+  
+      <div class="title">
+        <h1>Page doesn't exist (yet!)</h1>
+      </div>
+      <div><img src="{{url_for('static', filename='img/404.gif')}}" alt="animated gif page not found" id='404-gif'></div>
+  
+      
+    </div>
+  
+  </div>
+
+  <div id="blank">
+    <span> </span>
+  </div>
+
+</div>
+
+{% endblock %}
