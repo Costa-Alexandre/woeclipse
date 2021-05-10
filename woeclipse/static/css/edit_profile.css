@@ -16,12 +16,9 @@
 
 }
 
-body {
-  background-color: var(--light-dark);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  padding: 0;
-  margin: 0;
-  overflow-x: hidden;
+body{
+  color: white;
+  background-color: #333;
 }
 
 body a{
@@ -108,72 +105,110 @@ body a{
   
 }
 
-#stats-frame{
+.box{
+  background-color: #222;
+  margin: 0 auto;
+  padding: 0 32px 32px 32px;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
   justify-content: flex-start;
-  align-items: flex-start;
+  width: calc(var(--column-width) * 2 - 32px);
+  border: 1px solid black;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+}
+
+.box > .double-input{
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin: 16px 0 0 0;
   width: 100%;
-  margin-bottom: 32px;
-  color: white;
-  background-image: var(--gradient-dark);
-}
-
-.title{
-  margin-left: 32px;
-}
-
-#stats-items{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.stats-line{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 16px;
+  justify-content: center;
 }
 
-.stats-title{
-  width: 280px;
-  text-align: right;
-  margin-right: 32px;
-  font-weight: bold;
-}
-
-.stats-title::after{
-  content: ":";
-}
-
-.stats-value{
-  width: 280px;
-  text-align: left;
-}
-
-#badges-frame{
+.box > .double-input > div{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  width: 100%;
-  color: white;
-  background-image: var(--gradient-dark);
+  justify-content: center;
 }
 
-#badges-container{
+.box > .single-input{
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin: 16px 0 0 0;
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input{
+  width: 100%;
+  height: 40px;
+  font-size: 1.25rem;
+  padding-left: 16px;
+}
+
+.double-input{
+  justify-content: space-between !important;
+}
+
+.double-input > div > input{
+  width: 248px;
+}
+
+input[type="submit"]{
+  background-image: linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  width: 248px;
+}
+
+input[type="submit"]:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-image:linear-gradient(90deg, goldenrod, rgb(233, 139, 17));
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
+}
+
+#cancel-btn{
+  background-color: #555;
+  padding: 0 16px;
+  color: rgba(255, 255, 255, 0.815);
+  border: 2px rgba(255, 255, 255, 0.815) solid;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.3);
+  width: 248px;
+  font-size: 1.25rem;
+}
+
+#cancel-btn:hover{
+  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.3);
+  background-color: #555;
+  transform: translate(0, 1px);
+  color: white;
+  border: 2px white solid;
+}
+
+.box a:hover {
+  text-decoration: underline;
+}
+
+.error{
+  color: red;
+  text-align: center;
 }
 
 #blank{
   width: var(--column-width);
   height: 50px;
+}
+
+.title{
+  align-self: flex-start;
 }

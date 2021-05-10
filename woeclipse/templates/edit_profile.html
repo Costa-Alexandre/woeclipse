@@ -1,71 +1,141 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Woeclipse - Signup</title>
+<title>Woeclipse - Edit Profile</title>
 {% endblock %}
 
 {% block content %}
-<header>
-  <h1>Edit Profile</h1>
-</header>
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_profile.css') }}">
 <main>
-  <form action="/edit_profile" enctype="multipart/form-data" method="POST">
-    <div>
-      <label for="first_name">First Name:</label><br>
-      <input type="text" name="first_name" id="edit_first_name" 
-      value="{{ user.first_name.capitalize() }}">
-    </div>
-    <div>
-      <label for="last_name">Last Name:</label><br>
-      <input type="text" name="last_name" id="edit_last_name" 
-      value="{{ user.last_name.capitalize() }}">
-    </div>
-    <div>
-      <label for="birthday">Birthday: </label><br>
-      <input type="date" name="birthday" id="edit_birthday" 
-      value="{{ user.birthday }}">
-    </div>
-    <div>
-      <label for="country">Country: </label><br>
-      <input type="text" name="country" id="edit_country" 
-      value="{{ user.country.capitalize() }}">
-    </div>
-    <div>
-      <label for="email">E-mail (can't change) </label><br>
-      <input type="email" name="email" id="edit_email" 
-      value="{{user.email}}" disabled>
-    </div>
-    <div>
-      <label for="username">Username (can't change) </label><br>
-      <input type="text" name="username" id="edit_username" value="{{user.username}}" disabled>
-    </div>
-    <div>
-      <label for="password">New password (leave blank if not changing): </label><br>
-      <input type="password" name="password" id="edit_password" placeholder="New password">
-    </div>
-    <div>
-      <label for="password_confirmation">Confirm new password: </label><br>
-      <input type="password" name="password_confirmation" id="edit_password_confirmation"
-        placeholder="Confirm Password">
-    </div>
-    <div>
-      <label for="team_name">Team Name: </label><br>
-      <input type="text" name="team_name" id="edit_team_name" 
-      value="{{user.team_name}}">
-    </div>
-    <div>
-      <label for="avatar">Change your avatar: </label><br>
-      <img src="{{ url_for('routes.get_file', filename=user.avatar)}}" alt="avatar">
-      <input type="file" name="avatar" id="edit_avatar">
-    </div>
 
-    <input type="submit" value="Save">
-  </form>
+  <div id="page-container">
 
-  {% if error %}
-  <p class="error">{{error}}</p>
-  {% endif %}
+    <div id="menu">
+
+      <div class="menu-item">
+        <a href="/profile">Profile</a>
+      </div>
+
+      <div class="menu-item">
+        <a href="/edit_profile">Edit Profile</a>
+      </div>
+  
+      <div class="menu-item">
+        <a href="/delete_account">Delete Account</a>
+      </div>
+  
+    </div>
+    
+    <div id="content-container">
+    
+      <div id="username-frame">
+    
+        <div id="avatar">
+          <img src="{{ url_for('routes.get_file', filename=current_user.avatar) }}" alt="avatar-large" width="80px" height="80px">
+        </div>
+        
+        <div id="names">
+    
+            <div>
+              <h1>{{ current_user.username.capitalize() }}</h1>
+            </div>
+    
+            <div>
+              <h2>{{ current_user.first_name.capitalize() }} {{ current_user.last_name.capitalize() }}</h2>
+            </div>
+    
+        </div>
+    
+        <div id="flag">
+          <img src="https://via.placeholder.com/40" alt="country-flag">
+        </div>
+    
+      </div>
+    
+      <form action="/edit_profile" method="POST" enctype="multipart/form-data">
+        <div class="box">
+
+          <div class="title">
+            <h2>Edit Profile</h2>
+          </div>
+          
+          <div class="double-input">
+            <div>
+              <label for="first_name">First Name*</label><br>
+              <input type="text" name="first_name" id="edit_first_name" value="{{ current_user.first_name.capitalize() }}">
+            </div>
+    
+            <div>
+              <label for="last_name">Last Name*</label><br>
+              <input type="text" name="last_name" id="edit_last_name" value="{{current_user.last_name.capitalize()}}">
+            </div>
+          </div>
+          
+          <div class="double-input">
+            <div>
+              <label for="birthday">Birthday*</label><br>
+              <input type="date" name="birthday" id="edit_birthday" value="{{current_user.birthday}}">
+            </div>
+    
+            <div>
+              <label for="country">Country*</label><br>
+              <input type="text" name="country" id="edit_country" value="{{current_user.country.capitalize()}}">
+            </div>
+          </div>
+    
+          <div class="single-input">
+            <label for="email">E-mail</label><br>
+            <input type="email" name="email" id="edit_email" value="{{current_user.email}}" disabled>
+          </div>
+    
+          <div class="single-input">
+            <label for="username">Username</label><br>
+            <input type="text" name="username" id="edit_username" value="{{current_user.username}}" disabled>
+          </div>
+    
+          <div class="double-input">
+            <div>
+              <label for="password">Password</label><br>
+              <input type="password" name="password" id="edit_password" placeholder="Password">
+            </div>
+    
+            <div>
+              <label for="password_confirmation">Password Confirmation</label><br>
+              <input type="password" name="password_confirmation" id="edit_password_confirmation"
+                placeholder="Confirm Password">
+            </div>        
+          </div>
+
+          <div class="single-input">
+            <label for="team_name">Team Name*</label><br>
+            <input type="text" name="team_name" id="edit_team_name" value="{{current_user.team_name}}" required>
+          </div>
+
+          <div class="single-input" id="avatar-container">
+            <label for="avatar">Change Avatar</label><br>
+            <input type="file" name="avatar" id="edit_avatar">
+          </div>
+    
+          {% if error %}
+          <p class="error">{{error}}</p>
+          {% endif %}
+    
+          <div class="double-input">
+            <button id="cancel-btn" onclick="window.location.href = '/profile'">Cancel</button>
+            <input type="submit" value="Save">
+          </div>
+    
+        </div>
+      </form>
+    
+    </div>
+  
+    <div id="blank">
+      <span> </span>
+    </div>
+  
+  </div>
+
 </main>
 
 {% endblock %}
