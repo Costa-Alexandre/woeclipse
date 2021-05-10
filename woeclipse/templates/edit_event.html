@@ -2,52 +2,129 @@
 
 {% block content %}
 
-<h1><a href="/admin">Admin Panel</a>: Events Page </h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit_event.css') }}">
 
-<div>
-  <img src="{{url_for('routes.get_file', filename=event.filename)}}" alt="event image">
-  <h2>Event: {{ event.event_name }}</h2>
-  <form action="/admin/edit_event/{{ event.id }}" method="post" enctype="multipart/form-data">
-    <label for="event_name">Event Name: </label><br>
-    <input type="text" name="event_name" id="event_name" value="{{ event.event_name }}" maxlength="50" size="50"
-      required><br>
-    <label for="event_date">Date: </label><br>
-    <input type="text" name="event_date" id="event_date" value="{{event.date }}" required><br>
-    <label for="event_description">Description: </label><br>
-    <textarea name="event_description" id="event_description" rows="10"
+<div id="page-container">
+
+  <div id="menu">
+    
+    <div class="menu-item">
+      <a href="/admin">Admin Panel</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/events">Events</a>
+    </div>
+
+    <div class="menu-item">
+      <a href="/admin/users">Users</a>
+    </div>
+
+  </div>
+  
+  <div id="content-container">
+
+    <div id="title">
+      <h1>Admin Panel: Edit Events</h1>
+    </div>
+
+    <div id="main-frame">
+
+      <div>
+        <h2>Event: {{ event.event_name }}</h2>
+      </div>
+
+      <div id="event-image">
+        <img src="{{url_for('routes.get_file', filename=event.filename)}}" alt="event image">
+      </div>
+
+
+
+      <form action="/admin/edit_event/{{ event.id }}" method="post" enctype="multipart/form-data">
+
+        <label for="event_name">Event Name: </label><br>
+        <div class="row">
+          <input type="text" name="event_name" id="event_name" value="{{ event.event_name }}" maxlength="50" size="50"
+          required><br>
+        </div>
+
+        <label for="event_date">Date: </label><br>
+        <div class="row">
+          <input type="datetime-local" name="event_date" id="event_date" value="{{ date }}" required><br>
+        </div>
+
+        <label for="event_description">Description: </label><br>
+        <div class="row">
+          <textarea name="event_description" id="event_description" rows="10"
       cols="60%">{{ event.description }}</textarea><br><br>
-    <label for="event-image">Change Image</label><br>
-    <input type="file" name="event-image" id="event-image">
-    <input type="submit" value="Confirm">
-    <a href="/admin/events"><button type="button">Back</button></a>
-  </form>
+        </div>
+
+        <label for="event-image">Change Image: </label><br>
+        <div class="row">
+          <input type="file" name="event-image" id="event-image">
+        </div>
+
+        <div class="row">
+          <button id="cancel-btn" onclick="window.location.href = '/admin/events'">Back</button>
+          <input type="submit" value="Create Event">
+        </div>
+      
+      </form>
+
+    </div>
+
+    <div id="submain-frame">
+
+      <div>
+        <h2>Participants</h2>
+      </div>
+
+      <form action="/admin/add_participant/{{ event.id }}" method="post">
+
+        <label for="participants">Add participant:</label>
+        <div class="row">
+
+          <div class="input">
+            <select id="participants" name="participants">
+              {% for u in users %}
+              <option value="{{ u.username }}">{{ u.username }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="submit">
+            <input id="add-participant-btn" type="submit" value="Add Participant">
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+    <div id="table">
+      <h2>Participants</h2>
+      <table>
+        <thead>
+          <th>Username</th>
+          <th>Country</th>
+          <th>Action</th>
+        </thead>
+        {% for p in participants %}
+        <tr>
+          <td>{{ p.username }}</td>
+          <td>{{ p.country }}</td>
+          <td><a href="/admin/remove_participant/{{event.id }}/{{ p.id }}">Remove</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+  </div>
+
+  <div id="blank">
+    <span> </span>
+  </div>
+
 </div>
 
-
-
-<div>
-  <h2>Participants</h2>
-  <form action="/admin/add_participant/{{ event.id }}" method="post">
-    <label for="participants">Add participant:</label>
-    <select id="participants" name="participants">
-      {% for u in users %}
-      <option value="{{ u.username }}">{{ u.username }}</option>
-      {% endfor %}
-    </select>
-    <input type="submit">
-  </form>
-  <table>
-    <thead>
-      <th>Username</th>
-      <th>Country</th>
-    </thead>
-    {% for p in participants %}
-    <tr>
-      <td>{{ p.username }}</td>
-      <td>{{ p.country }}</td>
-      <td><a href="/admin/remove_participant/{{event.id }}/{{ p.id }}">Remove</a></td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
 {% endblock %}

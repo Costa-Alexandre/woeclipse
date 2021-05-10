@@ -9,7 +9,7 @@ from flask import Blueprint
 from woeclipse.website import db
 from woeclipse.models import Event, User, Avatar
 from woeclipse.helper import allowed_file, get_random_avatar,\
-    rank_users, save_image, user_rank
+    rank_users, save_image, user_rank, toString
 
 routes = Blueprint(
     'routes', __name__, static_folder='static', template_folder='templates')
@@ -285,10 +285,12 @@ def edit_event(event_id):
             # When request is GET
             participants = event.users
             users = User.query.all()
+            date = toString(event.date)
+            print(date)
 
             return render_template(
                 'edit_event.html', event=event,
-                participants=participants, users=users)
+                participants=participants, users=users, date=date)
     else:
         return 'You are not authorized to view this page.'
 

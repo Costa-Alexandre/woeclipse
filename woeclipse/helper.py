@@ -3,6 +3,7 @@ import os
 import string
 from flask import current_app
 from woeclipse.uploads import upload_blob
+from datetime import datetime
 
 AVATAR_ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 bucket_name = os.getenv("MY_BUCKET_NAME")
@@ -91,3 +92,6 @@ def save_image(image):
         upload_blob(
             bucket_name, image, f'uploads/{filename}')
     return filename
+
+def toString(Date): 
+    return datetime.strftime(Date, "%Y-%m-%dT%H:%M")
