@@ -9,4 +9,3 @@ junit/
 dotenv
 .coverage
 *key.json
-woeclipse/static/uploads/*
